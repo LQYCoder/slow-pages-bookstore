@@ -21,6 +21,16 @@ GitHub Free 的 Pages 需要使用公开仓库；仓库中的源代码与素材�
 打开 `docs/index.html`，或直接打开 `docs/reading/yangzhi-qiu/motion/index.html`。
 可选本地 HTTP 预览：在本目录运行 `python3 -m http.server 8768 --directory docs`。
 
+## 阅读入口
+
+- [书店首页](https://lqycoder.github.io/slow-pages-bookstore/)
+- [看故事](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/motion/index.html)
+- [读原文](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/motion/index.html#text)
+- [深入共读](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/index.html#review)
+
+2026/09/28 刊物版：放映与原文分别显示，切换保留分镜与阅读位置。
+深度书评、图文手记和分享素材分开呈现；录音和减少动态统一收在阅读设置。
+
 ## 功能
 
 - 六幕动态阅读：运镜、环境动画、字幕、播放暂停续播、重播、进度拖动。

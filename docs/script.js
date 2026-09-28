@@ -389,7 +389,7 @@ function bindInteractions() {
         openReader(randomBook.id, 0);
         notifyReader(`今天，让《${randomBook.title}》来遇见你`);
     });
-    ["heroRead", "previewRead"].forEach((buttonId) => {
+    ["heroRead"].forEach((buttonId) => {
         document.getElementById(buttonId).addEventListener("click", () => openReader("trees", 0));
     });
     ["collectionButton", "gardenButton"].forEach((buttonId) => {

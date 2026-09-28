@@ -1,0 +1,301 @@
+/* 共读刊物壳层，不改变六张高清海报的原始排版。创建者：Codex；2026/09/28。 */
+:root {
+    --paper: #f6f4ed;
+    --ink: #242d2b;
+    --muted: #65716b;
+    --line: #d5d9cd;
+    --accent: #c6482c;
+}
+[hidden] {
+    display: none !important;
+}
+html {
+    scroll-behavior: auto;
+}
+.journal-page a {
+    text-decoration: none;
+}
+.journal-page main {
+    max-width: 1280px;
+    padding: 0;
+    width: 88%;
+}
+.journal-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    padding: 40px 0 35px;
+}
+.journal-intro h1 {
+    font-size: clamp(44px, 5.4vw, 75px);
+    line-height: 1.2;
+    margin: 22px 0 0;
+    letter-spacing: -2px;
+}
+.journal-cover {
+    position: relative;
+    height: 185px;
+    width: 230px;
+    background: #e1e6d7;
+    overflow: hidden;
+    transform: rotate(4deg);
+    border: 7px solid #fffdf6;
+    box-shadow: 8px 10px 0 #d8decf;
+}
+.journal-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 90%;
+}
+.journal-cover span {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font: 8px/1.7 monospace;
+    letter-spacing: 2px;
+    background: var(--paper);
+    padding: 7px;
+}
+.journal-route {
+    display: flex;
+    gap: 30px;
+    padding: 15px 0;
+    border-block: 1px solid var(--line);
+    font-size: 12px;
+}
+.journal-route [aria-current] {
+    color: var(--accent);
+}
+.journal-notice {
+    color: var(--muted);
+    font-size: 10px;
+    margin: 20px 0 25px;
+}
+.journal-navigation {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1px solid var(--ink);
+}
+.journal-navigation button {
+    background: none;
+    color: var(--ink);
+    border: 0;
+    padding: 18px 24px;
+    font-size: 13px;
+}
+.journal-navigation [aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+.journal-navigation span {
+    margin-left: 15px;
+    font: italic 12px Georgia, serif;
+    opacity: .7;
+}
+.journal-navigation button:hover {
+    background: #dce5ce;
+    color: var(--ink);
+}
+.article-section {
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 60px;
+    border-top: 0;
+    padding: 35px 0 45px;
+}
+.article-section > aside {
+    align-self: start;
+    padding: 24px;
+    background: #e9ecdf;
+}
+.article-section aside h2 {
+    font-size: 28px;
+}
+.article-section aside > p {
+    font-size: 11px;
+}
+.review-toc {
+    gap: 15px;
+}
+.review-toc a {
+    font-size: 12px;
+}
+.review-toc a:focus-visible {
+    outline-offset: 2px;
+}
+.note-text {
+    max-width: 750px;
+}
+.note-text > h2 {
+    font-size: 31px;
+    line-height: 1.65;
+    margin: 15px 0 30px;
+}
+.review-chapter {
+    margin-top: 38px;
+}
+.review-chapter h3 {
+    font-size: 24px;
+}
+.panel-intro {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin: 28px 0 0;
+}
+.gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px 25px;
+}
+.gallery figcaption {
+    font-size: 10px;
+    line-height: 1.9;
+}
+.gallery figcaption a {
+    font-size: 10px;
+}
+.material-download {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+}
+.material-download h2 {
+    font-size: 28px;
+}
+.material-download p:not(.eyebrow) {
+    font-size: 12px;
+    color: var(--muted);
+}
+.discussion {
+    background: #dce5ce;
+    padding: 30px;
+    margin-bottom: 35px;
+}
+.discussion h2 {
+    font-size: 30px;
+}
+.questions p {
+    font-size: 13px;
+}
+.sources h2 {
+    font-size: 18px;
+}
+.sources p {
+    font-size: 11px;
+}
+.sources a {
+    text-decoration: underline;
+}
+/* 原有出版图导出模式继续可用，刊物导航不出现在导出的单张海报内。 */
+.export-mode .edition-header,
+    .export-mode .journal-intro,
+    .export-mode .journal-route,
+.export-mode .journal-notice,
+    .export-mode .journal-navigation,
+    .export-mode .panel-intro,
+.export-mode .material-download {
+    display: none;
+}
+@media (max-width: 850px) {
+    .article-section {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .article-section > aside {
+        padding: 22px;
+    }
+    .review-toc {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 25px;
+    }
+    .review-toc a {
+        font-size: 11px;
+    }
+    .note-text {
+        max-width: none;
+    }
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 560px) {
+    .journal-page main {
+        width: calc(100% - 32px);
+    }
+    .journal-intro {
+        padding: 28px 0;
+        gap: 10px;
+    }
+    .journal-intro h1 {
+        font-size: clamp(37px, 10vw, 51px);
+    }
+    .journal-intro .eyebrow {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+    .journal-cover {
+        width: 85px;
+        height: 130px;
+        flex-shrink: 0;
+        border-width: 4px;
+        box-shadow: 4px 5px 0 #d8decf;
+    }
+    .journal-cover span {
+        font-size: 6px;
+        letter-spacing: 0;
+        left: 4px;
+        padding: 4px;
+    }
+    .journal-route {
+        font-size: 10px;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .journal-notice {
+        font-size: 9px;
+        line-height: 1.9;
+    }
+    .journal-navigation {
+        gap: 0;
+    }
+    .journal-navigation button {
+        flex: 1;
+        padding: 16px 8px;
+        font-size: 11px;
+    }
+    .journal-navigation span {
+        font-size: 10px;
+        margin-left: 6px;
+    }
+    .review-toc {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .article-section aside h2 {
+        font-size: 24px;
+    }
+    .note-text > h2 {
+        font-size: 27px;
+    }
+    .review-chapter h3 {
+        font-size: 22px;
+    }
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    .material-download {
+        flex-direction: column;
+        align-items: start;
+    }
+    .discussion {
+        padding: 23px;
+    }
+    .discussion h2 {
+        font-size: 25px;
+    }
+}

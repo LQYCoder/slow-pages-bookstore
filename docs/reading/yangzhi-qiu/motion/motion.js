@@ -20,6 +20,7 @@
     const SWIPE_DIRECTION_RATIO = 1.3;
     const SNOW_COUNT = 19;
     const PERCENT = 100;
+    const MOBILE_READING_QUERY = "(max-width: 560px)";
     const AUDIO_EXTENSION = /\.(mp3|wav|m4a|ogg|webm|aac|flac)$/i;
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const elements = {};
@@ -30,7 +31,8 @@
         "transcript", "transcriptBody", "readMode", "audioSettings", "audioDialog", "audioFile",
         "audioStatus", "voiceEnabled", "removeAudio", "imageFallback", "originalMode", "interpretationMode",
         "modeDescription", "subtitleLabel", "sourceTitle", "sourceContext", "sourceParagraphs",
-        "sourceFrench", "frenchOriginal", "pauseForText", "scriptDownload"
+        "sourceFrench", "frenchOriginal", "pauseForText", "scriptDownload",
+        "cinemaViewButton", "textViewButton", "cinemaPanel", "textPanel"
     ];
     for (const elementId of elementIds) {
         elements[elementId] = document.getElementById(elementId);
@@ -89,6 +91,7 @@
             revisit.type = "button";
             revisit.textContent = "回到这一幕 ↑";
             revisit.addEventListener("click", function () {
+                setReadingView("cinema");
                 selectChapter(index);
                 elements.stage.scrollIntoView({ behavior: "auto", block: "center" });
                 elements.playButton.focus({ preventScroll: true });
@@ -246,7 +249,7 @@
         document.body.dataset.status = state.status;
         elements.playButton.textContent = playing ? "Ⅱ 暂停" : state.status === STATUS.ENDED ? "↺ 重播" : "▶ 播放";
         elements.playButton.setAttribute("aria-label", playing ? "暂停播放" : "开始自动播放");
-        elements.audioSettings.textContent = state.audio && !state.muted ? "旁白已开启 ⌁" : "静音阅读 ⌁";
+        elements.audioSettings.textContent = state.audio && !state.muted ? "设置 · 旁白 ⌁" : "设置 · 静音 ⌁";
         render();
     }
 
@@ -319,7 +322,8 @@
 
     /** 播放从用户点击启动；片尾再次播放自动回到起点。 */
     function play() {
-        if (state.status === STATUS.PLAYING || elements.audioDialog.open) {
+        if (state.status === STATUS.PLAYING || elements.audioDialog.open
+            || document.body.dataset.view !== "cinema") {
             return;
         }
         if (state.position >= TIMELINE.duration) {
@@ -478,18 +482,63 @@
         render();
     }
 
+    /**
+     * 切换放映与原文视图，保留分镜位置并暂停隐藏的播放器。
+     * @param {string} view 仅接受 text 或 cinema；其他值回到放映。
+     * @param {boolean} updateHash 是否更新可分享的视图锚点。
+     * @returns {void} 不修改阅读存档，不创建额外计时器。
+     */
+    function setReadingView(view, updateHash = true) {
+        const textView = view === "text";
+        const previousPanel = textView ? elements.cinemaPanel : elements.textPanel;
+        const focusWasInside = previousPanel.contains(document.activeElement);
+        if (textView) {
+            pause("已暂停在这一幕，读完原文后可回到画面继续。");
+        }
+        document.body.dataset.view = textView ? "text" : "cinema";
+        elements.cinemaPanel.hidden = textView;
+        elements.textPanel.hidden = !textView;
+        elements.cinemaViewButton.setAttribute("aria-pressed", String(!textView));
+        elements.textViewButton.setAttribute("aria-pressed", String(textView));
+        if (focusWasInside) {
+            const activeButton = textView ? elements.textViewButton : elements.cinemaViewButton;
+            activeButton.focus({ preventScroll: true });
+        }
+        if (updateHash) {
+            window.location.hash = textView ? "text" : "cinema";
+        }
+    }
+
+    /** 阅读入口支持直达链接和浏览器前进后退；设置与内容视图相互独立。 */
+    function bindReadingViews() {
+        elements.cinemaViewButton.addEventListener("click", function () { setReadingView("cinema"); });
+        elements.textViewButton.addEventListener("click", function () { setReadingView("text"); });
+        window.addEventListener("hashchange", function () {
+            setReadingView(window.location.hash === "#text" ? "text" : "cinema", false);
+        });
+        setReadingView(window.location.hash === "#text" ? "text" : "cinema", false);
+    }
+
+    /** 统一绑定播放与字幕操作，所有离开放映的动作都会暂停实际时间轴。 */
     function bindPlayback() {
         elements.originalMode.addEventListener("click", function () { setContentMode("original"); });
         elements.interpretationMode.addEventListener("click", function () { setContentMode("interpretation"); });
         elements.pauseForText.addEventListener("click", function () {
-            pause("已暂停。此处中文为法文原作选段的本站自译，可展开法文对照。");
+            setReadingView("cinema");
         });
         elements.frenchOriginal.addEventListener("toggle", function () {
             if (elements.frenchOriginal.open && state.status === STATUS.PLAYING) {
                 pause("已展开法文对照，画面暂停。读完后可点击播放继续。");
             }
         });
-        elements.startButton.addEventListener("click", play);
+        elements.startButton.addEventListener("click", function () {
+            play();
+            // 开始按钮播放后隐藏，将键盘焦点交给暂停按钮；手机同时定位画面与字幕区域。
+            elements.playButton.focus({ preventScroll: true });
+            if (window.matchMedia(MOBILE_READING_QUERY).matches) {
+                elements.stage.scrollIntoView({ behavior: "auto", block: "start" });
+            }
+        });
         elements.playButton.addEventListener("click", function () {
             if (state.status === STATUS.PLAYING) {
                 pause("已暂停。故事会在这里等你。");
@@ -511,10 +560,7 @@
             }
         });
         elements.readMode.addEventListener("click", function () {
-            pause("已切换到逐幕文字。按自己的速度读。");
-            elements.transcript.open = true;
-            elements.transcript.scrollIntoView({ behavior: "auto", block: "start" });
-            elements.transcript.querySelector("summary").focus({ preventScroll: true });
+            setReadingView("text");
         });
         elements.transcript.addEventListener("toggle", function () {
             if (elements.transcript.open && state.status === STATUS.PLAYING) {
@@ -585,6 +631,7 @@
     bindAudio();
     setReducedMotion(motionPreference.matches);
     updateControls();
+    bindReadingViews();
     elements.sceneArt.addEventListener("error", function () { elements.imageFallback.hidden = false; });
     elements.sceneArt.addEventListener("load", function () { elements.imageFallback.hidden = true; });
     document.addEventListener("visibilitychange", function () {

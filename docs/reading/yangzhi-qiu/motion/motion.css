@@ -1,12 +1,12 @@
-/* 慢页故事放映室。创建者：Codex；2026/09/28。所有字体与装饰均可离线使用。 */
+/* 文学影像刊物：以纸面、胶片与页边批注建立视觉层级。创建者：Codex；2026/09/28。 */
 :root {
-    color-scheme: dark;
-    --background: #202721;
-    --paper: #f3ebdd;
-    --text: #efe8db;
-    --muted: #a8afa0;
-    --line: #41483d;
-    --accent: #be492c;
+    color-scheme: light;
+    --paper: #f6f4ed;
+    --ink: #242d2b;
+    --muted: #65716b;
+    --line: #d5d9cd;
+    --accent: #c6482c;
+    --mint: #dce5ce;
     --camera-scale: 1;
     --camera-x: 0%;
     --camera-y: 0%;
@@ -14,12 +14,21 @@
 * {
     box-sizing: border-box;
 }
+[hidden] {
+    display: none !important;
+}
+html {
+    scroll-padding-top: 24px;
+}
 body {
     margin: 0;
-    background: var(--background);
-    color: var(--text);
+    background: var(--paper);
+    color: var(--ink);
     font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
     -webkit-font-smoothing: antialiased;
+}
+body:has(dialog[open]) {
+    overflow: hidden;
 }
 a {
     color: inherit;
@@ -35,15 +44,12 @@ button {
     color: inherit;
 }
 button:disabled {
-    opacity: .3;
+    opacity: .35;
     cursor: default;
 }
-button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
-    outline: 2px solid #eab598;
-    outline-offset: 5px;
-}
-[hidden] {
-    display: none !important;
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
 }
 .site-header, main {
     width: min(1280px, 90%);
@@ -51,613 +57,658 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 }
 .site-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 23px 0;
-    border-bottom: 1px solid var(--line);
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--ink);
 }
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 18px;
+    gap: 10px;
+    font: 26px "Songti SC", serif;
+}
+.brand small {
+    font: 9px sans-serif;
+    letter-spacing: 2px;
 }
 .brand-mark {
     display: grid;
     place-items: center;
     width: 32px;
     height: 36px;
-    border: 1px solid #c9c8b0;
-    border-radius: 2px 9px 2px 2px;
-    font: 20px "Songti SC", serif;
+    color: var(--paper);
+    background: var(--ink);
+    border-radius: 1px 10px 1px 1px;
+    font-size: 20px;
 }
-.brand > span:last-child {
-    font-size: 11px;
-    color: var(--muted);
-    border-left: 1px solid var(--line);
-    padding-left: 12px;
-}
-.back-link {
+.site-header nav {
+    display: flex;
+    gap: 28px;
     font-size: 12px;
-    color: #d4d7c8;
 }
-.back-link span {
-    margin-left: 15px;
+.site-header nav a {
+    padding: 8px 0;
+}
+.site-header nav [aria-current] {
+    border-bottom: 2px solid var(--accent);
+}
+.header-edition {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 .introduction {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    padding: 34px 0 30px;
-    gap: 25px;
+    padding: 38px 0 36px;
 }
 .eyebrow {
-    font-size: 10px;
+    font: 10px/1.8 sans-serif;
     letter-spacing: 2px;
     color: var(--muted);
-    line-height: 1.8;
-}
-.live-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: #d78456;
-    border-radius: 50%;
-    margin-right: 8px;
 }
 h1, h2 {
     font-family: "Songti SC", "SimSun", serif;
     font-weight: 500;
 }
 h1 {
-    font-size: clamp(30px, 3.5vw, 49px);
-    margin: 15px 0 0;
-    letter-spacing: -1px;
+    position: relative;
+    margin: 16px 0 0;
+    font-size: clamp(44px, 5.6vw, 78px);
+    line-height: 1.15;
+    letter-spacing: -3px;
 }
 h1 em {
+    color: var(--accent);
     font-style: normal;
-    color: #c6cbae;
+}
+h1 > span {
+    position: absolute;
+    left: 110%;
+    bottom: 10px;
+    font: 75px Georgia, serif;
+    color: #7e9474;
 }
 .intro-note {
-    font-size: 12px;
-    line-height: 1.9;
-    margin: 0;
-    color: #d0d4c5;
+    padding-left: 25px;
+    border-left: 1px solid var(--line);
+    min-width: 200px;
 }
-.intro-note span {
-    font-size: 10px;
+.intro-note p {
+    margin: 0 0 18px;
+    font: 23px/1.6 "Songti SC", serif;
+}
+.intro-note > span {
     color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+/* 阅读路径常驻，正文视图互斥，避免设置、原文和放映争夺同一个首屏。 */
+.view-navigation {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    border-bottom: 1px solid var(--ink);
+}
+.view-navigation > button, .view-navigation > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 12px 24px;
+    border: 0;
+    background: transparent;
+    font-size: 13px;
+}
+.view-navigation > button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+.view-navigation > :not(.settings-button):hover {
+    background: #dce5ce;
+    color: var(--ink);
+}
+.view-navigation span {
+    font: italic 14px Georgia, serif;
+    opacity: .65;
+}
+.view-navigation .settings-button {
+    margin-left: auto;
+    padding-right: 0;
+    color: var(--muted);
+    font-size: 11px;
 }
 .player {
-    border: 1px solid #58604e;
-    background: #171e19;
-    box-shadow: 0 20px 70px #10150f55;
+    background: #e7e9df;
 }
 .frame-top {
-    height: 38px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    gap: 12px;
+    min-height: 42px;
+    padding: 0 24px;
+    background: var(--ink);
+    color: #eeeede;
     font-size: 10px;
-    color: #c0c6b7;
     letter-spacing: 1px;
 }
-.frame-top i {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    background: #bc7459;
-    border-radius: 50%;
-    margin-right: 6px;
-}
 .quiet-button {
-    background: none;
     border: 0;
-    padding: 10px 0 10px 10px;
+    background: none;
+    padding: 12px 0;
     font-size: 11px;
 }
 .stage {
     position: relative;
-    aspect-ratio: 2.05;
+    display: grid;
+    grid-template-columns: 56% 44%;
+    height: clamp(345px, 34vw, 440px);
     overflow: hidden;
-    background: var(--paper);
-    color: #302b25;
     touch-action: pan-y;
-    user-select: none;
     isolation: isolate;
+    background: var(--mint);
 }
-/* 仅用 CSS 窗口取景与运镜，不改变原始插画文件；字幕始终保留在画面外的独立区域。 */
 .art-window {
-    position: absolute;
-    inset: 0 32% 0 0;
+    position: relative;
     overflow: hidden;
+    background: #d4d0c3;
 }
 .art-image {
-    display: block;
-    position: absolute;
     width: 100%;
-    max-width: none;
-    height: auto;
-    bottom: -4%;
-    transform-origin: 60% 86%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 92%;
     transform: translate(var(--camera-x), var(--camera-y)) scale(var(--camera-scale));
     will-change: transform;
-    mix-blend-mode: multiply;
 }
 .art-window::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 90%, var(--paper));
+    background: linear-gradient(0deg, #1c282766, transparent 40%);
     pointer-events: none;
 }
 .light-wash {
     position: absolute;
     inset: 0;
-    background: #baa56c;
-    opacity: .04;
-    pointer-events: none;
-}
-[data-atmosphere="warm"] .light-wash {
-    opacity: .1;
+    background: #e9bd6620;
     mix-blend-mode: multiply;
-}
-[data-atmosphere="shadow"] .light-wash {
-    background: linear-gradient(100deg, #242b36 0%, transparent 85%);
-    opacity: .17;
 }
 [data-atmosphere="cold"] .light-wash {
-    background: #758e9f;
-    opacity: .12;
-    mix-blend-mode: multiply;
+    background: #6592aa30;
 }
-[data-atmosphere="cold"] .art-image {
-    filter: saturate(.62);
-}
-[data-atmosphere="still"] .light-wash {
-    opacity: 0;
+[data-atmosphere="shadow"] .light-wash {
+    background: linear-gradient(110deg, #17232266, transparent);
 }
 .edge-caption {
     position: absolute;
-    top: 26px;
+    z-index: 2;
+    bottom: 24px;
     left: 26px;
-    font-size: 8px;
+    color: white;
+    font: 9px monospace;
     letter-spacing: 2px;
-    color: #827664;
 }
 .scene-copy {
-    position: absolute;
-    top: 14%;
-    left: 70%;
-    right: 4%;
+    padding: 34px clamp(24px, 3.5vw, 52px);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 .scene-label {
-    font-size: 10px;
-    color: #8d7964;
-    letter-spacing: 2px;
     margin: 0 0 24px;
+    font-size: 10px;
+    color: #4f634e;
+    letter-spacing: 1px;
 }
 .scene-copy h2 {
-    font-size: clamp(24px, 2.9vw, 39px);
-    line-height: 1.55;
-    letter-spacing: -.05em;
+    font-size: clamp(28px, 3vw, 43px);
+    line-height: 1.4;
     margin: 0;
     white-space: pre-line;
 }
 .red-rule {
     display: block;
-    width: 28px;
-    height: 2px;
-    margin: 25px 0 18px;
+    width: 36px;
+    height: 3px;
     background: var(--accent);
+    margin: 23px 0 13px;
 }
-.scene-copy > p:last-of-type {
+#sceneNote {
+    margin: 0;
+    max-width: 290px;
+    color: #50634f;
     font-size: 12px;
     line-height: 1.9;
-    color: #7e6e5f;
-    max-width: 210px;
 }
 .start-button {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 48px;
+    background: var(--accent);
+    color: #fff9ed;
     border: 0;
-    background: #9b402b;
-    color: #fff5e6;
-    font-size: 12px;
-    padding: 13px 17px;
-    margin-top: 15px;
+    padding: 12px 20px;
+    margin-top: auto;
+    font-size: 13px;
 }
-.start-button span {
-    font-size: 9px;
-    margin-left: 18px;
+.start-button:hover {
+    background: #a43c26;
 }
 .ending {
-    font-size: 11px;
+    margin-top: auto;
+    font-size: 12px;
     line-height: 2;
-    margin-top: 20px;
-}
-.ending span {
-    display: block;
-    color: #7e6e5f;
 }
 .ending a {
-    display: inline-block;
-    border-bottom: 1px solid #ae4a31;
-    color: #983c28;
-    padding: 6px 0;
+    display: block;
+    color: var(--accent);
+    border-bottom: 1px solid;
 }
 .image-fallback {
     position: absolute;
-    left: 5%;
-    bottom: 10%;
-    max-width: 45%;
-    line-height: 1.9;
-    font-size: 14px;
+    left: 20px;
+    bottom: 10px;
+    background: var(--paper);
+    font-size: 12px;
+    padding: 10px;
 }
-/* 雪粒完全由本地 CSS 绘制；暂停、减少动态和离开页面时一并停止。 */
 .snow {
     position: absolute;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
+    display: none;
+}
+[data-atmosphere="snow"] .snow {
+    display: block;
 }
 .snow span {
     position: absolute;
     top: -12px;
     width: 3px;
     height: 3px;
-    background: #faf7ee;
     border-radius: 50%;
-    opacity: .7;
-    animation: snowfall 8s linear infinite;
+    background: #fff;
+    animation: snowfall 7s linear infinite;
     animation-play-state: paused;
 }
-@keyframes snowfall {
-    from {
-        transform: translate(0, -10px);
-    }
-    to {
-        transform: translate(-60px, 680px);
-    }
-}
-body[data-playing="true"][data-reduced="false"] .snow span {
+body[data-playing="true"] .snow span {
     animation-play-state: running;
 }
-.stage:not([data-atmosphere="snow"]):not([data-atmosphere="cold"]) .snow {
-    opacity: 0;
+@keyframes snowfall {
+    to {
+        transform: translate(-40px, 500px);
+    }
 }
 body[data-reduced="true"] .snow {
     display: none;
 }
+/* 字幕来源在同一行切换；完整翻译说明保留在字幕下方与原文视图。 */
 .subtitle-bar {
-    min-height: 76px;
-    padding: 17px 28px;
+    padding: 19px 30px 20px;
+    background: #eeeee5;
+    border-bottom: 1px solid var(--line);
+}
+.subtitle-top {
     display: flex;
     align-items: center;
-    gap: 27px;
-    border-top: 1px solid #626449;
+    justify-content: space-between;
+    gap: 12px;
 }
 .subtitle-label {
-    flex-shrink: 0;
-    color: #939f88;
     font-size: 10px;
-    letter-spacing: 2px;
-    border-right: 1px solid var(--line);
-    padding-right: 25px;
+    letter-spacing: 1px;
+    color: var(--muted);
 }
-.subtitle-bar p {
-    font: 19px/1.7 "Songti SC", "SimSun", serif;
-    margin: 0;
+.reading-mode {
+    display: flex;
+    gap: 2px;
+}
+.reading-mode button {
+    background: none;
+    border: 0;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--muted);
+}
+.reading-mode button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+#subtitle {
+    min-height: 2em;
+    margin: 10px 0;
+    font: 21px/1.8 "Songti SC", serif;
+}
+#modeDescription {
+    font-size: 10px;
+    color: var(--muted);
 }
 .transport {
     display: flex;
     align-items: center;
-    gap: 18px;
-    padding: 16px 22px;
-    border-top: 1px solid #333e30;
+    gap: 24px;
+    padding: 13px 24px;
 }
 .transport-buttons {
     display: flex;
+    gap: 8px;
     align-items: center;
-    gap: 12px;
+}
+.transport button {
+    background: none;
+    border: 0;
+    min-height: 42px;
 }
 .icon-button {
-    width: 30px;
-    height: 34px;
-    font-size: 26px;
-    border: 0;
-    background: transparent;
+    width: 32px;
+    font: 28px Georgia, serif;
 }
-.play-button {
-    border: 1px solid #90997f;
-    border-radius: 3px;
-    background: #c9d0b6;
-    color: #253020;
-    min-width: 86px;
-    height: 35px;
+.transport .play-button {
+    background: var(--ink);
+    color: var(--paper);
+    min-width: 85px;
+    padding: 10px 15px;
     font-size: 12px;
 }
 .replay-button {
     font-size: 11px;
-    border: 0;
-    background: none;
-    white-space: nowrap;
+    margin-left: 6px;
 }
 .seek-control {
     flex: 1;
-    min-width: 50px;
-    display: flex;
+    min-width: 70px;
 }
-input[type="range"] {
+.seek-control input {
     width: 100%;
-    accent-color: #c8c9ad;
+    accent-color: var(--accent);
     cursor: pointer;
-    height: 25px;
 }
 .time {
+    color: var(--muted);
     font: 10px monospace;
     white-space: nowrap;
-    color: #c3c9b9;
-}
-.time-divider {
-    margin: 0 5px;
-    color: #708066;
-}
-.audio-button {
-    border: 0;
-    background: none;
-    font-size: 11px;
-    white-space: nowrap;
-    padding: 10px 0 10px 12px;
-    border-left: 1px solid #3a4434;
-}
-.audio-button span {
-    font-size: 17px;
-    margin-left: 5px;
 }
 .player-foot {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
     align-items: center;
-    gap: 20px;
+    font-size: 10px;
     color: var(--muted);
-    font-size: 11px;
-    padding: 8px 0;
-    min-height: 45px;
 }
 .player-foot p {
-    line-height: 1.7;
-    margin: 5px 0;
+    margin: 15px 0;
 }
-.motion-setting {
+.chapter-heading {
     display: flex;
-    gap: 7px;
-    align-items: center;
-    white-space: nowrap;
-}
-input[type="checkbox"] {
-    accent-color: #d7b696;
-    width: 15px;
-    height: 15px;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 10px;
+    color: var(--muted);
+    margin: 24px 0 14px;
 }
 .chapter-rail {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 18px;
+    gap: 14px;
 }
 .chapter-button {
-    text-align: left;
-    border: 1px solid #46513e;
-    background: #293125;
-    padding: 0;
-    min-width: 0;
-    overflow: hidden;
     position: relative;
-}
-.chapter-button[aria-current="step"] {
-    border-color: #e4bd98;
-    background: #353b2b;
+    min-width: 0;
+    padding: 0 0 12px;
+    border: 0;
+    background: none;
+    text-align: left;
 }
 .chapter-preview {
-    height: 76px;
     position: relative;
+    height: 91px;
     overflow: hidden;
-    background: #e8e1d3;
-    opacity: .58;
+    background: #dce0d5;
 }
 .chapter-preview img {
-    position: absolute;
-    bottom: -15px;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 92%;
+    filter: saturate(.55);
 }
-.chapter-button[aria-current="step"] .chapter-preview {
-    opacity: 1;
+.chapter-button[aria-current] .chapter-preview {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+.chapter-button[aria-current] img, .chapter-button:hover img {
+    filter: none;
 }
 .chapter-number {
     position: absolute;
-    top: 7px;
-    left: 9px;
-    z-index: 1;
-    font: 10px monospace;
-    color: #272d22;
+    top: 0;
+    left: 0;
+    padding: 7px 9px;
+    background: var(--paper);
+    font: italic 13px Georgia, serif;
 }
 .chapter-text {
     display: block;
+    margin-top: 10px;
     font-size: 11px;
-    padding: 13px 11px 15px;
-    white-space: nowrap;
+}
+.chapter-button[aria-current] .chapter-text {
+    color: var(--accent);
 }
 .chapter-progress {
     position: absolute;
-    bottom: 0;
     left: 0;
+    bottom: 0;
     height: 2px;
-    width: 0;
-    background: #d6ae83;
+    background: var(--accent);
+    max-width: 100%;
 }
-.gesture-hint {
-    font-size: 10px;
-    text-align: center;
-    color: #9ba68c;
-    line-height: 1.8;
-    margin: 18px 0 0;
-}
-.after-reading {
-    padding: 75px 0 60px;
-    text-align: center;
-}
-.after-reading h2 {
-    font-size: clamp(26px, 3vw, 40px);
-    line-height: 1.65;
-    margin: 18px 0;
-}
-.after-reading em {
-    font-style: normal;
-    color: #c6cbae;
-}
-.after-reading > p:not(.eyebrow) {
-    font-size: 13px;
-    color: #b0b9a1;
-    line-height: 2;
-}
-.after-reading a {
-    display: inline-block;
-    border-bottom: 1px solid #8d967a;
-    font-size: 12px;
-    padding: 15px 3px 9px;
-}
-.after-reading a span {
-    margin-left: 36px;
-}
-.transcript {
-    border-top: 1px solid var(--line);
+.source-panel {
+    position: relative;
+    padding: 36px clamp(22px, 7vw, 105px);
+    background: #fffdf6;
     border-bottom: 1px solid var(--line);
-    scroll-margin-top: 20px;
 }
-.transcript summary {
+.source-heading {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 24px 0;
-    font-size: 13px;
 }
-.transcript summary span {
+.source-heading h2 {
+    font-size: 29px;
+    margin: 10px 0 20px;
+}
+.source-heading button {
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font-size: 12px;
+    white-space: nowrap;
+}
+.translation-note, .source-credit {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+.source-credit a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.source-context {
+    background: #e8eddf;
+    color: #4c5d4e;
+    font-size: 13px;
+    line-height: 1.9;
+    padding: 18px;
+}
+.source-paragraphs {
+    max-width: 800px;
+    margin: 25px auto;
+    font: 20px/2.1 "Songti SC", serif;
+}
+.excerpt-omission {
+    font-size: 11px;
+    color: var(--muted);
+}
+.french-original {
+    border-block: 1px solid var(--line);
+    margin: 24px 0;
+}
+.french-original summary {
+    padding: 16px 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+.french-original div {
+    font: 17px/1.9 Georgia, serif;
+    overflow-wrap: anywhere;
+}
+.transcript {
+    padding: 24px clamp(22px, 7vw, 105px);
+    background: #eeeee5;
+}
+.transcript > summary {
+    font-size: 14px;
+}
+.transcript > summary span {
+    display: block;
+    margin-top: 10px;
     color: var(--muted);
     font-size: 11px;
 }
 .transcript-chapter {
-    padding: 25px 0;
-    max-width: 760px;
-    margin: auto;
     border-top: 1px solid var(--line);
-}
-.transcript-chapter h3 {
-    font: 22px/1.6 "Songti SC", serif;
-    color: #d1c5ab;
-}
-.transcript-chapter p {
-    font: 17px/2 "Songti SC", serif;
+    padding: 24px 0;
+    font: 16px/2 "Songti SC", serif;
 }
 .transcript-chapter button {
+    border: 0;
+    color: var(--accent);
     background: none;
-    border: 1px solid #727c65;
-    padding: 8px 13px;
-    font-size: 11px;
+    padding: 10px 0;
+}
+.next-reading {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 36px 0;
+    margin: 40px 0 20px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+}
+.next-symbol {
+    color: var(--accent);
+    font: 65px Georgia, serif;
+}
+.next-reading h2 {
+    font-size: 26px;
+    margin: 10px 0;
+}
+.next-reading p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+.next-reading a {
+    margin-left: auto;
+    border-bottom: 1px solid;
+    padding: 12px 0;
+    font-size: 12px;
 }
 footer {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: 25px;
-    padding: 25px 0 36px;
+    padding: 20px 0 30px;
+    color: var(--muted);
     font-size: 10px;
-    color: #9aa68d;
     line-height: 1.9;
 }
 footer a {
     white-space: nowrap;
 }
 dialog {
-    width: min(520px, calc(100% - 28px));
-    max-height: 90dvh;
-    padding: 36px;
-    background: #f3edde;
-    color: #332f27;
-    border: 1px solid #a29885;
-    color-scheme: light;
+    width: min(570px, 94vw);
+    max-height: 88dvh;
+    padding: 35px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
 }
 dialog::backdrop {
-    background: #0b120ed9;
-    backdrop-filter: blur(5px);
+    background: #1d2a29aa;
+    backdrop-filter: blur(6px);
 }
 dialog h2 {
-    font-size: 27px;
-    line-height: 1.5;
+    font-size: 29px;
+    margin: 15px 0;
+}
+dialog h3 {
+    margin: 28px 0 15px;
+    font-size: 14px;
+    font-weight: 500;
 }
 dialog p {
     font-size: 13px;
     line-height: 1.9;
-}
-dialog .eyebrow {
-    font-size: 9px;
-    color: #7b725e;
+    color: var(--muted);
 }
 .dialog-close {
-    position: absolute;
-    right: 14px;
-    top: 12px;
+    float: right;
     border: 0;
     background: none;
     font-size: 24px;
+    padding: 0 5px;
+}
+.motion-setting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
 }
 .upload-label {
     display: block;
-    margin-top: 25px;
     font-size: 13px;
+    line-height: 1.9;
 }
 .upload-label span {
     display: block;
-    margin: 8px 0 12px;
+    color: var(--muted);
     font-size: 10px;
-    color: #8d8371;
 }
-input[type="file"] {
-    font-size: 12px;
+#audioFile {
     width: 100%;
-    padding: 12px 0;
-}
-.audio-status {
-    color: #8d452c;
-    overflow-wrap: anywhere;
+    margin: 15px 0;
+    font-size: 12px;
 }
 .voice-toggle {
-    display: flex;
-    gap: 8px;
-    align-items: center;
     font-size: 13px;
 }
 .audio-actions {
     display: flex;
+    gap: 20px;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
     margin-top: 20px;
+    font-size: 12px;
 }
 .audio-actions button {
-    border: 1px solid #b9ac95;
     background: none;
-    padding: 8px 12px;
-    font-size: 12px;
-}
-.audio-actions a {
-    font-size: 12px;
-    text-decoration: underline;
+    border: 1px solid var(--line);
+    padding: 10px;
 }
 dialog .privacy-note {
-    font-size: 11px;
-    color: #847969;
-    margin-top: 25px;
+    font-size: 10px;
 }
 .sr-only {
     position: absolute;
@@ -665,395 +716,299 @@ dialog .privacy-note {
     height: 1px;
     overflow: hidden;
     clip-path: inset(50%);
-    white-space: nowrap;
 }
 .noscript-note {
-    padding: 25px;
+    text-align: center;
+    padding: 20px;
 }
-@media (max-width: 900px) {
-    .site-header, main {
-        width: 92%;
+/* 手机保留完整画面、字幕和触摸操作，不使用固定高度把长段落截断。 */
+@media (max-width: 800px) {
+    .header-edition {
+        display: none;
     }
-    .stage {
-        aspect-ratio: 1.8;
-    }
-    .scene-copy {
-        left: 68%;
-        top: 10%;
-    }
-    .scene-copy h2 {
-        font-size: 27px;
-    }
-    .scene-label {
-        font-size: 9px;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-    }
-    .red-rule {
-        margin: 18px 0 12px;
-    }
-    .scene-copy > p:last-of-type {
-        font-size: 11px;
-    }
-    .transport {
-        gap: 10px;
-        padding: 12px;
-    }
-    .transport-buttons {
-        gap: 5px;
-    }
-    .chapter-text {
-        font-size: 10px;
-        padding-left: 7px;
-    }
-}
-@media (max-width: 600px) {
     .site-header {
-        padding: 17px 0;
-    }
-    .brand {
-        font-size: 16px;
-        gap: 8px;
-    }
-    .brand > span:last-child {
-        font-size: 9px;
-        padding-left: 8px;
-    }
-    .back-link {
-        font-size: 10px;
-    }
-    .back-link span {
-        margin-left: 3px;
+        padding: 18px 0;
     }
     .introduction {
-        display: block;
-        padding: 24px 0;
+        padding: 28px 0;
+    }
+    h1 {
+        letter-spacing: -2px;
+    }
+    h1 > span {
+        display: none;
+    }
+    .intro-note {
+        min-width: 160px;
+    }
+    .intro-note p {
+        font-size: 20px;
+    }
+    .view-navigation > button, .view-navigation > a {
+        padding: 12px 16px;
+    }
+    .stage {
+        height: 360px;
+        grid-template-columns: 52% 48%;
+    }
+    .scene-copy {
+        padding: 28px 24px;
+    }
+    .scene-copy h2 {
+        font-size: 31px;
+    }
+    .chapter-rail {
+        gap: 10px;
+    }
+    .chapter-preview {
+        height: 76px;
+    }
+    .chapter-text {
+        line-height: 1.7;
+    }
+    .next-reading {
+        gap: 20px;
+    }
+    .next-reading h2 {
+        font-size: 23px;
+    }
+}
+@media (max-width: 560px) {
+    .site-header, main {
+        width: calc(100% - 32px);
+    }
+    .brand {
+        font-size: 22px;
+    }
+    .brand small {
+        display: none;
+    }
+    .site-header nav {
+        font-size: 11px;
+        gap: 20px;
+    }
+    .introduction {
+        gap: 16px;
+        align-items: start;
+        flex-direction: column;
     }
     .introduction .eyebrow {
         font-size: 8px;
-        letter-spacing: 1.5px;
+        letter-spacing: 1px;
     }
     h1 {
-        font-size: clamp(26px, 7vw, 39px);
-        line-height: 1.6;
-        letter-spacing: -.04em;
+        font-size: clamp(35px, 10vw, 52px);
+        line-height: 1.24;
     }
     .intro-note {
-        font-size: 10px;
-        margin-top: 10px;
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
     }
-    .intro-note br:first-child {
+    .intro-note p {
+        font-size: 13px;
+        margin: 0;
+    }
+    .intro-note p br {
         display: none;
     }
-    .intro-note span {
+    .intro-note > span {
         font-size: 9px;
+        text-align: right;
+    }
+    .view-navigation {
+        flex-wrap: wrap;
+        gap: 0;
+    }
+    .view-navigation > button, .view-navigation > a {
+        padding: 10px 11px;
+        min-height: 46px;
+        font-size: 11px;
+        gap: 6px;
+    }
+    .view-navigation span {
+        font-size: 11px;
+    }
+    .view-navigation .settings-button {
+        width: 100%;
+        justify-content: end;
+        min-height: 34px;
+        padding: 6px 0;
+        font-size: 10px;
     }
     .frame-top {
-        padding: 0 12px;
+        padding: 0 14px;
+        letter-spacing: 0;
         font-size: 8px;
-        letter-spacing: .6px;
     }
     .quiet-button {
         font-size: 10px;
     }
     .stage {
-        aspect-ratio: .86;
+        height: auto;
+        grid-template-columns: 1fr;
     }
     .art-window {
-        inset: 32% 0 0;
+        height: 255px;
     }
     .art-image {
-        bottom: -5%;
-    }
-    .art-window::after {
-        background: linear-gradient(var(--paper), transparent 16%);
-    }
-    .edge-caption {
-        display: none;
+        object-position: center 94%;
     }
     .scene-copy {
-        inset: 7% 7% auto;
-    }
-    .scene-label {
-        margin: 0 0 10px;
+        padding: 20px 24px;
+        position: static;
+        min-height: 180px;
     }
     .scene-copy h2 {
-        font-size: clamp(25px, 7vw, 35px);
-        line-height: 1.45;
+        font-size: 28px;
+    }
+    .scene-label {
+        font-size: 9px;
+        margin-bottom: 13px;
     }
     .red-rule {
-        position: absolute;
-        width: 21px;
-        top: 0;
-        right: 0;
-        margin: 3px 0;
+        margin: 14px 0 10px;
     }
-    .scene-copy > p:last-of-type {
-        max-width: 85%;
-        font-size: 10px;
-        margin: 9px 0 0;
+    #sceneNote {
+        font-size: 11px;
+        max-width: 100%;
+    }
+    .edge-caption {
+        font-size: 7px;
+        letter-spacing: 1px;
+        left: 18px;
     }
     .start-button {
         position: absolute;
-        right: 0;
-        top: 42px;
-        max-width: 94px;
-        line-height: 1.7;
-        padding: 9px 10px;
-        margin: 0;
-    }
-    .start-button span {
-        display: block;
-        margin: 2px 0 0;
+        right: 18px;
+        top: 195px;
+        bottom: auto;
+        z-index: 3;
+        gap: 9px;
+        min-height: 42px;
+        padding: 10px 12px;
+        font-size: 11px;
     }
     .ending {
-        position: absolute;
-        right: 0;
-        top: 40px;
-        width: 83px;
-        font-size: 10px;
-        margin: 0;
-    }
-    .ending span {
-        display: none;
+        margin-top: 15px;
     }
     .subtitle-bar {
-        padding: 16px;
-        min-height: 94px;
-        display: block;
+        padding: 14px 18px;
     }
     .subtitle-label {
-        display: block;
-        border: 0;
-        padding: 0;
-        font-size: 8px;
-        margin-bottom: 6px;
-    }
-    .subtitle-bar p {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-    .transport {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px 12px;
-        padding: 12px;
-    }
-    .transport-buttons {
-        grid-column: 1;
-        grid-row: 2;
-        gap: 7px;
-    }
-    .seek-control {
-        grid-column: 1;
-        grid-row: 1;
-    }
-    .time {
-        grid-column: 2;
-        grid-row: 1;
         font-size: 9px;
     }
-    .audio-button {
-        grid-column: 2;
-        grid-row: 2;
+    .reading-mode button {
         font-size: 10px;
-        padding-left: 8px;
+        padding: 8px;
     }
-    .audio-button span {
-        display: none;
+    #subtitle {
+        font-size: 18px;
+        line-height: 1.9;
+        min-height: 3.8em;
     }
-    .play-button {
-        min-width: 75px;
+    #modeDescription {
+        font-size: 9px;
+    }
+    .transport {
+        flex-wrap: wrap;
+        gap: 7px 15px;
+        padding: 10px 12px;
+    }
+    .transport-buttons {
+        flex: 1;
+    }
+    .time {
+        order: 1;
+        font-size: 9px;
+    }
+    .seek-control {
+        order: 2;
+        flex-basis: 100%;
+    }
+    .transport .play-button {
+        min-width: 74px;
+        padding: 10px;
     }
     .icon-button {
         width: 24px;
     }
-    .replay-button {
-        font-size: 10px;
-        padding: 8px 0;
+    .player-foot > span {
+        display: none;
     }
     .player-foot {
         font-size: 10px;
-        align-items: start;
-        padding-top: 13px;
-        gap: 10px;
+        line-height: 1.8;
     }
-    .motion-setting {
-        font-size: 9px;
-        padding-top: 3px;
-        gap: 3px;
+    .chapter-heading {
+        font-size: 8px;
     }
     .chapter-rail {
-        grid-template-columns: repeat(6, 115px);
-        overflow-x: auto;
-        padding-bottom: 10px;
-        margin-top: 12px;
-        scroll-snap-type: x proximity;
-    }
-    .chapter-button {
-        scroll-snap-align: start;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px 10px;
     }
     .chapter-preview {
-        height: 61px;
+        height: 75px;
     }
     .chapter-text {
-        padding: 12px 7px;
-    }
-    .gesture-hint {
-        font-size: 9px;
-        text-align: left;
-        margin-top: 6px;
-    }
-    .after-reading {
-        padding: 49px 0 40px;
-    }
-    .after-reading .eyebrow {
-        font-size: 8px;
-        letter-spacing: 1px;
-    }
-    .after-reading h2 {
-        font-size: 26px;
-    }
-    .after-reading > p:not(.eyebrow) {
-        font-size: 11px;
-    }
-    .transcript summary {
-        font-size: 12px;
-    }
-    .transcript summary span {
-        font-size: 9px;
-    }
-    footer {
-        display: block;
-    }
-    dialog {
-        padding: 28px 23px;
-    }
-}
-@media (prefers-reduced-motion: reduce) {
-    .snow span {
-        animation: none;
-    }
-}
-/* 原文、本站自译和解读在标签与版面上分开，所有选段可离线阅读。 */
-.reading-mode {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 18px;
-}
-.reading-mode > div {
-    display: flex;
-    gap: 5px;
-}
-.reading-mode button {
-    border: 1px solid var(--line);
-    background: transparent;
-    padding: 10px 14px;
-    font-size: 11px;
-}
-.reading-mode button[aria-pressed="true"] {
-    color: #232e21;
-    background: #c9d0b6;
-    border-color: #c9d0b6;
-}
-.reading-mode > span {
-    font-size: 10px;
-    color: var(--muted);
-}
-.source-panel {
-    margin-top: 35px;
-    padding: 32px 38px;
-    border: 1px solid #525b48;
-    background: #272f25;
-}
-.source-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-.source-heading h2 {
-    font-size: 25px;
-    margin: 10px 0;
-}
-.source-heading button {
-    background: transparent;
-    border: 1px solid #849074;
-    padding: 10px 14px;
-    white-space: nowrap;
-    font-size: 11px;
-}
-.translation-note, .source-context, .source-credit {
-    font-size: 11px;
-    line-height: 1.9;
-    color: #bcc3af;
-}
-.source-context {
-    border-left: 2px solid #c6a788;
-    padding-left: 12px;
-}
-.source-paragraphs {
-    max-width: 850px;
-    margin-top: 25px;
-}
-.source-paragraphs p {
-    font: 19px/2.1 "Songti SC", "SimSun", serif;
-}
-.source-paragraphs .excerpt-omission, .transcript-chapter .excerpt-omission,
-.french-original .excerpt-omission {
-    font: 10px/1.6 sans-serif;
-    color: #8c997f;
-    margin: 18px 0;
-}
-.french-original {
-    margin: 25px 0;
-    border-top: 1px solid var(--line);
-    padding-top: 15px;
-}
-.french-original summary {
-    font-size: 12px;
-    line-height: 1.8;
-    color: #c8cdbd;
-}
-.french-original p {
-    font: 16px/1.9 Georgia, serif;
-    overflow-wrap: anywhere;
-    color: #d2d2c0;
-}
-.source-credit a {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-.transcript-chapter .translation-note {
-    font: 11px/1.9 sans-serif;
-    color: #c0b598;
-    margin-top: 25px;
-}
-@media (max-width: 600px) {
-    .reading-mode {
-        display: block;
-    }
-    .reading-mode > span {
-        display: block;
-        margin-top: 10px;
-        font-size: 9px;
+        font-size: 10px;
     }
     .source-panel {
-        padding: 22px 18px;
-        margin-top: 25px;
+        padding: 24px 20px;
     }
     .source-heading {
-        display: block;
+        align-items: start;
+        gap: 10px;
     }
     .source-heading h2 {
         font-size: 23px;
     }
     .source-heading button {
-        margin: 8px 0;
+        font-size: 10px;
+        margin-top: 15px;
     }
-    .source-paragraphs p {
-        font-size: 17px;
+    .source-paragraphs {
+        font-size: 18px;
+    }
+    .next-reading {
+        flex-wrap: wrap;
+        margin-top: 30px;
+        padding: 25px 0;
+        gap: 8px 16px;
+    }
+    .next-symbol {
+        font-size: 42px;
+    }
+    .next-reading > div {
+        flex: 1;
+        min-width: 75%;
+    }
+    .next-reading h2 {
+        font-size: 22px;
+    }
+    .next-reading a {
+        margin: 10px 0 0 auto;
+    }
+    footer {
+        flex-direction: column;
+        gap: 3px;
+        font-size: 9px;
+    }
+    dialog {
+        padding: 24px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+    }
+    .snow {
+        display: none;
     }
 }
