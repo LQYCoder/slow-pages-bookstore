@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#202721">
+    <meta name="description" content="走进《羊脂球》的两次进食。六幕动态共读，跟着镜头看，也可以停下来慢慢读。">
+    <title>两次进食 · 羊脂球动态共读 | 慢页</title>
+    <link rel="icon" href="../../../logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="motion.css">
+    <script src="story.js" defer></script>
+    <script src="excerpts.js" defer></script>
+    <script src="timeline.js" defer></script>
+    <script src="motion.js" defer></script>
+</head>
+<body data-playing="false" data-reduced="false">
+    <header class="site-header">
+        <a class="brand" href="../../../index.html"><span class="brand-mark">慢</span>慢页<span>故事放映室</span></a>
+        <a class="back-link" href="../index.html?v=deep#review">回到完整书评 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+        <section class="introduction" aria-labelledby="pageTitle">
+            <div><p class="eyebrow"><span class="live-dot"></span> LITERATURE IN MOTION / 第 001 场</p>
+                <h1 id="pageTitle">同一辆马车。<em>两次进食。</em></h1>
+            </div>
+            <p class="intro-note">莫泊桑《羊脂球》<br>让镜头停在，文字没有说尽的地方。<br><span>六幕 · 约一分钟 · 含关键情节</span></p>
+        </section>
+        <div class="reading-mode" role="group" aria-label="选择字幕内容">
+            <div><button id="originalMode" type="button" aria-pressed="true">原文字幕 · 自译</button>
+                <button id="interpretationMode" type="button" aria-pressed="false">解读字幕</button></div>
+            <span id="modeDescription">法文公版原作节选 · 中文为本站自译</span>
+        </div>
+        <section class="player" aria-label="两次进食动态阅读播放器">
+            <div class="frame-top"><span><i></i> 原文 × 慢页解读</span><span id="sceneCounter">SCENE 01 / 06</span>
+                <button id="readMode" class="quiet-button" type="button">逐幕阅读 ↘</button></div>
+            <div class="stage" id="stage" data-atmosphere="snow" aria-label="画面区域，手机可左右滑动切换分镜">
+                <div class="art-window" aria-hidden="true">
+                    <img class="art-image" id="sceneArt" src="../assets/carriage.png" alt="" fetchpriority="high">
+                    <div class="light-wash"></div><div class="snow" id="snow"></div>
+                    <span class="edge-caption">BOULE DE SUIF / 1870</span>
+                </div>
+                <div class="scene-copy"><p class="scene-label" id="sceneLabel">01 / 一辆马车 · 镜头解读</p>
+                    <h2 id="sceneTitle">同路的人，<br>未必同行。</h2>
+                    <span class="red-rule"></span><p id="sceneNote">战争里，一群人乘车离开鲁昂。</p>
+                    <button class="start-button" id="startButton" type="button">开始这段共读 <span>▶</span></button>
+                    <div class="ending" id="ending" hidden><span>散场以后，故事还在。</span>
+                        <a href="../index.html?v=deep#review">读完整书评 ↗</a></div>
+                </div>
+                <p id="imageFallback" class="image-fallback" hidden>插画未能加载，仍可通过字幕与逐幕文字阅读。</p>
+            </div>
+            <div class="subtitle-bar"><span class="subtitle-label" id="subtitleLabel">原文节选 / 自译</span>
+                <p id="subtitle" role="status" aria-live="polite">马车慢慢地、慢慢地向前挪动，一小步，一小步。</p>
+            </div>
+            <div class="transport">
+                <div class="transport-buttons">
+                    <button id="previousButton" class="icon-button" type="button" aria-label="上一幕">‹</button>
+                    <button id="playButton" class="play-button" type="button" aria-label="开始自动播放">▶ 播放</button>
+                    <button id="nextButton" class="icon-button" type="button" aria-label="下一幕">›</button>
+                    <button id="replayButton" class="replay-button" type="button" aria-label="从头重播">↺ 重播</button>
+                </div>
+                <label class="seek-control"><span class="sr-only">播放进度</span>
+                    <input id="seekBar" type="range" min="0" max="64" step="0.1" value="0"
+                        aria-valuetext="00:00 / 01:04">
+                </label>
+                <span class="time"><span id="currentTime">00:00</span>
+                    <span class="time-divider">/</span><span id="totalTime">01:04</span></span>
+                <button id="audioSettings" class="audio-button" type="button">静音阅读 <span>⌁</span></button>
+            </div>
+        </section>
+        <div class="player-foot"><p id="playbackStatus" role="status">点击播放跟随镜头，也可以选择任意一幕。</p>
+            <label class="motion-setting"><input id="reduceMotion" type="checkbox">减少动态</label></div>
+        <nav class="chapter-rail" id="chapterRail" aria-label="选择分镜"></nav>
+        <p class="gesture-hint">手机左右滑动画面切幕 · 切换后暂停，留一点时间给阅读 · 键盘 ← → 切幕，空格播放</p>
+        <section class="source-panel" aria-labelledby="sourceTitle">
+            <div class="source-heading"><div><p class="eyebrow">RETURN TO THE TEXT / 回到原文</p>
+                <h2 id="sourceTitle">开篇 · 雪地里的马车</h2></div>
+                <button id="pauseForText" type="button">停下来读 Ⅱ</button></div>
+            <p class="translation-note">中文自译 · 依据法文公版文本，AI 辅助翻译，非指定出版译本。</p>
+            <p class="source-context" id="sourceContext" hidden></p>
+            <div class="source-paragraphs" id="sourceParagraphs"></div>
+            <details class="french-original" id="frenchOriginal"><summary>对照法文原文 ＋</summary>
+                <div id="sourceFrench" lang="fr"></div></details>
+            <p class="source-credit">莫泊桑《羊脂球》· 选段之间的省略已标注，并非小说全文。
+                <a href="https://www.gutenberg.org/files/10746/10746-h/10746-h.htm"
+                    target="_blank" rel="noopener noreferrer">查阅法文公版全文 ↗</a>
+                · <a href="original-excerpts.txt" download>下载六幕中法选段 ↓</a></p>
+        </section>
+        <section class="after-reading" aria-labelledby="afterTitle">
+            <p class="eyebrow">AFTER THE LAST FRAME / 把问题留给自己</p>
+            <h2 id="afterTitle">如果你也坐在那辆马车里，<br>反对之后，<em>还能做什么？</em></h2>
+            <p>我们把“忘恩负义”再往深处读了一层：<br>一个人的尊严，不该以她先证明自己足够善良为条件。</p>
+            <a href="../index.html?v=deep#review">继续八节深度共读 <span>↗</span></a>
+        </section>
+        <details class="transcript" id="transcript"><summary>逐幕原文与解读 <span>展开，按自己的速度读 ＋</span></summary>
+            <div id="transcriptBody"></div>
+        </details>
+        <footer><p>原作 / 莫泊桑《羊脂球》 · 原文选段附法文对照及本站中文自译；画面标题与解读字幕为原创阅读观点。<br>
+            插画为文学意象重构，人物数量与构图不作为情节证据。</p><a href="../index.html#sources">版本与创作说明 ↗</a></footer>
+    </main>
+    <dialog id="audioDialog" aria-labelledby="audioTitle">
+        <form method="dialog"><button class="dialog-close" aria-label="关闭旁白设置">×</button></form>
+        <p class="eyebrow">YOUR VOICE / 为故事留下一种声音</p><h2 id="audioTitle">用你的声音，读这一段。</h2>
+        <p>默认可静音完整阅读。你可以导入一段自己录制的旁白，按当前字幕模式对应的六幕脚本顺序朗读。</p>
+        <label class="upload-label" for="audioFile">选择本地录音 <span>MP3 / WAV / M4A / OGG / WEBM</span></label>
+        <input id="audioFile" type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.webm,.aac,.flac">
+        <p class="audio-status" id="audioStatus" role="status">还没有导入录音。无需录音也可以播放。</p>
+        <label class="voice-toggle"><input id="voiceEnabled" type="checkbox" disabled>播放旁白</label>
+        <div class="audio-actions"><button id="removeAudio" type="button" disabled>移除录音</button>
+            <a id="scriptDownload" href="narration-original.txt" download>下载原文自译录音脚本 ↓</a></div>
+        <p class="privacy-note">文件仅在当前页面使用，不上传、不保存；刷新后需重新选择。支持 10 秒至 10 分钟、最大 40 MB。
+            导入后六幕会按录音总时长等比例调整，暂不自动识别每句话的时间点。</p>
+    </dialog>
+    <noscript><p class="noscript-note">动态播放需要 JavaScript。你仍然可以<a href="../index.html#review">阅读完整书评</a>。</p></noscript>
+</body>
+</html>

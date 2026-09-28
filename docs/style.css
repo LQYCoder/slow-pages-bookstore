@@ -1,0 +1,308 @@
+/* 创建者：Codex；创建日期：2026/09/12。共享品牌变量保持书店与阅读室一致。 */
+:root {
+    --paper: #f5f1e8;
+    --ink: #29392e;
+    --muted: #697064;
+    --line: #d7d7c9;
+    --orange: #b64d32;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+body:has(dialog[open]) { overflow: hidden; }
+button, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { opacity: .4; cursor: default; }
+a { text-decoration: none; color: inherit; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.announcement { background: var(--ink); color: #e9e8da; padding: 10px 6%; text-align: center; font-size: 12px; letter-spacing: 2px; }
+.announcement span { float: right; font-size: 11px; }
+.site-header { margin: 0 6%; height: 100px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; font: 28px "Songti SC", "SimSun", serif; letter-spacing: 3px; }
+.brand img { flex-shrink: 0; }
+.brand small { display: block; font: 10px/1.8 sans-serif; letter-spacing: 2px; }
+.site-header nav { display: flex; align-items: center; gap: 30px; font-size: 14px; }
+.site-header nav button { padding: 12px 0; background: none; border: 0; color: var(--ink); }
+#collectionCount { background: #e4e4d7; border-radius: 50%; padding: 2px 6px; font-size: 11px; }
+.header-note { color: var(--muted); font-size: 12px; }
+.hero { display: grid; grid-template-columns: 1fr 1.05fr; max-width: 1500px; margin: auto; padding: 54px 6% 50px; gap: 40px; }
+.eyebrow { font: 11px/1.8 sans-serif; letter-spacing: 2px; }
+.hero-copy > .eyebrow { color: var(--orange); }
+h1 { font: 500 clamp(44px, 4.6vw, 72px)/1.4 "Songti SC", "SimSun", serif; margin: 20px 0; }
+h1 em { font-style: normal; color: var(--orange); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 12px; }
+.intro { font-size: 15px; line-height: 2; color: var(--muted); }
+.hero-actions { display: flex; gap: 25px; align-items: center; margin-top: 30px; }
+.primary-button { display: inline-flex; gap: 30px; align-items: center; justify-content: space-between; padding: 17px 24px; background: var(--ink); color: var(--paper); border: 1px solid var(--ink); font-size: 14px; transition: transform .2s, background .2s; }
+.primary-button:hover { background: #405744; transform: translateY(-2px); }
+.text-link { border: 0; border-bottom: 1px solid #9b9f8e; background: none; color: var(--ink); font-size: 14px; padding: 10px 0; }
+.hero-foot { display: flex; align-items: center; gap: 18px; margin-top: 25px; }
+.hero-foot > span { font-size: 40px; }
+.hero-foot p { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.hero-foot i { font: italic 21px Georgia, serif; color: var(--orange); margin-left: 12px; transform: rotate(-7deg); }
+.hero-preview { padding: 24px 26px; background: #e7e7d9; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.preview-top, .preview-bottom { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; letter-spacing: 1px; }
+.preview-spread { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 6px; transform: rotate(-3deg); box-shadow: 12px 20px 28px #22302624; }
+.display-cover { min-height: 300px; color: #eee6cb; padding: 24px; background: #334e3b; border-left: 6px solid #263a2e; }
+.display-cover small { font: 8px/1.5 sans-serif; letter-spacing: 1px; }
+.display-cover h2 { font: 37px/1.3 "Songti SC", serif; margin: 22px 0 10px; }
+.cover-rule { display: block; width: 30px; height: 1px; background: #c7bd8a; }
+.display-cover p { font: 9px/1.6 Georgia, serif; letter-spacing: 2px; }
+.cover-star { display: block; font: 64px/1.1 Georgia, serif; color: #bcbd8c; text-align: right; }
+.preview-page { position: relative; padding: 27px 22px; background: linear-gradient(90deg, #d7d3c5, #f9f6ee 12%); }
+.chapter-kicker { color: var(--orange); font-size: 9px; letter-spacing: 2px; }
+.preview-page h3 { font: 25px/1.5 "Songti SC", serif; margin: 17px 0; }
+.preview-page p { font: 12px/2 "Songti SC", serif; color: #747a6e; }
+.preview-page button { border: 0; background: none; color: var(--orange); padding: 10px 0; font-size: 13px; }
+.page-number { display: block; text-align: center; font: 10px Georgia, serif; margin-top: 10px; color: #8f9489; }
+.ticker { display: flex; justify-content: space-evenly; gap: 24px; padding: 19px 5%; border-block: 1px solid var(--line); font-size: 12px; letter-spacing: 2px; white-space: nowrap; overflow: hidden; }
+.ticker > span { color: var(--orange); }
+.books-section { max-width: 1500px; margin: auto; padding: 60px 6%; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; }
+h2 { font: 500 34px/1.4 "Songti SC", "SimSun", serif; margin: 10px 0; }
+.section-heading > p { color: var(--muted); font-size: 14px; }
+.filter-row { display: flex; gap: 10px; margin: 26px 0; flex-wrap: wrap; }
+.filter-row button { border: 1px solid var(--line); border-radius: 30px; padding: 11px 19px; color: var(--ink); background: none; font-size: 14px; }
+.filter-row button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-row span { margin-left: 10px; opacity: .65; font-size: 11px; }
+.book-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.book-card { min-width: 0; }
+.cover-button { border: 0; display: grid; place-items: center; width: 100%; height: 285px; background: #e9e7dc; position: relative; }
+.mini-book { position: relative; display: flex; flex-direction: column; width: 155px; height: 222px; padding: 18px; text-align: left; border-left: 5px solid #0002; box-shadow: 5px 5px 0 #d1cbb9, 10px 13px 18px #26332826; transition: transform .25s; }
+.cover-button:hover .mini-book { transform: translateY(-8px) rotate(-5deg); }
+.mini-book small { font: 7px/1.6 sans-serif; letter-spacing: 1px; }
+.mini-book strong { font: 27px/1.4 "Songti SC", serif; margin-top: 18px; white-space: pre-line; }
+.mini-book i { font: 8px/1.5 Georgia, serif; letter-spacing: 1px; margin-top: auto; }
+.mini-book .cover-ornament { font-size: 46px; line-height: 1.1; text-align: right; opacity: .65; }
+.cover-nature { background: #344f3b; color: #ece5cc; }
+.cover-city { background: #b54d35; color: #f1dfbd; }
+.cover-sunny { background: #dfc45c; color: #34494b; }
+.cover-moon { background: #5d718a; color: #f0e6ce; }
+.book-card h3 { font: 500 17px/1.5 "Songti SC", serif; margin: 19px 0 6px; }
+.book-card p { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 6px 0; }
+.book-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.book-bottom button { border: 0; background: none; color: var(--orange); padding: 8px 0; font-size: 14px; }
+.concept-note { font-size: 12px; color: var(--muted); margin: 25px 0 0; }
+.quote-garden { background: #293b30; color: var(--paper); margin: 0 6% 55px; padding: 44px 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.quote-garden > div > p:not(.eyebrow) { color: #c2cbbd; font-size: 14px; line-height: 1.8; }
+.quote-garden .text-link { color: var(--paper); }
+.quote-paper { position: relative; background: #eee9dc; color: var(--ink); padding: 27px 30px; transform: rotate(2deg); box-shadow: 6px 6px 0 #c3c5ac; }
+.quote-paper > span, .quote-paper small { font-size: 11px; color: var(--muted); }
+.quote-paper blockquote { margin: 20px 0; font: 25px/1.7 "Songti SC", serif; }
+.quote-paper button { display: block; border: 0; background: none; padding: 18px 0 0; color: var(--orange); font-size: 14px; }
+.letter { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 25px; align-items: center; margin: 0 6% 50px; }
+.letter-symbol { font-size: 50px; color: var(--orange); }
+.letter h2 { font-size: 29px; }
+.letter > p { font-size: 14px; line-height: 2; color: var(--muted); }
+.letter > p span { display: block; text-align: right; }
+footer { margin: 0 6%; padding: 28px 0; border-top: 1px solid var(--line); display: flex; gap: 30px; align-items: center; font-size: 12px; color: var(--muted); }
+footer > span { margin-left: auto; }
+.return-card { margin: 30px 6% 0; padding: 24px 30px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #eeecdf; }
+.return-card h2 { font-size: 24px; }
+.return-card p { font-size: 13px; color: var(--muted); }
+/* 阅读室使用自身配色变量，夜读主题不会改变书店主页的品牌颜色。 */
+dialog::backdrop { background: #17251dc9; backdrop-filter: blur(6px); }
+.reader-dialog {
+    --reader-bg: #eae7dc;
+    --reader-page: #faf7ee;
+    --reader-ink: #354037;
+    --reader-muted: #697468;
+    --reader-line: #d9d8c9;
+    --reader-accent: #a44930;
+    --reading-size: 18px;
+    width: min(1280px, 96vw);
+    height: 94dvh;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    border: 1px solid var(--reader-line);
+    border-radius: 12px;
+    background: var(--reader-bg);
+    color: var(--reader-ink);
+    overflow: auto;
+}
+.reader-dialog[data-theme="forest"] { --reader-bg: #cdd7c7; --reader-page: #e6eddf; --reader-line: #b9c8b1; --reader-ink: #294033; --reader-muted: #52684d; }
+.reader-dialog[data-theme="night"] { --reader-bg: #1c2826; --reader-page: #25332f; --reader-ink: #e2e2d2; --reader-muted: #adb9a9; --reader-line: #45554b; --reader-accent: #e3a77f; }
+.reader-toolbar { position: sticky; top: 0; z-index: 3; background: var(--reader-bg); border-bottom: 1px solid var(--reader-line); display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 25px; }
+.toolbar-button { color: var(--reader-ink); border: 1px solid var(--reader-line); border-radius: 30px; background: transparent; padding: 11px 16px; font-size: 14px; }
+.toolbar-button[aria-pressed="true"] { background: var(--reader-ink); color: var(--reader-bg); }
+.reader-brand { font: 22px "Songti SC", serif; }
+.reader-brand small { font: 10px sans-serif; letter-spacing: 2px; margin-left: 10px; }
+.reader-layout { display: grid; grid-template-columns: 245px minmax(0, 1fr); }
+.reader-sidebar { padding: 36px 24px; border-right: 1px solid var(--reader-line); }
+.reader-sidebar h2 { font-size: 27px; }
+.reader-original { font-size: 12px; color: var(--reader-muted); margin-bottom: 30px; }
+#chapterList { display: grid; gap: 10px; }
+#chapterList button { text-align: left; display: flex; gap: 12px; align-items: center; width: 100%; padding: 14px 12px; border: 1px solid transparent; border-radius: 5px; background: none; color: var(--reader-muted); font-size: 14px; line-height: 1.7; }
+#chapterList button[aria-current="true"] { color: var(--reader-ink); background: var(--reader-page); border-color: var(--reader-line); }
+#chapterList button span { font: 12px Georgia, serif; color: var(--reader-accent); }
+.sidebar-note { margin-top: 42px; color: var(--reader-muted); font: 15px/2 "Songti SC", serif; }
+.completion-label { margin-top: 40px; font-size: 12px; color: var(--reader-muted); }
+progress { width: 100%; height: 5px; accent-color: var(--reader-accent); }
+.reader-main { padding: 24px 40px; min-width: 0; }
+.reading-controls { display: flex; justify-content: space-between; align-items: center; max-width: 710px; margin: 0 auto 20px; gap: 10px; }
+.theme-controls { display: flex; gap: 7px; }
+.theme-controls button { border: 1px solid var(--reader-line); border-radius: 20px; padding: 9px 15px; font-size: 13px; color: var(--reader-ink); background: none; }
+.theme-controls button[aria-pressed="true"] { border-color: var(--reader-accent); color: var(--reader-accent); background: var(--reader-page); }
+.font-control { font-size: 13px; white-space: nowrap; }
+.font-control select { border: 1px solid var(--reader-line); color: var(--reader-ink); background: var(--reader-page); padding: 8px; border-radius: 5px; }
+.reading-page { position: relative; max-width: 710px; margin: auto; background: var(--reader-page); padding: 40px 50px 25px; box-shadow: 0 8px 25px #13251d08, 4px 4px 0 var(--reader-line); border-radius: 2px; scroll-margin-top: 95px; }
+.reading-page.page-enter { animation: pageReveal .4s ease-out; }
+@keyframes pageReveal { from { opacity: .35; transform: translateY(10px) rotateY(-3deg); } to { opacity: 1; transform: none; } }
+.page-running { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--reader-line); color: var(--reader-muted); font: 11px/1.8 sans-serif; letter-spacing: 2px; }
+.reading-page > h2 { font-size: 35px; margin-top: 35px; }
+.chapter-lead { font: 14px/1.9 "Songti SC", serif; color: var(--reader-accent); margin-bottom: 30px; }
+.chapter-body { font: var(--reading-size)/2.15 "Songti SC", "SimSun", serif; letter-spacing: .4px; overflow-wrap: anywhere; }
+.chapter-body p { text-indent: 2em; margin: 0 0 1.2em; }
+.sentence-card { margin: 30px 0; padding: 25px 0 20px; border-block: 1px solid var(--reader-line); }
+.sentence-card .eyebrow { color: var(--reader-muted); font-size: 11px; }
+.sentence-card blockquote { margin: 14px 0; font: 22px/1.8 "Songti SC", serif; }
+.sentence-card button { color: var(--reader-accent); padding: 10px 0; font-size: 14px; border: 0; background: none; }
+.chapter-navigation { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.chapter-navigation button { border: 1px solid var(--reader-line); border-radius: 5px; background: none; color: var(--reader-ink); padding: 12px 15px; font-size: 13px; }
+.chapter-navigation button:last-child { background: var(--reader-ink); color: var(--reader-page); }
+.chapter-navigation > span { color: var(--reader-muted); font: 12px Georgia, serif; white-space: nowrap; }
+.reader-hint { text-align: center; color: var(--reader-muted); font-size: 11px; line-height: 1.8; margin-top: 22px; }
+.finished-message { color: var(--reader-accent); font: 16px/1.9 "Songti SC", serif; }
+.reader-dialog.focus-mode .reader-sidebar { display: none; }
+.reader-dialog.focus-mode .reader-layout { grid-template-columns: 1fr; }
+.collection-dialog { width: min(650px, 92vw); max-height: 88dvh; padding: 38px; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; }
+.close-button { position: absolute; top: 8px; right: 12px; background: none; border: 0; font-size: 30px; padding: 6px 10px; color: var(--ink); }
+.collection-intro { color: var(--muted); font-size: 14px; }
+.saved-card { border-top: 1px solid var(--line); padding: 18px 0; }
+.saved-card blockquote { margin: 8px 0; font: 23px/1.7 "Songti SC", serif; }
+.saved-card p { font-size: 12px; color: var(--muted); }
+.saved-actions { display: flex; justify-content: space-between; }
+.saved-actions button { background: none; border: 0; color: var(--orange); padding: 10px 0; font-size: 14px; }
+.empty-collection { padding: 30px 0; color: var(--muted); line-height: 1.8; font-size: 15px; }
+.toast { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); max-width: 90vw; padding: 13px 22px; background: #29392e; color: #fffbed; border: 1px solid #8a9684; border-radius: 30px; font-size: 13px; text-align: center; pointer-events: none; opacity: 0; z-index: 10; }
+.toast.visible { opacity: 1; }
+/* 中等宽度保留两列书架；手机阅读正文独占一列，目录转为可横向浏览的章签。 */
+@media (max-width: 1050px) {
+    .header-note { display: none; }
+    .hero { gap: 25px; }
+    .hero-preview { padding: 22px 18px; }
+    .display-cover { padding: 20px 16px; }
+    .display-cover h2 { font-size: 32px; }
+    .preview-page { padding: 23px 16px; }
+    .book-grid { grid-template-columns: repeat(2, 1fr); }
+    .reader-layout { grid-template-columns: 210px minmax(0, 1fr); }
+    .reader-sidebar { padding: 25px 17px; }
+    .reader-main { padding: 22px; }
+    .reading-page { padding: 30px; }
+}
+@media (max-width: 720px) {
+    .announcement { font-size: 10px; letter-spacing: 1px; }
+    .announcement span { display: none; }
+    .site-header { height: 83px; }
+    .brand { gap: 8px; font-size: 24px; }
+    .brand img { width: 38px; height: 38px; }
+    .brand small { font-size: 8px; }
+    .site-header nav { gap: 17px; font-size: 12px; }
+    .site-header nav > a { display: none; }
+    .hero { grid-template-columns: 1fr; padding-top: 27px; }
+    h1 { font-size: clamp(40px, 10vw, 58px); }
+    .hero-preview { padding: 20px; }
+    .display-cover { min-height: 300px; padding: 22px; }
+    .display-cover h2 { font-size: 34px; }
+    .preview-page { padding: 24px 18px; }
+    .preview-bottom { font-size: 9px; letter-spacing: 0; }
+    .hero-foot i { font-size: 18px; }
+    .ticker { justify-content: flex-start; }
+    .books-section { padding-top: 35px; }
+    .section-heading { display: block; }
+    h2 { font-size: 28px; }
+    .filter-row { gap: 8px; }
+    .filter-row button { font-size: 12px; padding: 11px 14px; }
+    .book-grid { gap: 17px; }
+    .cover-button { height: 230px; }
+    .mini-book { width: 124px; height: 185px; padding: 13px; }
+    .mini-book strong { font-size: 24px; margin-top: 12px; }
+    .mini-book small { font-size: 6px; }
+    .mini-book .cover-ornament { font-size: 36px; }
+    .mini-book i { font-size: 6px; }
+    .book-card h3 { font-size: 17px; }
+    .book-bottom { flex-wrap: wrap; gap: 4px; }
+    .quote-garden { grid-template-columns: 1fr; gap: 25px; padding: 28px; }
+    .quote-paper { padding: 24px; }
+    .quote-paper blockquote { font-size: 23px; }
+    .letter { grid-template-columns: 35px 1fr; gap: 15px; }
+    .letter-symbol { font-size: 36px; }
+    .letter > p { grid-column: 2; }
+    footer { flex-wrap: wrap; gap: 17px; }
+    footer > span { margin-left: 0; }
+    footer > a:last-child { margin-left: auto; }
+    .return-card { flex-direction: column; align-items: start; padding: 23px; }
+    .reader-dialog { width: 100%; height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+    .reader-toolbar { padding: 12px; gap: 8px; }
+    .reader-brand { font-size: 19px; }
+    .reader-brand small { display: none; }
+    .toolbar-button { font-size: 12px; padding: 10px 13px; }
+    .reader-layout { grid-template-columns: 1fr; }
+    .reader-sidebar { padding: 20px 17px 16px; border-right: 0; border-bottom: 1px solid var(--reader-line); }
+    .reader-sidebar > .eyebrow, .reader-original, .sidebar-note, .completion-label, #bookProgress { display: none; }
+    .reader-sidebar h2 { font-size: 24px; margin: 0 0 15px; }
+    #chapterList { display: flex; overflow-x: auto; gap: 8px; }
+    #chapterList button { width: auto; flex-shrink: 0; font-size: 12px; padding: 10px; gap: 6px; }
+    .reader-main { padding: 18px 12px; }
+    .reading-controls { gap: 6px; }
+    .theme-controls { gap: 4px; }
+    .theme-controls button { font-size: 12px; padding: 9px 11px; }
+    .font-control { font-size: 12px; }
+    .font-control select { padding: 7px 3px; }
+    .reading-page { padding: 25px 22px; }
+    .page-running { letter-spacing: 1px; font-size: 10px; }
+    .reading-page > h2 { font-size: 29px; }
+    .chapter-navigation button { font-size: 12px; padding: 11px 9px; }
+    .chapter-navigation { gap: 6px; }
+    .collection-dialog { padding: 30px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* 部分内嵌浏览器限制下载，保留可手动复制的文本出口。 */
+#exportPreview { margin-top: 22px; font-size: 13px; line-height: 1.8; }
+#exportText { width: 100%; margin-top: 10px; padding: 12px; border: 1px solid var(--line); background: #fffaf0; color: var(--ink); font-family: inherit; font-size: 14px; line-height: 1.8; resize: vertical; }
+
+/* 2026/09/28 新增文学共读入口；不影响既有书架筛选与阅读室布局。 */
+.shared-reading {
+    max-width: 1320px;
+    margin: 35px auto 10px;
+    padding: 36px 6%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    gap: 36px;
+    border-bottom: 1px solid var(--line);
+}
+.shared-reading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+.shared-reading small {
+    display: block;
+    margin-top: 17px;
+    font-size: 11px;
+    color: var(--muted);
+}
+.shared-reading img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+}
+@media (max-width: 700px) {
+    .shared-reading {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .shared-reading h2 {
+        font-size: 27px;
+    }
+    .shared-reading img {
+        display: none;
+    }
+}

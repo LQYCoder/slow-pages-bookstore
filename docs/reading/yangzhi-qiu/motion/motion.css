@@ -1,0 +1,1059 @@
+/* 慢页故事放映室。创建者：Codex；2026/09/28。所有字体与装饰均可离线使用。 */
+:root {
+    color-scheme: dark;
+    --background: #202721;
+    --paper: #f3ebdd;
+    --text: #efe8db;
+    --muted: #a8afa0;
+    --line: #41483d;
+    --accent: #be492c;
+    --camera-scale: 1;
+    --camera-x: 0%;
+    --camera-y: 0%;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button, input {
+    font: inherit;
+}
+button, summary {
+    cursor: pointer;
+}
+button {
+    color: inherit;
+}
+button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 2px solid #eab598;
+    outline-offset: 5px;
+}
+[hidden] {
+    display: none !important;
+}
+.site-header, main {
+    width: min(1280px, 90%);
+    margin: auto;
+}
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 23px 0;
+    border-bottom: 1px solid var(--line);
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+}
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 36px;
+    border: 1px solid #c9c8b0;
+    border-radius: 2px 9px 2px 2px;
+    font: 20px "Songti SC", serif;
+}
+.brand > span:last-child {
+    font-size: 11px;
+    color: var(--muted);
+    border-left: 1px solid var(--line);
+    padding-left: 12px;
+}
+.back-link {
+    font-size: 12px;
+    color: #d4d7c8;
+}
+.back-link span {
+    margin-left: 15px;
+}
+.introduction {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 34px 0 30px;
+    gap: 25px;
+}
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+.live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #d78456;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+h1, h2 {
+    font-family: "Songti SC", "SimSun", serif;
+    font-weight: 500;
+}
+h1 {
+    font-size: clamp(30px, 3.5vw, 49px);
+    margin: 15px 0 0;
+    letter-spacing: -1px;
+}
+h1 em {
+    font-style: normal;
+    color: #c6cbae;
+}
+.intro-note {
+    font-size: 12px;
+    line-height: 1.9;
+    margin: 0;
+    color: #d0d4c5;
+}
+.intro-note span {
+    font-size: 10px;
+    color: var(--muted);
+}
+.player {
+    border: 1px solid #58604e;
+    background: #171e19;
+    box-shadow: 0 20px 70px #10150f55;
+}
+.frame-top {
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 10px;
+    color: #c0c6b7;
+    letter-spacing: 1px;
+}
+.frame-top i {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: #bc7459;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.quiet-button {
+    background: none;
+    border: 0;
+    padding: 10px 0 10px 10px;
+    font-size: 11px;
+}
+.stage {
+    position: relative;
+    aspect-ratio: 2.05;
+    overflow: hidden;
+    background: var(--paper);
+    color: #302b25;
+    touch-action: pan-y;
+    user-select: none;
+    isolation: isolate;
+}
+/* 仅用 CSS 窗口取景与运镜，不改变原始插画文件；字幕始终保留在画面外的独立区域。 */
+.art-window {
+    position: absolute;
+    inset: 0 32% 0 0;
+    overflow: hidden;
+}
+.art-image {
+    display: block;
+    position: absolute;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    bottom: -4%;
+    transform-origin: 60% 86%;
+    transform: translate(var(--camera-x), var(--camera-y)) scale(var(--camera-scale));
+    will-change: transform;
+    mix-blend-mode: multiply;
+}
+.art-window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 90%, var(--paper));
+    pointer-events: none;
+}
+.light-wash {
+    position: absolute;
+    inset: 0;
+    background: #baa56c;
+    opacity: .04;
+    pointer-events: none;
+}
+[data-atmosphere="warm"] .light-wash {
+    opacity: .1;
+    mix-blend-mode: multiply;
+}
+[data-atmosphere="shadow"] .light-wash {
+    background: linear-gradient(100deg, #242b36 0%, transparent 85%);
+    opacity: .17;
+}
+[data-atmosphere="cold"] .light-wash {
+    background: #758e9f;
+    opacity: .12;
+    mix-blend-mode: multiply;
+}
+[data-atmosphere="cold"] .art-image {
+    filter: saturate(.62);
+}
+[data-atmosphere="still"] .light-wash {
+    opacity: 0;
+}
+.edge-caption {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #827664;
+}
+.scene-copy {
+    position: absolute;
+    top: 14%;
+    left: 70%;
+    right: 4%;
+}
+.scene-label {
+    font-size: 10px;
+    color: #8d7964;
+    letter-spacing: 2px;
+    margin: 0 0 24px;
+}
+.scene-copy h2 {
+    font-size: clamp(24px, 2.9vw, 39px);
+    line-height: 1.55;
+    letter-spacing: -.05em;
+    margin: 0;
+    white-space: pre-line;
+}
+.red-rule {
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin: 25px 0 18px;
+    background: var(--accent);
+}
+.scene-copy > p:last-of-type {
+    font-size: 12px;
+    line-height: 1.9;
+    color: #7e6e5f;
+    max-width: 210px;
+}
+.start-button {
+    border: 0;
+    background: #9b402b;
+    color: #fff5e6;
+    font-size: 12px;
+    padding: 13px 17px;
+    margin-top: 15px;
+}
+.start-button span {
+    font-size: 9px;
+    margin-left: 18px;
+}
+.ending {
+    font-size: 11px;
+    line-height: 2;
+    margin-top: 20px;
+}
+.ending span {
+    display: block;
+    color: #7e6e5f;
+}
+.ending a {
+    display: inline-block;
+    border-bottom: 1px solid #ae4a31;
+    color: #983c28;
+    padding: 6px 0;
+}
+.image-fallback {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    max-width: 45%;
+    line-height: 1.9;
+    font-size: 14px;
+}
+/* 雪粒完全由本地 CSS 绘制；暂停、减少动态和离开页面时一并停止。 */
+.snow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.snow span {
+    position: absolute;
+    top: -12px;
+    width: 3px;
+    height: 3px;
+    background: #faf7ee;
+    border-radius: 50%;
+    opacity: .7;
+    animation: snowfall 8s linear infinite;
+    animation-play-state: paused;
+}
+@keyframes snowfall {
+    from {
+        transform: translate(0, -10px);
+    }
+    to {
+        transform: translate(-60px, 680px);
+    }
+}
+body[data-playing="true"][data-reduced="false"] .snow span {
+    animation-play-state: running;
+}
+.stage:not([data-atmosphere="snow"]):not([data-atmosphere="cold"]) .snow {
+    opacity: 0;
+}
+body[data-reduced="true"] .snow {
+    display: none;
+}
+.subtitle-bar {
+    min-height: 76px;
+    padding: 17px 28px;
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    border-top: 1px solid #626449;
+}
+.subtitle-label {
+    flex-shrink: 0;
+    color: #939f88;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-right: 1px solid var(--line);
+    padding-right: 25px;
+}
+.subtitle-bar p {
+    font: 19px/1.7 "Songti SC", "SimSun", serif;
+    margin: 0;
+}
+.transport {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 22px;
+    border-top: 1px solid #333e30;
+}
+.transport-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.icon-button {
+    width: 30px;
+    height: 34px;
+    font-size: 26px;
+    border: 0;
+    background: transparent;
+}
+.play-button {
+    border: 1px solid #90997f;
+    border-radius: 3px;
+    background: #c9d0b6;
+    color: #253020;
+    min-width: 86px;
+    height: 35px;
+    font-size: 12px;
+}
+.replay-button {
+    font-size: 11px;
+    border: 0;
+    background: none;
+    white-space: nowrap;
+}
+.seek-control {
+    flex: 1;
+    min-width: 50px;
+    display: flex;
+}
+input[type="range"] {
+    width: 100%;
+    accent-color: #c8c9ad;
+    cursor: pointer;
+    height: 25px;
+}
+.time {
+    font: 10px monospace;
+    white-space: nowrap;
+    color: #c3c9b9;
+}
+.time-divider {
+    margin: 0 5px;
+    color: #708066;
+}
+.audio-button {
+    border: 0;
+    background: none;
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 10px 0 10px 12px;
+    border-left: 1px solid #3a4434;
+}
+.audio-button span {
+    font-size: 17px;
+    margin-left: 5px;
+}
+.player-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 8px 0;
+    min-height: 45px;
+}
+.player-foot p {
+    line-height: 1.7;
+    margin: 5px 0;
+}
+.motion-setting {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    white-space: nowrap;
+}
+input[type="checkbox"] {
+    accent-color: #d7b696;
+    width: 15px;
+    height: 15px;
+}
+.chapter-rail {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+.chapter-button {
+    text-align: left;
+    border: 1px solid #46513e;
+    background: #293125;
+    padding: 0;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+}
+.chapter-button[aria-current="step"] {
+    border-color: #e4bd98;
+    background: #353b2b;
+}
+.chapter-preview {
+    height: 76px;
+    position: relative;
+    overflow: hidden;
+    background: #e8e1d3;
+    opacity: .58;
+}
+.chapter-preview img {
+    position: absolute;
+    bottom: -15px;
+    width: 100%;
+    height: auto;
+}
+.chapter-button[aria-current="step"] .chapter-preview {
+    opacity: 1;
+}
+.chapter-number {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    z-index: 1;
+    font: 10px monospace;
+    color: #272d22;
+}
+.chapter-text {
+    display: block;
+    font-size: 11px;
+    padding: 13px 11px 15px;
+    white-space: nowrap;
+}
+.chapter-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #d6ae83;
+}
+.gesture-hint {
+    font-size: 10px;
+    text-align: center;
+    color: #9ba68c;
+    line-height: 1.8;
+    margin: 18px 0 0;
+}
+.after-reading {
+    padding: 75px 0 60px;
+    text-align: center;
+}
+.after-reading h2 {
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.65;
+    margin: 18px 0;
+}
+.after-reading em {
+    font-style: normal;
+    color: #c6cbae;
+}
+.after-reading > p:not(.eyebrow) {
+    font-size: 13px;
+    color: #b0b9a1;
+    line-height: 2;
+}
+.after-reading a {
+    display: inline-block;
+    border-bottom: 1px solid #8d967a;
+    font-size: 12px;
+    padding: 15px 3px 9px;
+}
+.after-reading a span {
+    margin-left: 36px;
+}
+.transcript {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 20px;
+}
+.transcript summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0;
+    font-size: 13px;
+}
+.transcript summary span {
+    color: var(--muted);
+    font-size: 11px;
+}
+.transcript-chapter {
+    padding: 25px 0;
+    max-width: 760px;
+    margin: auto;
+    border-top: 1px solid var(--line);
+}
+.transcript-chapter h3 {
+    font: 22px/1.6 "Songti SC", serif;
+    color: #d1c5ab;
+}
+.transcript-chapter p {
+    font: 17px/2 "Songti SC", serif;
+}
+.transcript-chapter button {
+    background: none;
+    border: 1px solid #727c65;
+    padding: 8px 13px;
+    font-size: 11px;
+}
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 25px 0 36px;
+    font-size: 10px;
+    color: #9aa68d;
+    line-height: 1.9;
+}
+footer a {
+    white-space: nowrap;
+}
+dialog {
+    width: min(520px, calc(100% - 28px));
+    max-height: 90dvh;
+    padding: 36px;
+    background: #f3edde;
+    color: #332f27;
+    border: 1px solid #a29885;
+    color-scheme: light;
+}
+dialog::backdrop {
+    background: #0b120ed9;
+    backdrop-filter: blur(5px);
+}
+dialog h2 {
+    font-size: 27px;
+    line-height: 1.5;
+}
+dialog p {
+    font-size: 13px;
+    line-height: 1.9;
+}
+dialog .eyebrow {
+    font-size: 9px;
+    color: #7b725e;
+}
+.dialog-close {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    border: 0;
+    background: none;
+    font-size: 24px;
+}
+.upload-label {
+    display: block;
+    margin-top: 25px;
+    font-size: 13px;
+}
+.upload-label span {
+    display: block;
+    margin: 8px 0 12px;
+    font-size: 10px;
+    color: #8d8371;
+}
+input[type="file"] {
+    font-size: 12px;
+    width: 100%;
+    padding: 12px 0;
+}
+.audio-status {
+    color: #8d452c;
+    overflow-wrap: anywhere;
+}
+.voice-toggle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+}
+.audio-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+.audio-actions button {
+    border: 1px solid #b9ac95;
+    background: none;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+.audio-actions a {
+    font-size: 12px;
+    text-decoration: underline;
+}
+dialog .privacy-note {
+    font-size: 11px;
+    color: #847969;
+    margin-top: 25px;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+.noscript-note {
+    padding: 25px;
+}
+@media (max-width: 900px) {
+    .site-header, main {
+        width: 92%;
+    }
+    .stage {
+        aspect-ratio: 1.8;
+    }
+    .scene-copy {
+        left: 68%;
+        top: 10%;
+    }
+    .scene-copy h2 {
+        font-size: 27px;
+    }
+    .scene-label {
+        font-size: 9px;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+    }
+    .red-rule {
+        margin: 18px 0 12px;
+    }
+    .scene-copy > p:last-of-type {
+        font-size: 11px;
+    }
+    .transport {
+        gap: 10px;
+        padding: 12px;
+    }
+    .transport-buttons {
+        gap: 5px;
+    }
+    .chapter-text {
+        font-size: 10px;
+        padding-left: 7px;
+    }
+}
+@media (max-width: 600px) {
+    .site-header {
+        padding: 17px 0;
+    }
+    .brand {
+        font-size: 16px;
+        gap: 8px;
+    }
+    .brand > span:last-child {
+        font-size: 9px;
+        padding-left: 8px;
+    }
+    .back-link {
+        font-size: 10px;
+    }
+    .back-link span {
+        margin-left: 3px;
+    }
+    .introduction {
+        display: block;
+        padding: 24px 0;
+    }
+    .introduction .eyebrow {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+    h1 {
+        font-size: clamp(26px, 7vw, 39px);
+        line-height: 1.6;
+        letter-spacing: -.04em;
+    }
+    .intro-note {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    .intro-note br:first-child {
+        display: none;
+    }
+    .intro-note span {
+        font-size: 9px;
+    }
+    .frame-top {
+        padding: 0 12px;
+        font-size: 8px;
+        letter-spacing: .6px;
+    }
+    .quiet-button {
+        font-size: 10px;
+    }
+    .stage {
+        aspect-ratio: .86;
+    }
+    .art-window {
+        inset: 32% 0 0;
+    }
+    .art-image {
+        bottom: -5%;
+    }
+    .art-window::after {
+        background: linear-gradient(var(--paper), transparent 16%);
+    }
+    .edge-caption {
+        display: none;
+    }
+    .scene-copy {
+        inset: 7% 7% auto;
+    }
+    .scene-label {
+        margin: 0 0 10px;
+    }
+    .scene-copy h2 {
+        font-size: clamp(25px, 7vw, 35px);
+        line-height: 1.45;
+    }
+    .red-rule {
+        position: absolute;
+        width: 21px;
+        top: 0;
+        right: 0;
+        margin: 3px 0;
+    }
+    .scene-copy > p:last-of-type {
+        max-width: 85%;
+        font-size: 10px;
+        margin: 9px 0 0;
+    }
+    .start-button {
+        position: absolute;
+        right: 0;
+        top: 42px;
+        max-width: 94px;
+        line-height: 1.7;
+        padding: 9px 10px;
+        margin: 0;
+    }
+    .start-button span {
+        display: block;
+        margin: 2px 0 0;
+    }
+    .ending {
+        position: absolute;
+        right: 0;
+        top: 40px;
+        width: 83px;
+        font-size: 10px;
+        margin: 0;
+    }
+    .ending span {
+        display: none;
+    }
+    .subtitle-bar {
+        padding: 16px;
+        min-height: 94px;
+        display: block;
+    }
+    .subtitle-label {
+        display: block;
+        border: 0;
+        padding: 0;
+        font-size: 8px;
+        margin-bottom: 6px;
+    }
+    .subtitle-bar p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    .transport {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px 12px;
+        padding: 12px;
+    }
+    .transport-buttons {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 7px;
+    }
+    .seek-control {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .time {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 9px;
+    }
+    .audio-button {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 10px;
+        padding-left: 8px;
+    }
+    .audio-button span {
+        display: none;
+    }
+    .play-button {
+        min-width: 75px;
+    }
+    .icon-button {
+        width: 24px;
+    }
+    .replay-button {
+        font-size: 10px;
+        padding: 8px 0;
+    }
+    .player-foot {
+        font-size: 10px;
+        align-items: start;
+        padding-top: 13px;
+        gap: 10px;
+    }
+    .motion-setting {
+        font-size: 9px;
+        padding-top: 3px;
+        gap: 3px;
+    }
+    .chapter-rail {
+        grid-template-columns: repeat(6, 115px);
+        overflow-x: auto;
+        padding-bottom: 10px;
+        margin-top: 12px;
+        scroll-snap-type: x proximity;
+    }
+    .chapter-button {
+        scroll-snap-align: start;
+    }
+    .chapter-preview {
+        height: 61px;
+    }
+    .chapter-text {
+        padding: 12px 7px;
+    }
+    .gesture-hint {
+        font-size: 9px;
+        text-align: left;
+        margin-top: 6px;
+    }
+    .after-reading {
+        padding: 49px 0 40px;
+    }
+    .after-reading .eyebrow {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+    .after-reading h2 {
+        font-size: 26px;
+    }
+    .after-reading > p:not(.eyebrow) {
+        font-size: 11px;
+    }
+    .transcript summary {
+        font-size: 12px;
+    }
+    .transcript summary span {
+        font-size: 9px;
+    }
+    footer {
+        display: block;
+    }
+    dialog {
+        padding: 28px 23px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .snow span {
+        animation: none;
+    }
+}
+/* 原文、本站自译和解读在标签与版面上分开，所有选段可离线阅读。 */
+.reading-mode {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+.reading-mode > div {
+    display: flex;
+    gap: 5px;
+}
+.reading-mode button {
+    border: 1px solid var(--line);
+    background: transparent;
+    padding: 10px 14px;
+    font-size: 11px;
+}
+.reading-mode button[aria-pressed="true"] {
+    color: #232e21;
+    background: #c9d0b6;
+    border-color: #c9d0b6;
+}
+.reading-mode > span {
+    font-size: 10px;
+    color: var(--muted);
+}
+.source-panel {
+    margin-top: 35px;
+    padding: 32px 38px;
+    border: 1px solid #525b48;
+    background: #272f25;
+}
+.source-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.source-heading h2 {
+    font-size: 25px;
+    margin: 10px 0;
+}
+.source-heading button {
+    background: transparent;
+    border: 1px solid #849074;
+    padding: 10px 14px;
+    white-space: nowrap;
+    font-size: 11px;
+}
+.translation-note, .source-context, .source-credit {
+    font-size: 11px;
+    line-height: 1.9;
+    color: #bcc3af;
+}
+.source-context {
+    border-left: 2px solid #c6a788;
+    padding-left: 12px;
+}
+.source-paragraphs {
+    max-width: 850px;
+    margin-top: 25px;
+}
+.source-paragraphs p {
+    font: 19px/2.1 "Songti SC", "SimSun", serif;
+}
+.source-paragraphs .excerpt-omission, .transcript-chapter .excerpt-omission,
+.french-original .excerpt-omission {
+    font: 10px/1.6 sans-serif;
+    color: #8c997f;
+    margin: 18px 0;
+}
+.french-original {
+    margin: 25px 0;
+    border-top: 1px solid var(--line);
+    padding-top: 15px;
+}
+.french-original summary {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #c8cdbd;
+}
+.french-original p {
+    font: 16px/1.9 Georgia, serif;
+    overflow-wrap: anywhere;
+    color: #d2d2c0;
+}
+.source-credit a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.transcript-chapter .translation-note {
+    font: 11px/1.9 sans-serif;
+    color: #c0b598;
+    margin-top: 25px;
+}
+@media (max-width: 600px) {
+    .reading-mode {
+        display: block;
+    }
+    .reading-mode > span {
+        display: block;
+        margin-top: 10px;
+        font-size: 9px;
+    }
+    .source-panel {
+        padding: 22px 18px;
+        margin-top: 25px;
+    }
+    .source-heading {
+        display: block;
+    }
+    .source-heading h2 {
+        font-size: 23px;
+    }
+    .source-heading button {
+        margin: 8px 0;
+    }
+    .source-paragraphs p {
+        font-size: 17px;
+    }
+}
