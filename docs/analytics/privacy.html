@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>访问统计说明 · 慢页</title><link rel="icon" href="../logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="dashboard.css?v=stats1">
+    <script src="config.js?v=stats1" defer></script><script src="privacy.js?v=stats1" defer></script>
+</head>
+<body><header><a class="brand" href="../index.html">慢页 <span>SLOW PAGES</span></a><a href="../index.html">回到书架 ↗</a></header>
+    <main class="privacy-copy"><p class="eyebrow">READING, WITH RESPECT</p><h1>关于这里的访问统计。</h1>
+        <p>我们希望知道哪些故事被翻开、被读了多久，用来改进阅读体验。</p>
+        <p id="collectionState" role="status">正在读取统计设置。</p>
+        <h2>记录什么</h2><p>启用后记录访问开始时间、页面、前台停留时长、估算阅读时长、动态观看时长，
+            以及服务端根据 IP 推断的国家、省州和城市。本站数据库不保存原始 IP。</p>
+        <p>每日随机浏览器标识用于当天访客去重，服务端按日做不可直接还原的匿名化。
+            不采集你的摘句、书签内容、表单输入、私人录音或浏览器指纹，也不请求精确位置。</p>
+        <h2>数字的边界</h2><p>切到后台或窗口失去焦点后停止计时。阅读时间还要求正文在视口内，
+            且最近 60 秒有操作；它是行为估计，不代表真正读懂了多少。</p>
+        <p>IP 地区可能是运营商或代理的出口地址。不同设备、隐私模式及清除浏览器数据会影响访客去重。
+            拦截统计、断网或离开页面时补报失败会少计。</p>
+        <h2>由谁处理与保留</h2><p>统计将由独立后台接收，阅读页面继续在 GitHub Pages 托管。
+            访问明细只允许持有管理密钥的人查看，默认保留 90 天后自动删除。
+            启用后的服务地址会显示在下方。</p><p id="processorAddress">尚未配置统计服务。</p>
+        <h2>你可以不参与</h2><p>本站尊重浏览器的 Do Not Track 和 Global Privacy Control 信号。
+            你也可以在此关闭本浏览器的统计，阅读、书签和夜读功能仍然可用。</p>
+        <button id="toggleAnalytics" aria-pressed="false">关闭本浏览器统计</button>
+        <p id="privacyStatus" role="status"></p><p>关闭只影响之后的上报；不删除此前已汇总的匿名记录。</p>
+        <footer>说明更新：2026-09-28。</footer>
+    </main>
+</body></html>

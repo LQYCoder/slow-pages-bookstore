@@ -1,0 +1,29 @@
+# 部署前复制为 wrangler.toml，并填写新建 D1 的 ID。不要把任何 secret 写进配置。
+name = "slow-pages-analytics"
+main = "worker.mjs"
+compatibility_date = "2026-09-28"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGIN = "https://lqycoder.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "slow-pages-analytics"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[ratelimits]]
+name = "EVENT_LIMITER"
+namespace_id = "47281001"
+simple = { limit = 20, period = 60 }
+
+[[ratelimits]]
+name = "REQUEST_LIMITER"
+namespace_id = "47281002"
+simple = { limit = 600, period = 60 }
+
+[triggers]
+crons = ["30 19 * * *"]
+
+[observability]
+enabled = false

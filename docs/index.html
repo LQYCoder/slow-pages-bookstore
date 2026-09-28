@@ -14,6 +14,12 @@
     <script src="library/catalog.js?v=library1" defer></script>
     <script src="library/state.js?v=library1" defer></script>
     <script src="library/shelf.js?v=library1" defer></script>
+
+    <!-- ANALYTICS_START -->
+    <script src="analytics/config.js?v=stats1" defer></script>
+    <script src="analytics/metrics.js?v=stats1" defer></script>
+    <script src="analytics/tracker.js?v=stats1" defer></script>
+    <!-- ANALYTICS_END -->
 </head>
 <body class="edition-home library-home">
     <header class="edition-header">
@@ -130,7 +136,7 @@
             <div class="quote-paper"><span>今日摘句 · 慢页原创试读</span><blockquote id="dailyQuote"></blockquote>
                 <small id="dailySource"></small><button id="dailyRead">去读这一章 ↗</button></div></section>
     </main>
-    <footer class="edition-footer"><span>慢页 / SLOW PAGES</span><p>少一点匆匆看过，多一点真正读过。</p><a href="#">回到页首 ↑</a></footer>
+    <footer class="edition-footer"><span>慢页 / SLOW PAGES</span><p>少一点匆匆看过，多一点真正读过。</p><a href="#">回到页首 ↑</a><a data-analytics-privacy href="analytics/privacy.html">访问统计说明</a></footer>
     <!-- 原生对话框管理阅读时的焦点与 Esc 返回，内容由安全文本节点生成。 -->
     <dialog id="readerDialog" class="reader-dialog" aria-labelledby="readerBookTitle" data-theme="paper">
         <div class="reader-toolbar"><button id="closeReader" class="toolbar-button">← 返回书店</button><span class="reader-brand">慢页 <small>READING ROOM</small></span><button id="focusButton" class="toolbar-button" aria-pressed="false">专注模式</button></div>

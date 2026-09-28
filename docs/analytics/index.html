@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <title>阅读发生的地方 · 慢页统计</title>
+    <link rel="icon" href="../logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="dashboard.css?v=stats1">
+    <script src="config.js?v=stats1" defer></script>
+    <script src="metrics.js?v=stats1" defer></script>
+    <script src="dashboard.js?v=stats1" defer></script>
+</head>
+<body>
+    <header><a class="brand" href="../index.html">慢页 <span>READING OBSERVATORY</span></a>
+        <a href="privacy.html">统计口径与隐私 ↗</a></header>
+    <main>
+        <section class="intro"><div><p class="eyebrow">PRIVATE ANALYTICS / 私人统计看板</p>
+            <h1>阅读，<em>在这里发生。</em></h1><p>看见每天的相遇，也看见文字被认真停留的时刻。</p></div>
+            <span class="status-tag" id="connectionBadge">尚未连接统计服务</span></section>
+        <section class="setup-panel" aria-labelledby="setupTitle" id="setupPanel">
+            <div><h2 id="setupTitle">连接你的统计后台</h2><p id="setupDescription">页面已就绪；部署统计服务后才会有真实访问数据。</p>
+                <p>管理密钥只用于验证，不会保存在浏览器或 GitHub 中。访客无法读取这份报表。</p></div>
+            <form id="connectForm"><label for="apiEndpoint">统计服务地址（HTTPS）</label>
+                <input id="apiEndpoint" type="url" placeholder="https://你的统计服务.workers.dev" required>
+                <label for="adminToken">管理密钥</label>
+                <input id="adminToken" type="password" autocomplete="off" minlength="32" maxlength="200" required>
+                <button type="submit" id="connectButton">验证并查看数据 ↗</button></form>
+        </section>
+        <form id="rangeForm" class="range-form"><div><label for="fromDate">开始日期</label>
+            <input id="fromDate" type="date" required></div><span>—</span>
+            <div><label for="toDate">结束日期</label><input id="toDate" type="date" required></div>
+            <button id="refreshButton" type="submit" disabled>更新统计</button>
+            <button id="disconnectButton" type="button" class="quiet-button" hidden>退出看板</button>
+            <span class="timezone">北京时间 · 最多 31 天</span></form>
+        <p id="dashboardStatus" class="notice" role="status" aria-live="polite">未连接，以下不代表零访问。</p>
+        <section class="metric-grid" aria-label="核心指标">
+            <article><span id="visitorLabel">访客日</span><strong id="visitorCount">—</strong><small>每日匿名浏览器去重后相加</small></article>
+            <article><span>页面浏览量</span><strong id="pageViews">—</strong><small>刷新算一次，心跳不重复算</small></article>
+            <article><span>平均页面停留</span><strong id="averageStay">—</strong><small>前台停留总时长 / 浏览量</small></article>
+            <article><span>有效阅读总时长</span><strong id="readingTotal">—</strong><small>正文可见、前台、近期有交互</small></article>
+        </section>
+        <div class="secondary-metrics"><p>平均有效阅读 <strong id="averageReading">—</strong>
+            <small>仅含有阅读记录的浏览（<span id="readingViews">—</span> 次）</small></p>
+            <p>动态观看时长 <strong id="motionTotal">—</strong><small>单独统计，未计入正文阅读</small></p></div>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">DAILY RHYTHM</p><h2>每天有多少人翻开一页</h2></div>
+            <span class="legend"><i></i> 日访客 <i></i> 浏览量</span></div>
+            <div id="dailyChart" class="daily-chart" aria-label="每日访客与浏览量柱状图"><p class="empty">连接后显示每天的变化。</p></div>
+            <div class="table-scroll"><table><caption class="sr-only">每日统计明细</caption>
+                <thead><tr><th>日期</th><th>日访客 UV</th><th>浏览量 PV</th><th>平均停留</th><th>阅读时长</th></tr></thead>
+                <tbody id="dailyRows"></tbody></table></div></section>
+        <div class="split-panels">
+            <section class="panel"><div class="panel-heading"><div><p class="eyebrow">PAGES & STORIES</p><h2>哪些文字留住了人</h2></div></div>
+                <div class="table-scroll"><table><caption class="sr-only">页面与作品统计</caption>
+                    <thead><tr><th>页面 / 作品</th><th>浏览</th><th>平均停留</th><th>阅读时长</th></tr></thead>
+                    <tbody id="pageRows"></tbody></table></div></section>
+            <section class="panel"><div class="panel-heading"><div><p class="eyebrow">WHERE READERS ARE</p><h2>读者从哪里来</h2></div></div>
+                <p class="panel-note">按 IP 推断的网络出口地区，可能不准；缺失显示未知。</p>
+                <div class="table-scroll"><table><caption class="sr-only">地区统计，最多展示前一百项</caption>
+                    <thead><tr><th>国家 · 省州 · 城市</th><th>浏览</th><th>访客日</th></tr></thead>
+                    <tbody id="regionRows"></tbody></table></div></section>
+        </div>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">VISIT LOG</p><h2>每一次访问</h2></div>
+            <button id="exportButton" class="quiet-button" disabled>导出本页 CSV ↓</button></div>
+            <p class="panel-note">按访问开始时间倒序，50 条 / 页。不显示原始 IP 或访客身份。</p>
+            <div class="table-scroll"><table><caption class="sr-only">当前页访问明细</caption>
+                <thead><tr><th>访问开始时间</th><th>页面</th><th>IP 地区</th><th>前台停留</th><th>有效阅读</th><th>动态观看</th></tr></thead>
+                <tbody id="visitRows"></tbody></table></div>
+            <div class="pagination"><button id="previousPage" class="quiet-button" disabled>← 上一页</button>
+                <span id="pageLabel">尚无数据</span><button id="nextPage" class="quiet-button" disabled>下一页 →</button></div></section>
+        <footer><p>统计从服务启用后开始。浏览器拦截、断网、隐私设置与退出丢包会造成漏计。</p>
+            <p>“有效阅读”是行为估计，不代表真实理解程度。记录保留 90 天。</p></footer>
+    </main>
+</body>
+</html>
