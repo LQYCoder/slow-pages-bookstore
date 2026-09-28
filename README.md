@@ -1,6 +1,6 @@
-# 慢页书店 · 动态文学共读
+# 慢页 · 经典全文阅读与动态共读
 
-纯 HTML、CSS、JavaScript 静态网站，包含书店、莫泊桑《羊脂球》共读笔记和六幕动态阅读。
+纯 HTML、CSS、JavaScript 静态网站，包含经典全文书架、独立阅读页、莫泊桑《羊脂球》共读笔记和六幕动态阅读。
 无需构建、后端、数据库或收费生成服务。
 
 ## GitHub Pages 发布
@@ -25,7 +25,8 @@ GitHub Free 的 Pages 需要使用公开仓库；仓库中的源代码与素材�
 
 - [书店首页](https://lqycoder.github.io/slow-pages-bookstore/)
 - [看故事](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/motion/index.html)
-- [读原文](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/motion/index.html#text)
+- [完整中文阅读·故乡](https://lqycoder.github.io/slow-pages-bookstore/library/hometown/index.html)
+- [羊脂球·法文全文](https://lqycoder.github.io/slow-pages-bookstore/library/boule-de-suif/index.html)
 - [深入共读](https://lqycoder.github.io/slow-pages-bookstore/reading/yangzhi-qiu/index.html#review)
 
 2026/09/28 刊物版：放映与原文分别显示，切换保留分镜与阅读位置。
@@ -46,3 +47,14 @@ https://www.gutenberg.org/files/10746/10746-h/10746-h.htm
 中文为本站依据法文的自译（AI 辅助），非指定出版译本；书评和解读与原文分开标注。
 插画为 AI 生成的文学意象，不作为史实或人物数量的证据。
 原书店四本原创试读为概念作品，不提供真实销售。
+
+## 新增经典全文
+
+五部中文小说：《故乡》《孔乙己》《狂人日记》《阿Q正传》《药》，均为鲁迅原作。
+保留来源分章及旧词、标点，来源为维基文库简体显示，各书页提供固定修订链接。
+《羊脂球》提供 Project Gutenberg #10746 所收同名篇目的完整法文；不包含尚未核实的完整中文译本。
+
+全文页支持目录、每部一枚段落书签、进度恢复、四档字号、纸白/浅绿/夜读和主动“读完”标记。
+同一浏览器保存阅读记录，无登录、无跨设备同步。旧版试读与摘句仍保留。
+动态选段与全文段落可双向跳转。全部正文均为静态 HTML，离线或关闭脚本也可以读。
+在线界面的核对原文链接为可选外部资源，阅读本身不依赖外部服务。

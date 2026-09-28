@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="motion.css?v=edition2">
     <script src="story.js" defer></script>
     <script src="excerpts.js" defer></script>
+    <script src="full-text-scenes.js?v=library1" defer></script>
     <script src="timeline.js" defer></script>
-    <script src="motion.js?v=edition2" defer></script>
+    <script src="motion.js?v=library1" defer></script>
 </head>
 <body data-playing="false" data-reduced="false" data-view="cinema">
     <header class="site-header">
         <a class="brand" href="../../../index.html"><span class="brand-mark">慢</span>慢页 <small>SLOW PAGES</small></a>
         <nav aria-label="主导航"><a href="../../../index.html#books">书架</a><a href="./index.html" aria-current="page">本期共读</a></nav>
-        <span class="header-edition">文学影像刊物 / VOL. 01</span>
+        <a class="header-edition" href="../../../library/boule-de-suif/index.html">读法文全文 ↗</a>
     </header>
     <main>
         <section class="introduction" aria-labelledby="pageTitle">
@@ -28,14 +29,14 @@
         <div class="workspace" id="readingWorkspace">
             <nav class="view-navigation" aria-label="共读流程">
                 <button id="cinemaViewButton" aria-pressed="true" aria-controls="cinemaPanel"><span>01</span> 看故事</button>
-                <button id="textViewButton" aria-pressed="false" aria-controls="textPanel"><span>02</span> 读原文</button>
+                <button id="textViewButton" aria-pressed="false" aria-controls="textPanel"><span>02</span> 读选段</button>
                 <a href="../index.html#review"><span>03</span> 深入共读 ↗</a>
                 <button id="audioSettings" class="settings-button" type="button">阅读设置 ⌁</button>
             </nav>
             <div id="cinemaPanel">
                 <section class="player" aria-label="两次进食动态阅读播放器">
                     <div class="frame-top"><span>慢页 / 文学放映室</span><span id="sceneCounter">SCENE 01 / 06</span>
-                        <button id="readMode" class="quiet-button" type="button">读本幕原文 ↗</button></div>
+                        <button id="readMode" class="quiet-button" type="button">读本幕选段 ↗</button></div>
                     <div class="stage" id="stage" data-atmosphere="snow" aria-label="画面区域，手机可左右滑动切换分镜">
                         <div class="art-window" aria-hidden="true">
                             <img class="art-image" id="sceneArt" src="../assets/carriage.png" alt="" fetchpriority="high">
@@ -85,9 +86,10 @@
             <div class="source-paragraphs" id="sourceParagraphs"></div>
             <details class="french-original" id="frenchOriginal"><summary>对照法文原文 ＋</summary>
                 <div id="sourceFrench" lang="fr"></div></details>
+            <p class="source-credit"><a id="fullTextLink" href="../../../library/boule-de-suif/index.html">在法文全文中读这一段 ↗</a></p>
             <p class="source-credit">莫泊桑《羊脂球》· 选段之间的省略已标注，并非小说全文。
                 <a href="https://www.gutenberg.org/files/10746/10746-h/10746-h.htm"
-                    target="_blank" rel="noopener noreferrer">查阅法文公版全文 ↗</a>
+                    target="_blank" rel="noopener noreferrer">核对原文来源 ↗</a>
                 · <a href="original-excerpts.txt" download>下载六幕中法选段 ↓</a></p>
         </section>
         <details class="transcript" id="transcript"><summary>逐幕原文与解读 <span>展开，按自己的速度读 ＋</span></summary>

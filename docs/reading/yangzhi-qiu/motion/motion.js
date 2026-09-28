@@ -137,6 +137,10 @@
     /** 当前分镜的较长选段与画面同步；查看法文时由交互事件暂停。 */
     function updateSource(scene) {
         const excerpt = EXCERPTS[scene.id];
+        const fullTextLink = document.getElementById("fullTextLink");
+        const paragraphNumber = window.FULL_TEXT_SCENES[scene.id];
+        fullTextLink.href = "../../../library/boule-de-suif/index.html#p-"
+            + String(paragraphNumber).padStart(4, "0");
         elements.sourceTitle.textContent = excerpt.location;
         elements.sourceContext.hidden = !excerpt.context;
         elements.sourceContext.textContent = excerpt.context || "";
@@ -632,6 +636,12 @@
     setReducedMotion(motionPreference.matches);
     updateControls();
     bindReadingViews();
+    // 全文导读链接只接受静态分镜 ID，不使用查询参数生成 HTML 或外部 URL。
+    const requestedScene = new URLSearchParams(window.location.search).get("scene");
+    const requestedIndex = STORY.findIndex(function (scene) { return scene.id === requestedScene; });
+    if (requestedIndex >= 0) {
+        selectChapter(requestedIndex);
+    }
     elements.sceneArt.addEventListener("error", function () { elements.imageFallback.hidden = false; });
     elements.sceneArt.addEventListener("load", function () { elements.imageFallback.hidden = true; });
     document.addEventListener("visibilitychange", function () {
