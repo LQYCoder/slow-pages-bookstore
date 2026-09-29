@@ -1,2 +1,7 @@
 .DS_Store
 Thumbs.db
+# 管理密钥和验收记录只留在本地，防止误复制后被提交。
+统计后台私密配置/
+**/worker-secrets.json
+**/verification-records.json
+**/*-私密登录信息.txt

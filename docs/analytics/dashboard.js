@@ -22,6 +22,8 @@
     const config = window.READING_ANALYTICS_CONFIG;
     if (config && config.endpoint) {
         getElement("apiEndpoint").value = config.endpoint;
+        // 配置地址后给出实际登录步骤；是否连通仍以鉴权请求的结果为准。
+        getElement("setupDescription").textContent = "统计服务地址已填好。输入管理密钥，可查看启用后收到的访问数据。";
     }
 
     /** 时长不夸大精度；不足一秒时显示 0 秒，尚未连接由上层显示破折号。 */

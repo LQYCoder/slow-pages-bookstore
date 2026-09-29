@@ -1,0 +1,97 @@
+name: Verify analytics ingestion
+
+# 只允许手工触发上线验收；不设置定时采集，也不上传管理密钥。
+on:
+    workflow_dispatch:
+        inputs:
+            verification_id:
+                description: "本次验收的随机页面 UUID；核验后按此 ID 单独清理"
+                required: true
+                type: string
+
+permissions:
+    contents: read
+
+jobs:
+    verify:
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+        env:
+            VERIFICATION_ID: ${{ inputs.verification_id }}
+        steps:
+            - name: Verify published configuration and real ingestion
+              shell: bash
+              run: |
+                  python3 - <<'PY'
+                  import datetime
+                  import json
+                  import os
+                  import time
+                  import urllib.error
+                  import urllib.request
+                  import uuid
+
+                  # 固定官方站点和已部署端点；输入只作为合法 UUID，不拼接命令或目标 URL。
+                  SITE_ORIGIN = 'https://lqycoder.github.io'
+                  SITE_BASE = SITE_ORIGIN + '/slow-pages-bookstore/'
+                  ENDPOINT = 'https://slow-pages-analytics.analytics-service.workers.dev'
+                  REQUEST_TIMEOUT_SECONDS = 20
+                  SAMPLE_INTERVAL_SECONDS = 3
+                  SAMPLE_DURATION_MS = 3000
+                  HTTP_SUCCESS = 200
+                  HTTP_NO_CONTENT = 204
+                  HTTP_UNAUTHORIZED = 401
+                  HTTP_FORBIDDEN = 403
+                  HTTP_BAD_REQUEST = 400
+                  verificationId = str(uuid.UUID(os.environ['VERIFICATION_ID']))
+                  directOpener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+                  def requestEndpoint(url, method='GET', data=None, origin=SITE_ORIGIN):
+                      """执行不带任何管理凭据的直连请求，并返回可断言的状态和响应。"""
+                      headers = {'Origin': origin, 'User-Agent': 'SlowPagesDeploymentCheck/1.0'}
+                      if data is not None:
+                          headers['Content-Type'] = 'text/plain'
+                      requestData = None if data is None else json.dumps(data).encode('utf-8')
+                      request = urllib.request.Request(url, data=requestData, headers=headers, method=method)
+                      try:
+                          with directOpener.open(request, timeout=REQUEST_TIMEOUT_SECONDS) as response:
+                              return response.status, response.read().decode('utf-8')
+                      except urllib.error.HTTPError as error:
+                          return error.code, error.read().decode('utf-8')
+
+                  # 核验的是真正发布的配置，不能通过本地替换配置制造“已启用”的假象。
+                  configStatus, configText = requestEndpoint(
+                      SITE_BASE + 'analytics/config.js?v=' + verificationId
+                  )
+                  assert configStatus == HTTP_SUCCESS
+                  assert 'enabled: true' in configText and ENDPOINT in configText
+                  assert requestEndpoint(ENDPOINT + '/stats')[0] == HTTP_UNAUTHORIZED
+                  assert requestEndpoint(ENDPOINT + '/stats', origin='https://invalid.test')[0] == HTTP_FORBIDDEN
+                  assert requestEndpoint(ENDPOINT + '/events', 'POST', {})[0] == HTTP_BAD_REQUEST
+                  assert requestEndpoint(ENDPOINT + '/events', 'OPTIONS')[0] == HTTP_NO_CONTENT
+
+                  # 这是单条可识别的验收记录，不冒充真实读者；由部署端核对后定向删除。
+                  currentDay = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8)))
+                  event = {
+                      'version': 1,
+                      'pageId': verificationId,
+                      'visitorId': str(uuid.uuid4()),
+                      'day': currentDay.strftime('%Y-%m-%d'),
+                      'path': 'library/medicine/index.html',
+                      'visibleMs': 0,
+                      'readingMs': 0,
+                      'motionMs': 0
+                  }
+                  assert requestEndpoint(ENDPOINT + '/events', 'POST', event)[0] == HTTP_NO_CONTENT
+                  time.sleep(SAMPLE_INTERVAL_SECONDS)
+                  event['visibleMs'] = SAMPLE_DURATION_MS
+                  event['readingMs'] = SAMPLE_DURATION_MS
+                  assert requestEndpoint(ENDPOINT + '/events', 'POST', event)[0] == HTTP_NO_CONTENT
+                  # 同一个页面重复上报，数据库中只能有一行，不能把心跳算成新访问。
+                  assert requestEndpoint(ENDPOINT + '/events', 'POST', event)[0] == HTTP_NO_CONTENT
+                  result = {'verificationId': verificationId, 'day': event['day'], 'httpChecks': 'passed'}
+                  print(json.dumps(result, ensure_ascii=False))
+                  with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summaryFile:
+                      summaryFile.write('公开配置、来源限制、未授权拒绝和真实上报检查通过。\n\n')
+                      summaryFile.write('验收记录 ID：`' + verificationId + '`。需核对入库后定向清理。\n')
+                  PY

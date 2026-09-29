@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
     <title>访问统计说明 · 慢页</title><link rel="icon" href="../logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="dashboard.css?v=stats1">
-    <script src="config.js?v=stats1" defer></script><script src="privacy.js?v=stats1" defer></script>
+    <link rel="stylesheet" href="dashboard.css?v=stats2">
+    <script src="config.js?v=stats2" defer></script><script src="privacy.js?v=stats2" defer></script>
 </head>
 <body><header><a class="brand" href="../index.html">慢页 <span>SLOW PAGES</span></a><a href="../index.html">回到书架 ↗</a></header>
     <main class="privacy-copy"><p class="eyebrow">READING, WITH RESPECT</p><h1>关于这里的访问统计。</h1>
@@ -18,13 +18,14 @@
             且最近 60 秒有操作；它是行为估计，不代表真正读懂了多少。</p>
         <p>IP 地区可能是运营商或代理的出口地址。不同设备、隐私模式及清除浏览器数据会影响访客去重。
             拦截统计、断网或离开页面时补报失败会少计。</p>
-        <h2>由谁处理与保留</h2><p>统计将由独立后台接收，阅读页面继续在 GitHub Pages 托管。
+        <h2>由谁处理与保留</h2><p>启用时，统计由 Cloudflare Workers 接收，存入独立的 Cloudflare D1 数据库。
+            阅读页面继续在 GitHub Pages 托管。
             访问明细只允许持有管理密钥的人查看，默认保留 90 天后自动删除。
             启用后的服务地址会显示在下方。</p><p id="processorAddress">尚未配置统计服务。</p>
         <h2>你可以不参与</h2><p>本站尊重浏览器的 Do Not Track 和 Global Privacy Control 信号。
             你也可以在此关闭本浏览器的统计，阅读、书签和夜读功能仍然可用。</p>
         <button id="toggleAnalytics" aria-pressed="false">关闭本浏览器统计</button>
         <p id="privacyStatus" role="status"></p><p>关闭只影响之后的上报；不删除此前已汇总的匿名记录。</p>
-        <footer>说明更新：2026-09-28。</footer>
+        <footer>说明更新：2026-09-29。</footer>
     </main>
 </body></html>

@@ -59,12 +59,14 @@ https://www.gutenberg.org/files/10746/10746-h/10746-h.htm
 动态选段与全文段落可双向跳转。全部正文均为静态 HTML，离线或关闭脚本也可以读。
 在线界面的核对原文链接为可选外部资源，阅读本身不依赖外部服务。
 
-## 私人访问与阅读统计（待接入）
+## 私人访问与阅读统计
 
 [统计看板](https://lqycoder.github.io/slow-pages-bookstore/analytics/index.html)
 提供每日访客与浏览、平均停留、阅读与动态观看时长、地区、访问时间、分页明细和 CSV 导出。
-当前统计服务尚未部署，docs/analytics/config.js 的 enabled=false，未开始采集。
+2026-09-29 已部署 Cloudflare Workers + D1，本次发布开启 docs/analytics/config.js 的采集开关。
+仅统计启用后成功送达的记录。默认 workers.dev 在部分网络下不可达，可能漏记；看板连接失败不代表零访问。
 
 部署后台请参考 analytics-service/README.md。服务端保存管理 secret，公开前端只有 endpoint。
-部署、鉴权及真实上报验收通过后，将 docs/analytics/config.js 的 endpoint 和 enabled 更新，再提交发布。
+看板已自动填入公开接收地址，查看报表仍需站点所有者持有的管理密钥。
+手工验收流程为 Verify analytics ingestion；验收记录核对后按随机 ID 清理，不计入正式数据。
 不要把管理密钥或真实统计数据库上传到本仓库。无后端时不能仅改开关就获得访问数据。

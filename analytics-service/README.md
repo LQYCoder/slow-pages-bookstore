@@ -1,10 +1,20 @@
 # 慢页独立统计服务
 
 当前交付：采集脚本、私人看板、Cloudflare Workers 接收端及 D1 表结构。
-**未配置 Cloudflare 账号、数据库或部署地址；前端 enabled=false，不会采集任何访问。**
+**2026-09-29 后台已部署，本次发布开启前端采集（enabled=true）。**
+公开接收地址：https://slow-pages-analytics.analytics-service.workers.dev。
+看板自动填写该地址；管理密钥单独保存在站点所有者本地的私密登录文件中。
+
+默认 workers.dev 在当前本机网络下无法直连；不能访问该域名的读者会漏记，
+后台看板也可能连接失败。这不影响阅读功能，不代表全站没有访问。
+当前启用按站点所有者明确要求执行，不使用本地代理。
+线上验收从 GitHub 运行环境发送可识别的测试记录，通过可直连的 Cloudflare 官方管理 API
+核对入库并删除验收记录。验收成功只证明该网络路径可用，不保证所有地区都能访问。
+若主要读者仍无法上报，应绑定可达的自有域名或迁移接收端，不能用已有数字推断完整流量。
+
 GitHub Pages 只负责静态网页，不能保存来自所有读者的访问记录。
 
-## 接入步骤（准备就绪后由助手继续执行）
+## 新环境部署步骤（当前账号已完成部署，不要重复创建资源）
 
 1. 使用 Cloudflare 账号登录官方 Wrangler CLI（`wrangler login`）。密钥不要粘贴在公开仓库。
 2. 复制 `wrangler.toml.example` 为 `wrangler.toml`；配置文件已被忽略。
@@ -15,10 +25,11 @@ GitHub Pages 只负责静态网页，不能保存来自所有读者的访问记�
 6. 核对 ALLOWED_ORIGIN、D1 绑定与限流 namespace_id；确保不与账号已有项目共享限流空间。
 7. `wrangler deploy`，得到 HTTPS 地址。默认走 workers.dev，无需修改网站域名。
 8. 用有效/无效管理密钥检查 /stats，发送受控测试访问并核对地区、重复补报和时间聚合。
-9. 将 `docs/analytics/config.js` 的 endpoint 设为根地址，enabled 改为 true，提交并推送到 main，等待 GitHub Pages 发布。
+9. 将 `docs/analytics/config.js` 的 endpoint 设为根地址，enabled 改为 true，运行
+   `python3 scripts/connect_analytics.py`，再同步到 `docs` 发布。
 10. 访问 `https://lqycoder.github.io/slow-pages-bookstore/analytics/index.html`，输入管理密钥。
 
-需要实际账号授权才能部署；不能仅通过修改 HTML 假装全站统计已经工作。
+新环境需要账号授权才能部署；当前账号已完成授权。仅部署后端不代表前端已经采集。
 免费计划达到 Workers / D1 日额度后可能停止收集；不自动升级套餐。
 大陆网络访问 workers.dev 的可达性需要实测；若不可达，可使用受支持的自定义域名或改用已有服务器。
 后端接口与采集格式独立，迁移服务时只需要替换适配层与公开 endpoint。
@@ -49,8 +60,3 @@ GitHub Pages 只负责静态网页，不能保存来自所有读者的访问记�
 - https://developers.cloudflare.com/d1/get-started/
 - https://developers.cloudflare.com/workers/runtime-apis/request/
 - https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
-
-## 可重复校验
-
-在仓库根目录执行 `node --test tests/AnalyticsMetricsTest.cjs tests/AnalyticsApiTest.mjs`。
-需要 Node.js 20 或更新版本，以及 Python 3（内置 SQLite），不需要线上服务或真实密钥。
