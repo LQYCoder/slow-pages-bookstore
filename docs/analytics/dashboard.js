@@ -8,6 +8,11 @@
     const MINUTES_PER_HOUR = 60;
     const MILLISECONDS_PER_SECOND = 1000;
     const MAX_CHART_HEIGHT = 150;
+    const MIN_TOKEN_LENGTH = 32;
+    const MAX_TOKEN_LENGTH = 200;
+    const MAX_TOKEN_INPUT_LENGTH = 256;
+    const TOKEN_LABEL_PATTERN = /^(?:管理密钥|ADMIN_TOKEN)\s*[:：]\s*/i;
+    const VISIBLE_ASCII_PATTERN = /^[\x21-\x7E]+$/;
     const getElement = (id) => document.getElementById(id);
     let token = "";
     let endpoint = "";
@@ -24,6 +29,52 @@
         getElement("apiEndpoint").value = config.endpoint;
         // 配置地址后给出实际登录步骤；是否连通仍以鉴权请求的结果为准。
         getElement("setupDescription").textContent = "统计服务地址已填好。输入管理密钥，可查看启用后收到的访问数据。";
+    }
+
+    /**
+     * 兼容复制私密说明中的整行密钥，只移除已知标签及首尾空白。
+     * 不改写密钥内部字符、不进行编码转换，避免悄悄改变认证值。
+     * 返回格式错误供表单展示；禁止把用户输入拼入错误消息或日志。
+     */
+    function parseAdminToken(rawValue) {
+        if (rawValue.length > MAX_TOKEN_INPUT_LENGTH) {
+            return { error: "粘贴内容过长，请只复制管理密钥所在的一行。" };
+        }
+        const candidate = rawValue.trim().replace(TOKEN_LABEL_PATTERN, "").trim();
+        if (!candidate) {
+            return { error: "请填写私密登录文件中的管理密钥。" };
+        }
+        if (!VISIBLE_ASCII_PATTERN.test(candidate)) {
+            return { error: "密钥中含有中文、空格或不可见字符。请重新复制密钥，可保留“管理密钥：”前缀。" };
+        }
+        if (candidate.length < MIN_TOKEN_LENGTH || candidate.length > MAX_TOKEN_LENGTH) {
+            return { error: "管理密钥应为 " + MIN_TOKEN_LENGTH + "—" + MAX_TOKEN_LENGTH + " 个字符，请检查是否复制完整。" };
+        }
+        return { value: candidate };
+    }
+
+    /** 格式错误在输入框旁说明，焦点回到字段；不向网络发送无效密钥。 */
+    function showTokenError(message) {
+        const input = getElement("adminToken");
+        input.setAttribute("aria-invalid", "true");
+        getElement("tokenError").textContent = message;
+        getElement("tokenError").hidden = false;
+        getElement("dashboardStatus").textContent = "请修正管理密钥后重试，尚未发送验证请求。";
+        input.focus();
+    }
+
+    /** 网络故障不能被描述成密钥错误，也不直接展示浏览器内部的英文异常。 */
+    function connectionMessage(error) {
+        if (error.name === "AbortError") {
+            return "连接超时，统计接口在当前网络可能无法直连。请检查网络或使用可达的统计服务地址。";
+        }
+        if (error instanceof TypeError) {
+            return "无法连接统计服务，请检查网络或服务地址。这不代表管理密钥错误，也不代表没有访问。";
+        }
+        if (error instanceof SyntaxError) {
+            return "统计服务返回的数据格式异常，请稍后重试。";
+        }
+        return error.message;
     }
 
     /** 时长不夸大精度；不足一秒时显示 0 秒，尚未连接由上层显示破折号。 */
@@ -117,7 +168,8 @@
         getElement("pageViews").textContent = total.pageViews.toLocaleString();
         getElement("averageStay").textContent = duration(total.pageViews ? total.visibleMs / total.pageViews : 0);
         getElement("readingTotal").textContent = duration(total.readingMs);
-        getElement("averageReading").textContent = duration(total.readingViews ? total.readingMs / total.readingViews : 0);
+        getElement("averageReading").textContent = duration(
+            total.readingViews ? total.readingMs / total.readingViews : 0);
         getElement("readingViews").textContent = total.readingViews.toLocaleString();
         getElement("motionTotal").textContent = duration(total.motionMs);
         const days = completeDays(data);
@@ -126,7 +178,8 @@
             duration(day.pageViews ? day.visibleMs / day.pageViews : 0), duration(day.readingMs)]), 5);
         renderRows("pageRows", data.pages.map((page) => [data.titles[page.path] || page.path, page.pageViews,
             duration(page.pageViews ? page.visibleMs / page.pageViews : 0), duration(page.readingMs)]), 4);
-        renderRows("regionRows", data.regions.map((region) => [regionName(region), region.pageViews, region.visitorDays]), 3);
+        renderRows("regionRows", data.regions.map((region) => [
+            regionName(region), region.pageViews, region.visitorDays]), 3);
         renderRows("visitRows", data.visits.map((visit) => [formatTime(visit.startedAt),
             data.titles[visit.path] || visit.path, regionName(visit), duration(visit.visibleMs),
             duration(visit.readingMs), duration(visit.motionMs)]), 6);
@@ -179,8 +232,7 @@
             }
         } catch (error) {
             if (version === requestVersion) {
-                getElement("dashboardStatus").textContent = error.name === "AbortError"
-                    ? "连接超时，请检查统计服务地址或稍后重试。" : error.message;
+                getElement("dashboardStatus").textContent = connectionMessage(error);
                 getElement("setupPanel").hidden = false;
                 getElement("connectionBadge").textContent = report ? "连接失败 · 显示上次结果" : "连接失败 · 没有数据";
             }
@@ -208,19 +260,37 @@
 
     getElement("connectForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        try {
-            const address = new URL(getElement("apiEndpoint").value);
-            if (address.protocol !== "https:" || address.username || address.password || address.search || address.hash
-                || address.pathname !== "/") {
-                throw new Error("请填写 HTTPS 服务根地址，不要包含路径、查询参数或用户名。");
-            }
-            endpoint = address.origin;
-            token = getElement("adminToken").value;
-            getElement("adminToken").value = "";
-            loadReport();
-        } catch (error) {
-            getElement("dashboardStatus").textContent = error.message;
+        const parsedToken = parseAdminToken(getElement("adminToken").value);
+        if (parsedToken.error) {
+            showTokenError(parsedToken.error);
+            return;
         }
+        getElement("adminToken").setAttribute("aria-invalid", "false");
+        getElement("tokenError").hidden = true;
+        getElement("tokenError").textContent = "";
+        let address;
+        try {
+            address = new URL(getElement("apiEndpoint").value.trim());
+        } catch (error) {
+            getElement("dashboardStatus").textContent = "请填写有效的 HTTPS 统计服务地址。";
+            getElement("apiEndpoint").focus();
+            return;
+        }
+        if (address.protocol !== "https:" || address.username || address.password || address.search || address.hash
+            || address.pathname !== "/") {
+            getElement("dashboardStatus").textContent = "请填写 HTTPS 服务根地址，不要包含路径、查询参数或用户名。";
+            getElement("apiEndpoint").focus();
+            return;
+        }
+        endpoint = address.origin;
+        token = parsedToken.value;
+        getElement("adminToken").value = "";
+        loadReport();
+    });
+    getElement("adminToken").addEventListener("input", () => {
+        getElement("adminToken").setAttribute("aria-invalid", "false");
+        getElement("tokenError").hidden = true;
+        getElement("tokenError").textContent = "";
     });
     getElement("rangeForm").addEventListener("submit", (event) => { event.preventDefault(); loadReport(); });
     getElement("previousPage").addEventListener("click", () => { if (report) { loadReport(report.page - 1); } });

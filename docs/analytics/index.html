@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="dashboard.css?v=stats2">
     <script src="config.js?v=stats2" defer></script>
     <script src="metrics.js?v=stats2" defer></script>
-    <script src="dashboard.js?v=stats2" defer></script>
+    <script src="dashboard.js?v=stats3" defer></script>
 </head>
 <body>
     <header><a class="brand" href="../index.html">慢页 <span>READING OBSERVATORY</span></a>
@@ -22,10 +22,14 @@
         <section class="setup-panel" aria-labelledby="setupTitle" id="setupPanel">
             <div><h2 id="setupTitle">连接你的统计后台</h2><p id="setupDescription">页面已就绪；部署统计服务后才会有真实访问数据。</p>
                 <p>管理密钥只用于验证，不会保存在浏览器或 GitHub 中。访客无法读取这份报表。</p></div>
-            <form id="connectForm"><label for="apiEndpoint">统计服务地址（HTTPS）</label>
+            <form id="connectForm" novalidate><label for="apiEndpoint">统计服务地址（HTTPS）</label>
                 <input id="apiEndpoint" type="url" placeholder="https://你的统计服务.workers.dev" required>
                 <label for="adminToken">管理密钥</label>
-                <input id="adminToken" type="password" autocomplete="off" minlength="32" maxlength="200" required>
+                <input id="adminToken" type="password" autocomplete="off" maxlength="256" required
+                    autocapitalize="none" autocorrect="off" spellcheck="false" aria-invalid="false"
+                    aria-describedby="tokenHelp tokenError">
+                <small id="tokenHelp">可粘贴密钥本身，或“管理密钥：……”这一行；不要粘贴整篇说明。</small>
+                <p id="tokenError" class="panel-note" role="alert" hidden></p>
                 <button type="submit" id="connectButton">验证并查看数据 ↗</button></form>
         </section>
         <form id="rangeForm" class="range-form"><div><label for="fromDate">开始日期</label>
