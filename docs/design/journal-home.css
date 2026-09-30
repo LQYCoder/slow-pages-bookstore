@@ -1,0 +1,278 @@
+/* 首页增量样式：保留已有阅读器与摘句对话框。创建者：Codex；2026/09/30。 */
+.journal-home {
+    --paper: #f4f0e5;
+    --ink: #202a41;
+    --muted: #73716e;
+    --line: #d8d2c5;
+    --orange: #b94531;
+    background: var(--paper);
+}
+.journal-home [hidden] {
+    display: none !important;
+}
+.journal-masthead, .cover-issue {
+    width: min(1280px, 88%);
+    margin-inline: auto;
+}
+.journal-masthead {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    align-items: end;
+    padding-block: 46px 35px;
+}
+.journal-masthead h1 {
+    font: 500 clamp(32px, 4.4vw, 63px)/1.4 "Songti SC", "STSong", serif;
+    margin-top: 20px;
+    letter-spacing: -2px;
+}
+.journal-masthead em, .cover-story em {
+    font-style: normal;
+    color: var(--orange);
+    text-decoration: none;
+}
+.masthead-note {
+    font: 12px/1.9 "Songti SC", serif;
+    padding-left: 18px;
+    border-left: 1px solid var(--orange);
+    white-space: nowrap;
+}
+.cover-issue {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr;
+    border: 1px solid var(--line);
+}
+.cover-landscape {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-width: 0;
+    color: #f6edda;
+    background: #283952;
+}
+.cover-landscape img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 540px;
+    object-fit: cover;
+    object-position: 57% center;
+    transition: transform 1.2s ease;
+}
+.cover-landscape:hover img {
+    transform: scale(1.025);
+}
+.cover-topline {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+.cover-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 50px 25px 25px;
+    background: linear-gradient(transparent, #152239d9);
+    font: 16px "Songti SC", serif;
+}
+.cover-caption i {
+    font: 30px sans-serif;
+}
+.cover-story {
+    padding: 40px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+.cover-story h2 {
+    font: 22px "Songti SC", serif;
+    margin: 20px 0 12px;
+}
+.cover-story h3 {
+    font: 500 clamp(30px, 3.5vw, 48px)/1.4 "Songti SC", "STSong", serif;
+    letter-spacing: -1px;
+    margin: 0;
+}
+.cover-story > p:not(.edition-kicker) {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 23px 0;
+}
+.cover-story .edition-primary {
+    width: 100%;
+    margin: 0;
+}
+.cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding-top: 22px;
+    font-size: 10px;
+}
+.cover-story small {
+    font-size: 10px;
+    line-height: 1.9;
+    margin-top: 14px;
+    color: var(--muted);
+}
+.journal-home .reading-path {
+    margin-top: 35px;
+}
+.journal-home .reading-path > a > span {
+    color: var(--orange);
+}
+.journal-home .classic-library {
+    padding-top: 30px;
+}
+.shelf-discovery {
+    position: relative;
+    margin: 35px 0 24px;
+    padding: 27px 30px;
+    border: 1px solid var(--line);
+    background: #ebe6da;
+}
+.discovery-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.thread-icon {
+    color: var(--orange);
+    font-size: 40px;
+}
+.discovery-title h3 {
+    margin: 0 0 8px;
+    font: 24px "Songti SC", serif;
+}
+.discovery-title p, #discoveryStatus {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+.discovery-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 22px 0 15px;
+}
+.discovery-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 11px;
+}
+.discovery-controls select, .discovery-controls input {
+    background: var(--paper);
+    border: 1px solid #c9c3b6;
+    border-radius: 0;
+    padding: 13px;
+    width: 100%;
+    min-width: 0;
+    font: 13px sans-serif;
+    color: var(--ink);
+}
+#discoveryStatus {
+    padding-right: 110px;
+}
+#clearDiscovery {
+    position: absolute;
+    bottom: 24px;
+    right: 30px;
+    border: none;
+    background: none;
+    color: var(--orange);
+    padding: 8px 0;
+    font-size: 11px;
+}
+.journal-home .classic-cover {
+    border-radius: 0 8px 8px 0;
+}
+@media (max-width: 900px) {
+    .cover-story {
+        padding: 25px;
+    }
+    .cover-landscape img {
+        min-height: 500px;
+    }
+    .masthead-note {
+        display: none;
+    }
+}
+@media (max-width: 650px) {
+    .journal-masthead, .cover-issue {
+        width: 88%;
+    }
+    .journal-masthead {
+        padding-block: 30px 25px;
+    }
+    .journal-masthead h1 {
+        font-size: 36px;
+        letter-spacing: -1px;
+    }
+    .journal-masthead em {
+        display: block;
+    }
+    .journal-masthead .edition-kicker {
+        font-size: 8px;
+    }
+    .cover-issue {
+        grid-template-columns: 1fr;
+    }
+    .cover-landscape img {
+        height: 330px;
+        min-height: 0;
+    }
+    .cover-topline {
+        left: 18px;
+        top: 18px;
+        font-size: 8px;
+    }
+    .cover-caption {
+        padding: 45px 18px 18px;
+        font-size: 13px;
+    }
+    .cover-story {
+        padding: 27px;
+    }
+    .cover-story h3 {
+        font-size: 38px;
+    }
+    .cover-story h2 {
+        font-size: 19px;
+    }
+    .shelf-discovery {
+        padding: 23px 18px;
+    }
+    .discovery-title {
+        gap: 13px;
+    }
+    .discovery-title h3 {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+    .discovery-controls {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    #clearDiscovery {
+        position: static;
+        margin-top: 10px;
+    }
+    #discoveryStatus {
+        padding: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cover-landscape img {
+        transition: none;
+    }
+}

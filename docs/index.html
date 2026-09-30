@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="慢页，经典文学全文阅读空间。五部中文小说、羊脂球法文原作、动态共读与文学手记。">
+    <meta name="description" content="慢页文学共读：追风筝的人原创深度导读、经典全文书架、按时间主题选书与私人页边笔记。">
     <title>慢页 SLOW PAGES · 把故事读下去</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="stylesheet" href="style.css?v=edition2">
@@ -13,48 +13,54 @@
     <link rel="stylesheet" href="library/library.css?v=library1">
     <script src="library/catalog.js?v=library1" defer></script>
     <script src="library/state.js?v=library1" defer></script>
-    <script src="library/shelf.js?v=library1" defer></script>
+    <script src="library/discovery.js?v=journal1" defer></script>
+    <script src="library/shelf.js?v=journal1" defer></script>
+    <link rel="stylesheet" href="design/journal-home.css?v=journal1">
 
     <!-- ANALYTICS_START -->
-    <script src="analytics/config.js?v=stats2" defer></script>
-    <script src="analytics/metrics.js?v=stats2" defer></script>
-    <script src="analytics/tracker.js?v=stats2" defer></script>
+    <script src="analytics/config.js?v=stats3" defer></script>
+    <script src="analytics/metrics.js?v=stats3" defer></script>
+    <script src="analytics/tracker.js?v=stats3" defer></script>
     <!-- ANALYTICS_END -->
 </head>
-<body class="edition-home library-home">
+<body class="edition-home library-home journal-home">
     <header class="edition-header">
         <a class="edition-brand" href="index.html"><span class="edition-mark">慢</span>慢页 <small>SLOW PAGES</small></a>
-        <nav aria-label="主导航"><a href="#books">书架</a><a href="reading/yangzhi-qiu/motion/index.html">本期共读</a>
+        <nav aria-label="主导航"><a href="#books">书架</a><a href="reading/kite-runner/index.html">本期共读</a>
             <button id="collectionButton">我的摘句 <span id="collectionCount">0</span></button></nav>
-        <span class="edition-stamp">完整阅读 / 经典文学书架</span>
+        <span class="edition-stamp">文学共读 / 独立阅读空间</span>
     </header>
     <main>
-        <section class="edition-intro" aria-labelledby="homeTitle">
-            <p class="edition-kicker">把一本书，从第一页读到心里。</p>
-            <h1 id="homeTitle">故事的余地，<br><em>留给慢慢读。</em><span class="title-asterisk" aria-hidden="true">✳</span></h1>
-            <div class="intro-aside"><span>OPEN A BOOK / STAY A WHILE</span><p>从原文开始，<br>在页边停一会儿。<br>下一次，还从这里继续。</p></div>
+        <!-- JOURNAL_HERO_START -->
+        <section class="journal-masthead" aria-labelledby="homeTitle">
+            <div><p class="edition-kicker">A SMALL JOURNAL FOR LONG STORIES / 慢页文学共读</p>
+                <h1 id="homeTitle">有些故事，<em>读完才开始。</em></h1></div>
+            <p class="masthead-note">读一本书，<br>也读一读自己。</p>
         </section>
-        <section class="feature-issue" aria-labelledby="issueTitle">
-            <a class="issue-art" href="library/boule-de-suif/index.html" aria-label="阅读羊脂球法文全文">
-                <img src="reading/yangzhi-qiu/assets/carriage.png" alt="雪夜马车里的乘客与一位女子">
-                <span class="art-index">01</span><span class="art-caption">先读故事，再听见自己的回声。</span>
-                <span class="art-play" aria-hidden="true">↗</span>
+        <section class="cover-issue" aria-labelledby="issueTitle">
+            <a class="cover-landscape" href="reading/kite-runner/index.html" aria-label="进入追风筝的人原创共读">
+                <img src="reading/kite-runner/assets/sky.png" width="1536" height="1024"
+                    alt="深蓝天空里一只朱红风筝，细线越过喀布尔的屋顶；原创文学意象插画。">
+                <span class="cover-topline">本期封面 / THE KITE RUNNER</span>
+                <span class="cover-caption">一根线，牵着尚未完成的以后。<i>↗</i></span>
             </a>
-            <div class="issue-copy"><p class="edition-kicker">本期共读 / GUY DE MAUPASSANT</p>
-                <h2 id="issueTitle">《羊脂球》</h2><p class="issue-subtitle">一辆马车，<br>十位同行的人。</p>
-                <p class="issue-description">大雪中的一次出发。<br>从各自的处境，读进一个共同的故事。</p>
-                <a class="edition-primary" href="library/boule-de-suif/index.html">从头读 · 法文全文 <span>↗</span></a>
-                <a class="feature-secondary" href="reading/yangzhi-qiu/motion/index.html">先看一分钟片段 · 中文选段 ↗</a>
-                <div class="issue-meta"><span>莫泊桑 · 1880</span><span>动态片段含关键情节</span></div>
+            <div class="cover-story"><p class="edition-kicker">NEW READING / 新一期共读</p>
+                <h2 id="issueTitle">追风筝的人</h2><h3>有些长大，<br>是别人替我们<br><em>付了账。</em></h3>
+                <p>从渴望被看见的童年，<br>读到不急于被原谅的责任。</p>
+                <a class="edition-primary" href="reading/kite-runner/index.html">读这一期 <span>↗</span></a>
+                <div class="cover-meta"><span>08 节原创导读</span><span>03 种阅读视角</span></div>
+                <small>卡勒德·胡赛尼 / 原著 2003<br>原创评论，非小说全文 · 含剧透提示</small>
             </div>
         </section>
         <nav class="reading-path" aria-label="选择阅读方式">
-            <a href="#books"><span>01 / READ</span><strong>完整读一本 <i>↗</i></strong><p>五部中文小说，按自己的速度读完。</p></a>
-            <a href="reading/yangzhi-qiu/motion/index.html"><span>02 / WATCH</span><strong>走进一个场景 <i>↗</i></strong>
-                <p>《羊脂球》六幕影像，随时回到全文。</p></a>
-            <a href="reading/yangzhi-qiu/index.html#review"><span>03 / THINK</span><strong>读后再聊一聊 <i>↗</i></strong>
-                <p>原创文学手记，留给读完之后的追问。</p></a>
+            <a href="#books"><span>01 / READ</span><strong>给时间找一本书 <i>↗</i></strong>
+                <p>按空闲时间与主题，挑一部经典全文。</p></a>
+            <a href="reading/kite-runner/index.html#response"><span>02 / RESPOND</span><strong>在页边留下自己 <i>↗</i></strong>
+                <p>写一段私人回应，保存这次阅读的余温。</p></a>
+            <a href="reading/yangzhi-qiu/motion/index.html"><span>03 / WATCH</span><strong>让一个场景慢下来 <i>↗</i></strong>
+                <p>《羊脂球》六幕动态片段，继续读往期共读。</p></a>
         </nav>
+        <!-- JOURNAL_HERO_END -->
 <!-- CLASSIC_SHELF_START -->
         <section class="classic-library" id="books" aria-labelledby="libraryTitle">
             <div class="library-heading"><div><p class="edition-kicker">THE CLASSICS / 经典全文书架</p>
@@ -63,6 +69,23 @@
             <div class="library-resume" id="libraryResumeCard" hidden>
                 <div><span class="edition-kicker">书页还停在这里</span><p id="libraryResumeTitle"></p></div>
                 <a id="libraryResumeLink">接着读 ↗</a></div>
+
+            <!-- DISCOVERY_START -->
+            <div class="shelf-discovery" hidden>
+                <div class="discovery-title"><span class="thread-icon" aria-hidden="true">↳</span>
+                    <div><h3>今天，给阅读留多少时间？</h3><p>时间仅为估算，随时可以停下，书签会等你。</p></div></div>
+                <div class="discovery-controls">
+                    <label>我有一些时间<select id="readingTime"><option value="all">不限时间</option>
+                        <option value="10">约 10 分钟以内</option><option value="20">约 20 分钟以内</option>
+                        <option value="long">留一段长时间</option></select></label>
+                    <label>我想读到<select id="readingTheme"><option value="all">所有主题</option>
+                        <option value="relationships">关系与距离</option><option value="crowds">人群与旁观</option>
+                        <option value="self">自我与困境</option></select></label>
+                    <label>也可以找一本<input id="bookSearch" type="search" maxlength="80" placeholder="书名或作者"></label>
+                </div><p id="discoveryStatus" role="status">六部作品，等一次翻开。</p>
+                <button type="button" id="clearDiscovery">重置筛选 ↺</button>
+            </div>
+            <!-- DISCOVERY_END -->
             <div class="library-tabs" role="group" aria-label="按正文语言筛选" hidden>
                 <button data-library-filter="all" aria-pressed="true">全部 06</button>
                 <button data-library-filter="zh-CN" aria-pressed="false">中文全文 05</button>

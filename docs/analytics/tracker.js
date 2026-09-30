@@ -15,7 +15,7 @@
     const MAX_VISITOR_LENGTH = 256;
     const UUID_PATTERN = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
     const ALLOWED_PATHS = new Set([
-        "index.html", "reading/yangzhi-qiu/index.html", "reading/yangzhi-qiu/motion/index.html",
+        "index.html", "reading/kite-runner/index.html", "reading/yangzhi-qiu/index.html", "reading/yangzhi-qiu/motion/index.html",
         "library/hometown/index.html", "library/kong-yiji/index.html", "library/madman-diary/index.html",
         "library/ah-q/index.html", "library/medicine/index.html", "library/boule-de-suif/index.html"
     ]);
@@ -103,6 +103,7 @@
         const dialog = document.querySelector("dialog[open]");
         const legacyReader = dialog && dialog.id === "readerDialog";
         const readingTarget = document.getElementById("novelText")
+            || document.querySelector("#journalGate[open] #journalReading")
             || document.querySelector("#reviewPanel:not([hidden]) #review")
             || document.querySelector("#textPanel:not([hidden]) .source-paragraphs")
             || (legacyReader ? document.getElementById("chapterBody") : null);

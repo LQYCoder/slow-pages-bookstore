@@ -51,6 +51,11 @@ function requestFor(endpoint, data, token = '') {
 
 const statsPath = '/stats?from=2026-09-28&to=2026-09-28';
 
+test('新共读页可以接收计时，但不接受任意路径', () => {
+    assert.equal(validateEvent(eventData({ path: 'reading/kite-runner/index.html' }), NOW), true);
+    assert.equal(validateEvent(eventData({ path: 'reading/private-note/index.html' }), NOW), false);
+});
+
 test('日期、未知路径、计时负数、阅读超过停留均被拒绝', () => {
     assert.equal(validDay('2026-02-31'), false);
     assert.equal(validDay('2024-02-29'), true);

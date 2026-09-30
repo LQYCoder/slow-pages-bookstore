@@ -19,6 +19,7 @@ const COUNTRY_PATTERN = /^[A-Z]{2}$/;
 const BOT_PATTERN = /bot\b|spider|crawler|headless|preview|facebookexternalhit/i;
 const PATHS = Object.freeze({
     "index.html": "书架首页",
+    "reading/kite-runner/index.html": "追风筝的人 · 原创共读",
     "library/hometown/index.html": "故乡 · 全文",
     "library/kong-yiji/index.html": "孔乙己 · 全文",
     "library/madman-diary/index.html": "狂人日记 · 全文",
