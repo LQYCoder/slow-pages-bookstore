@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1500">
+<defs><pattern id="grain" width="64" height="64" patternUnits="userSpaceOnUse">
+<path d="M12 14h15M40 48h18" stroke="#6a5e50" stroke-opacity=".12"/></pattern></defs>
+<rect width="900" height="1500" fill="#f1e8d7"/><rect width="900" height="1500" fill="url(#grain)"/>
+<path d="M72 1120h760v380H72z" fill="#d1c3ac" stroke="#272722" stroke-width="7"/>
+<path d="M258 1120V816l192-198 194 198v304" fill="#aa9b83" stroke="#272722" stroke-width="10"/>
+<path d="M406 700V490h92v210m-46-310v82m-36-41h73" fill="none" stroke="#272722" stroke-width="14"/>
+<path d="M378 1120V933q72-105 144 0v187" fill="#564d42" stroke="#272722" stroke-width="8"/>
+<path d="M135 1120V976q53-82 106 0v144m448 0V976q53-82 106 0v144" fill="#ede2d0" stroke="#272722" stroke-width="7"/>
+<path d="M0 1310q150-80 300 4t300 0 300-4v190H0Z" fill="#817767"/>
+<path d="M525 1308h83v113h-83z" fill="#a63a30"/><path d="M0 1490h900" stroke="#272722" stroke-width="5"/></svg>

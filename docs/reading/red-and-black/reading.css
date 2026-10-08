@@ -1,0 +1,371 @@
+/* 创建者：Codex；2026/09/28。共读页面与六张出版图共用文本，避免发布稿与网页脱节。 */
+:root {
+    --paper: #f5f1e8;
+    --ink: #322f29;
+    --muted: #756e62;
+    --accent: #b63624;
+    --line: #d7cebf;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+a {
+    color: inherit;
+    text-underline-offset: 5px;
+}
+a:focus-visible, button:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 5px;
+}
+button {
+    font: inherit;
+    cursor: pointer;
+}
+.reading-header, footer {
+    max-width: 1320px;
+    margin: auto;
+    padding: 28px 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 12px;
+}
+.reading-header a {
+    text-decoration: none;
+}
+main {
+    max-width: 1320px;
+    margin: auto;
+    padding: 0 5%;
+}
+.lead {
+    padding: 48px 0 30px;
+    border-top: 1px solid var(--line);
+}
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+h1, h2 {
+    font-family: "Songti SC", "SimSun", serif;
+    font-weight: 500;
+}
+h1 {
+    font-size: clamp(38px, 5vw, 70px);
+    line-height: 1.35;
+    margin: 26px 0;
+    letter-spacing: -1px;
+}
+h1 em {
+    font-style: normal;
+    color: var(--accent);
+}
+.lead-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+.lead-bottom p, .notice, aside p, .sources p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+.button {
+    display: inline-block;
+    padding: 15px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+}
+.sub-link {
+    display: block;
+    margin-top: 16px;
+    font-size: 12px;
+}
+.notice {
+    margin-top: 32px;
+    font-size: 11px;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 38px 28px;
+    padding: 24px 0 60px;
+}
+figure {
+    margin: 0;
+    min-width: 0;
+}
+figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 15px;
+    font-size: 11px;
+    color: var(--muted);
+}
+/* 完整保留生成插画的画幅；所有中文以真实字体排版，导出时不依赖 AI 生成文字。 */
+.poster {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 3 / 5;
+    overflow: hidden;
+    container-type: inline-size;
+    background: var(--paper);
+}
+.poster-art {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    object-fit: contain;
+}
+/* 正常浏览展示已经合成文字的 PNG，长按或右键保存时不会只拿到无字插画。 */
+.poster-final {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    object-fit: contain;
+}
+.poster-copy {
+    position: absolute;
+    inset: 7.2% 9% auto;
+}
+.poster-kicker {
+    margin: 0 0 8%;
+    color: var(--muted);
+    font-size: 2.15cqw;
+    letter-spacing: .2em;
+}
+.poster h2 {
+    font-size: 7.7cqw;
+    line-height: 1.5;
+    margin: 0 0 7%;
+    letter-spacing: -.04em;
+}
+.cover h2 {
+    font-size: 8.05cqw;
+}
+.poster-body p {
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 3.05cqw;
+    line-height: 1.95;
+    margin: 0 0 4%;
+}
+.cover .poster-body p:first-child {
+    color: var(--accent);
+    font-size: 4cqw;
+}
+.poster-footer {
+    position: absolute;
+    left: 9%;
+    right: 5%;
+    bottom: 2.6%;
+    margin: 0;
+    font-size: 1.55cqw;
+    letter-spacing: .03em;
+    color: var(--muted);
+    padding: .65em .3em;
+    background: var(--paper);
+}
+.article-section {
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 65px;
+    padding: 70px 0;
+}
+aside h2, .discussion h2 {
+    font-size: 34px;
+    line-height: 1.5;
+}
+.note-text h2 {
+    font-size: 27px;
+    margin: 20px 0 35px;
+}
+.note-text > p {
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 18px;
+    line-height: 2.15;
+    margin: 0 0 1.5em;
+}
+.note-text .tags {
+    font-size: 13px;
+    color: var(--accent);
+}
+/* 深度书评使用清晰目录与章节间距；较长标题在窄屏自然换行。 */
+.review-toc {
+    display: grid;
+    gap: 16px;
+    margin: 28px 0;
+}
+.review-toc a {
+    font-size: 13px;
+    line-height: 1.8;
+    text-decoration: none;
+}
+.review-toc a:hover {
+    color: var(--accent);
+}
+.review-chapter {
+    scroll-margin-top: 28px;
+    margin-top: 48px;
+}
+.review-chapter h3 {
+    font: 500 23px/1.7 "Songti SC", "SimSun", serif;
+    color: var(--accent);
+    border-top: 1px solid var(--line);
+    padding-top: 25px;
+}
+.review-chapter p {
+    font: 18px/2.15 "Songti SC", "SimSun", serif;
+    margin: 0 0 1.5em;
+}
+.note-text .review-credit {
+    font: 12px/1.9 sans-serif;
+    color: var(--muted);
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+details {
+    padding: 20px 0;
+    font-size: 13px;
+}
+summary {
+    cursor: pointer;
+}
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 300px;
+    margin-top: 20px;
+    padding: 18px;
+    font: 14px/1.9 sans-serif;
+    color: var(--ink);
+    background: #fffcf5;
+    border: 1px solid var(--line);
+}
+.discussion {
+    padding: 42px 0 48px;
+    border-top: 1px solid var(--line);
+}
+.questions p {
+    font-size: 15px;
+    line-height: 1.9;
+}
+.sources {
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+}
+.sources h2 {
+    font: 14px sans-serif;
+}
+footer {
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+}
+/* 导出只改变网页展示布局，不修改、裁剪或重新绘制原始插画。 */
+body.export-mode {
+    width: 540px;
+}
+.export-mode main, .export-mode .gallery {
+    display: block;
+    width: 540px;
+    padding: 0;
+    margin: 0;
+}
+.export-mode .reading-header, .export-mode .lead, .export-mode figcaption,
+.export-mode .article-section, .export-mode .discussion, .export-mode .sources, .export-mode footer,
+.export-mode .poster-final {
+    display: none;
+}
+.export-mode .poster {
+    width: 540px;
+    height: 900px;
+}
+@media (max-width: 700px) {
+    .reading-header span {
+        display: none;
+    }
+    .lead {
+        padding-top: 26px;
+    }
+    .lead-bottom, .article-section {
+        display: block;
+    }
+    .lead-bottom > div {
+        margin-top: 25px;
+    }
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    .article-section {
+        padding: 38px 0;
+    }
+    .note-text {
+        margin-top: 40px;
+    }
+    .note-text > p, .review-chapter p {
+        font-size: 17px;
+    }
+    .review-chapter h3 {
+        font-size: 21px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* 动态共读入口保持原有书评阅读与高清图导出布局独立。 */
+.motion-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 30px;
+    margin: 12px 0 25px;
+    background: #e8e7db;
+    border: 1px solid var(--line);
+}
+.motion-entry h2 {
+    font-size: 25px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+.motion-entry p:not(.eyebrow) {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+.motion-entry .button {
+    flex-shrink: 0;
+}
+.export-mode .motion-entry {
+    display: none;
+}
+@media (max-width: 700px) {
+    .motion-entry {
+        display: block;
+        padding: 22px;
+    }
+    .motion-entry .button {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1500">
+<defs><pattern id="grain" width="56" height="56" patternUnits="userSpaceOnUse">
+<path d="M3 9h19M27 39h24" stroke="#6a5e50" stroke-opacity=".12"/></pattern></defs>
+<rect width="900" height="1500" fill="#e8dece"/><rect width="900" height="1500" fill="url(#grain)"/>
+<path d="M122 610h656v660H122z" fill="#b8aa94" stroke="#272722" stroke-width="12"/>
+<path d="M175 664h550v552H175z" fill="#9b9b88" stroke="#272722" stroke-width="6"/>
+<path d="M450 664v552M175 935h550" stroke="#272722" stroke-width="10"/>
+<path d="M188 844q97-126 225-86v165H188zm299-86q128-40 225 86v79H487Z" fill="#d6c5a9"/>
+<path d="M0 1258h900v242H0z" fill="#776e5f"/>
+<path d="M550 1210q-25-168 73-257 110 89 84 257" fill="none"
+stroke="#272722" stroke-width="12"/>
+<path d="M630 1044q-115-90-152-13 5 81 152 92 151-10 155-93-38-76-155 14Z"
+fill="#a63a30" stroke="#272722" stroke-width="7"/>
+<path d="M628 1121q-94-6-119 79 84 23 132-44 42 69 128 54-30-85-141-89Z"
+fill="#61734f" stroke="#272722" stroke-width="5"/>
+<path d="M0 1490h900" stroke="#272722" stroke-width="5"/></svg>
