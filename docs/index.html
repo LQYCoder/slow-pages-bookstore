@@ -3,181 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="慢页文学共读：追风筝的人原创深度导读、经典全文书架、按时间主题选书与私人页边笔记。">
-    <title>慢页 SLOW PAGES · 把故事读下去</title>
+    <meta name="theme-color" content="#f5f5ef">
+    <meta name="description" content="慢页，一个可以认真读下去的文学空间。经典全文、原创共读、动态文学片段，支持时间主题选书、段落书签和手机阅读。">
+    <title>慢页 SLOW PAGES · 把世界读厚一点</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="stylesheet" href="style.css?v=edition2">
+    <link rel="stylesheet" href="design/modern-home.css?v=modern1">
     <script src="books.js" defer></script>
     <script src="script.js?v=edition2" defer></script>
-    <link rel="stylesheet" href="edition.css?v=edition2">
-    <link rel="stylesheet" href="library/library.css?v=library1">
-    <script src="library/catalog.js?v=library1" defer></script>
+    <script src="library/catalog.js?v=library2" defer></script>
     <script src="library/state.js?v=library1" defer></script>
-    <script src="library/discovery.js?v=journal1" defer></script>
-    <script src="library/shelf.js?v=journal1" defer></script>
-    <link rel="stylesheet" href="design/journal-home.css?v=miguel1">
-
+    <script src="library/discovery.js?v=modern1" defer></script>
+    <script src="library/shelf.js?v=modern1" defer></script>
     <!-- ANALYTICS_START -->
     <script src="analytics/config.js?v=stats3" defer></script>
     <script src="analytics/metrics.js?v=stats3" defer></script>
     <script src="analytics/tracker.js?v=stats3" defer></script>
     <!-- ANALYTICS_END -->
+    <!-- CONTACT_START -->
+    <link rel="stylesheet" href="design/contact.css?v=contact1">
+    <script src="design/contact.js?v=contact1" defer></script>
+    <!-- CONTACT_END -->
 </head>
-<body class="edition-home library-home journal-home">
-    <header class="edition-header">
-        <a class="edition-brand" href="index.html"><span class="edition-mark">慢</span>慢页 <small>SLOW PAGES</small></a>
-        <nav aria-label="主导航"><a href="#books">书架</a><a href="#journalShelf">共读手记</a>
-            <a href="reading/miguel-street/index.html">本期共读</a>
-            <button id="collectionButton">我的摘句 <span id="collectionCount">0</span></button></nav>
-        <span class="edition-stamp">文学共读 / 独立阅读空间</span>
+<body class="modern-home library-home">
+    <a class="home-skip" href="#books">跳到书架</a>
+    <header class="site-header">
+        <a class="site-brand" href="index.html" aria-label="慢页首页"><span>慢</span>
+            <strong>慢页</strong><small>SLOW PAGES</small></a>
+        <nav aria-label="主导航"><a href="#books">经典书架</a><a href="#journalShelf">共读手记</a>
+            <a href="#contact">联系黎先生</a></nav>
+        <button class="collection-link" id="collectionButton">我的摘句 <span id="collectionCount">0</span></button>
     </header>
     <main>
-        <!-- JOURNAL_HERO_START -->
-        <section class="journal-masthead" aria-labelledby="homeTitle">
-            <div><p class="edition-kicker">A SMALL JOURNAL FOR LONG STORIES / 慢页文学共读</p>
-                <h1 id="homeTitle">有些故事，<em>读完才开始。</em></h1></div>
-            <p class="masthead-note">读一本书，<br>也读一读自己。</p>
-        </section>
-        <section class="cover-issue" aria-labelledby="issueTitle">
-            <a class="cover-landscape cover-miguel" href="reading/miguel-street/index.html"
-                aria-label="进入米格尔街原创共读">
-                <img src="reading/miguel-street/assets/street.png" width="972" height="1620"
-                    alt="站在廊下交谈的人与街口的孩子；《米格尔街》原创文学意象插画。">
-                <span class="cover-topline">本期封面 / MIGUEL STREET</span>
-                <span class="cover-caption">一条街，也是一整个世界。<i>↗</i></span>
-            </a>
-            <div class="cover-story"><p class="edition-kicker">NEW READING / 新一期共读</p>
-                <h2 id="issueTitle">米格尔街</h2><h3>笑声停下来以后，<br>才听见<br><em>他们的一生。</em></h3>
-                <p>从一个孩子的目光，<br>读到自尊、偏心与离开的复杂。</p>
-                <a class="edition-primary" href="reading/miguel-street/index.html">读这一期 <span>↗</span></a>
-                <div class="cover-meta"><span>08 节原创细读</span><span>06 张图文手记</span></div>
-                <small>V. S. 奈保尔 / 原著 1959<br>原创评论，非小说全文 · 含剧透提示</small>
+        <section class="home-hero" aria-labelledby="homeTitle">
+            <div class="hero-copy"><p class="section-label"><span class="live-dot"></span>为好故事，留一点时间</p>
+                <h1 id="homeTitle">把世界<br><span>读厚一点。</span></h1>
+                <p class="hero-description">经典全文、原创共读与文学影像。<br>翻开一页，给自己一个走进故事的机会。</p>
+                <div class="hero-actions"><a class="primary-action" href="#books">找一本开始 <span>↗</span></a>
+                    <a class="secondary-action" href="reading/miguel-street/index.html">读本期共读 <span>→</span></a></div>
+                <div class="hero-facts"><span><b>12</b> 部经典全文</span>
+                    <span><b>04</b> 篇深度共读</span><span>无需登录 · 可记书签</span></div>
+            </div>
+            <div class="hero-stage" aria-label="本次上新推荐">
+                <div class="stage-caption"><span>NEW ON THE SHELF</span><b>新故事，上架了。</b></div>
+                <a class="showcase-book showcase-back" href="library/sinking/index.html">
+                    <span>郁达夫 / 1921</span><strong>沉沦</strong><small>一个青年的孤独与追问</small></a>
+                <a class="showcase-book showcase-front" href="library/spring-peach/index.html">
+                    <span>许地山 / 1934</span><strong>春桃</strong><small>在困顿的生活里，重新选择</small>
+                    <i aria-hidden="true">桃</i><em>中文全文 ↗</em></a>
+                <a class="stage-note" href="library/fathers-back/index.html"><span>有四分钟？</span>
+                    <b>从《背影》开始 →</b><small>阅读时长为估算</small></a>
+                <span class="stage-index" aria-hidden="true">READ<br>MORE.</span>
             </div>
         </section>
-        <nav class="reading-path" aria-label="选择阅读方式">
-            <a href="#books"><span>01 / READ</span><strong>给时间找一本书 <i>↗</i></strong>
-                <p>按空闲时间与主题，挑一部经典全文。</p></a>
-            <a href="reading/kite-runner/index.html#response"><span>02 / RESPOND</span><strong>在页边留下自己 <i>↗</i></strong>
-                <p>写一段私人回应，保存这次阅读的余温。</p></a>
-            <a href="reading/yangzhi-qiu/motion/index.html"><span>03 / WATCH</span><strong>让一个场景慢下来 <i>↗</i></strong>
-                <p>《羊脂球》六幕动态片段，继续读往期共读。</p></a>
-        </nav>
-        <section class="journal-shelf" id="journalShelf" aria-labelledby="journalShelfTitle">
-            <div class="journal-shelf-heading"><div><p class="edition-kicker">READING JOURNALS / 共读手记</p>
-                <h2 id="journalShelfTitle">书页合上以后，<br><em>还可以继续谈。</em></h2></div>
-                <p>从情节回到人物，从人物再看自己。<br>这里收藏几篇慢慢写下来的文学细读。</p></div>
-            <div class="journal-shelf-grid">
-                <a class="journal-shelf-card journal-shelf-miguel" href="reading/miguel-street/index.html">
-                    <img src="reading/miguel-street/assets/street.png" alt="廊下交谈与男孩的注视" width="972" height="1620">
-                    <span class="journal-shelf-number">NEW JOURNAL / 04</span>
-                    <span class="journal-shelf-title">《米格尔街》</span>
-                    <span class="journal-shelf-copy">笑声停下来以后，<br>才听见他们的一生。</span>
-                    <span class="journal-shelf-link">八个阅读切口 <i>↗</i></span>
-                </a>
-                <a class="journal-shelf-card journal-shelf-red" href="reading/red-and-black/index.html">
-                    <img src="reading/red-and-black/assets/stairs.svg" alt="走向高处的石阶剪影" width="900" height="1500">
-                    <span class="journal-shelf-number">READING JOURNAL / 03</span>
-                    <span class="journal-shelf-title">《红与黑》</span>
-                    <span class="journal-shelf-copy">他一直在向上走，<br>却很少问自己想去哪里。</span>
-                    <span class="journal-shelf-link">八个阅读切口 <i>↗</i></span>
-                </a>
-                <a class="journal-shelf-card journal-shelf-gold" href="reading/yangzhi-qiu/index.html">
-                    <img src="reading/yangzhi-qiu/assets/carriage.png" alt="行驶在旧路上的马车" width="1536" height="2560">
-                    <span class="journal-shelf-number">READING JOURNAL / 02</span>
-                    <span class="journal-shelf-title">《羊脂球》</span>
-                    <span class="journal-shelf-copy">他们需要她，<br>却容不下她。</span>
-                    <span class="journal-shelf-link">八个阅读切口 <i>↗</i></span>
-                </a>
-                <a class="journal-shelf-card journal-shelf-blue" href="reading/kite-runner/index.html">
-                    <img src="reading/kite-runner/assets/sky.png" alt="屋顶上方的风筝与天空" width="1536" height="1024">
-                    <span class="journal-shelf-number">READING JOURNAL / 01</span>
-                    <span class="journal-shelf-title">《追风筝的人》</span>
-                    <span class="journal-shelf-copy">有些长大，<br>是别人替我们付了账。</span>
-                    <span class="journal-shelf-link">八个阅读切口 <i>↗</i></span>
-                </a>
-            </div>
+        <section class="library-resume" id="libraryResumeCard" hidden aria-label="继续上次阅读">
+            <div><span class="section-label">你的书页，还停在这里</span><p id="libraryResumeTitle"></p></div>
+            <a id="libraryResumeLink">继续阅读 ↗</a>
         </section>
-        <!-- JOURNAL_HERO_END -->
-<!-- CLASSIC_SHELF_START -->
         <section class="classic-library" id="books" aria-labelledby="libraryTitle">
-            <div class="library-heading"><div><p class="edition-kicker">THE CLASSICS / 经典全文书架</p>
-                <h2 id="libraryTitle">有些故事，值得完整读一遍。</h2></div>
-                <p>本次选读：鲁迅的五部小说。<br>另收《羊脂球》法文全文 · 版本与来源见各书正文页。</p></div>
-            <div class="library-resume" id="libraryResumeCard" hidden>
-                <div><span class="edition-kicker">书页还停在这里</span><p id="libraryResumeTitle"></p></div>
-                <a id="libraryResumeLink">接着读 ↗</a></div>
-
-            <!-- DISCOVERY_START -->
-            <div class="shelf-discovery" hidden>
-                <div class="discovery-title"><span class="thread-icon" aria-hidden="true">↳</span>
-                    <div><h3>今天，给阅读留多少时间？</h3><p>时间仅为估算，随时可以停下，书签会等你。</p></div></div>
-                <div class="discovery-controls">
-                    <label>我有一些时间<select id="readingTime"><option value="all">不限时间</option>
-                        <option value="10">约 10 分钟以内</option><option value="20">约 20 分钟以内</option>
-                        <option value="long">留一段长时间</option></select></label>
-                    <label>我想读到<select id="readingTheme"><option value="all">所有主题</option>
-                        <option value="relationships">关系与距离</option><option value="crowds">人群与旁观</option>
-                        <option value="self">自我与困境</option></select></label>
-                    <label>也可以找一本<input id="bookSearch" type="search" maxlength="80" placeholder="书名或作者"></label>
-                </div><p id="discoveryStatus" role="status">六部作品，等一次翻开。</p>
-                <button type="button" id="clearDiscovery">重置筛选 ↺</button>
+            <div class="section-heading"><div><p class="section-label">THE OPEN SHELF / 经典全文</p>
+                <h2 id="libraryTitle">今天，想读哪一本？</h2></div>
+                <p>12部作品，按你的时间和心情挑选。<br>上新 6 篇 · 原文版本见各阅读页</p></div>
+            <div class="shelf-toolbar" data-shelf-enhancement hidden>
+                <label class="book-search"><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="10" cy="10" r="6"></circle>
+                    <path d="m15 15 5 5"></path></svg><span class="sr-only">搜索书名或作者</span>
+                    <input id="bookSearch" type="search" maxlength="80" placeholder="搜一本书，或一位作家"></label>
+                <button class="pick-button" id="pickBook"><span aria-hidden="true">↝</span> 帮我选一本</button>
             </div>
-            <!-- DISCOVERY_END -->
-            <div class="library-tabs" role="group" aria-label="按正文语言筛选" hidden>
-                <button data-library-filter="all" aria-pressed="true">全部 06</button>
-                <button data-library-filter="zh-CN" aria-pressed="false">中文全文 05</button>
-                <button data-library-filter="fr" aria-pressed="false">法文原作 01</button></div>
-            <div class="classic-grid"><a class="classic-card moss" href="library/hometown/index.html"
-        data-classic-id="hometown" data-language="zh-CN">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 01</span>
-            <span class="cover-symbol" aria-hidden="true">乡</span>
-            <div class="cover-title"><h3>故乡</h3><span>鲁迅 / 1921</span></div>
-            <span class="cover-bottom">中文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">回去以后，故乡还在吗。</p><p class="classic-meta">短篇小说 · 4,239 汉字</p>
-        <span class="book-state" data-book-state="hometown">从第一页开始 →</span></a>
-<a class="classic-card rust" href="library/kong-yiji/index.html"
-        data-classic-id="kong-yiji" data-language="zh-CN">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 02</span>
-            <span class="cover-symbol" aria-hidden="true">己</span>
-            <div class="cover-title"><h3>孔乙己</h3><span>鲁迅 / 1919</span></div>
-            <span class="cover-bottom">中文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">笑声里，有谁被听见。</p><p class="classic-meta">短篇小说 · 2,188 汉字</p>
-        <span class="book-state" data-book-state="kong-yiji">从第一页开始 →</span></a>
-<a class="classic-card plum" href="library/madman-diary/index.html"
-        data-classic-id="madman-diary" data-language="zh-CN">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 03</span>
-            <span class="cover-symbol" aria-hidden="true">狂</span>
-            <div class="cover-title"><h3>狂人日记</h3><span>鲁迅 / 1918</span></div>
-            <span class="cover-bottom">中文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">翻开日记，也翻开沉默。</p><p class="classic-meta">短篇小说 · 4,050 汉字</p>
-        <span class="book-state" data-book-state="madman-diary">从第一页开始 →</span></a>
-<a class="classic-card ochre" href="library/ah-q/index.html"
-        data-classic-id="ah-q" data-language="zh-CN">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 04</span>
-            <span class="cover-symbol" aria-hidden="true">Q</span>
-            <div class="cover-title"><h3>阿Q正传</h3><span>鲁迅 / 1921—1922</span></div>
-            <span class="cover-bottom">中文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">一个名字，一面镜子。</p><p class="classic-meta">中篇小说 · 17,883 汉字</p>
-        <span class="book-state" data-book-state="ah-q">从第一页开始 →</span></a>
-<a class="classic-card blue" href="library/medicine/index.html"
-        data-classic-id="medicine" data-language="zh-CN">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 05</span>
-            <span class="cover-symbol" aria-hidden="true">药</span>
-            <div class="cover-title"><h3>药</h3><span>鲁迅 / 1919</span></div>
-            <span class="cover-bottom">中文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">他们各自相信着什么。</p><p class="classic-meta">短篇小说 · 3,832 汉字</p>
-        <span class="book-state" data-book-state="medicine">从第一页开始 →</span></a>
-<a class="classic-card ink" href="library/boule-de-suif/index.html"
-        data-classic-id="boule-de-suif" data-language="fr">
-        <div class="classic-cover"><span class="cover-top">SLOW PAGES / 06</span>
-            <span class="cover-symbol" aria-hidden="true">球</span>
-            <div class="cover-title"><h3>羊脂球</h3><span>莫泊桑 / 1880</span></div>
-            <span class="cover-bottom">法文全文 <i>↗</i></span></div>
-        <p class="classic-tagline">一辆马车，一个缩小的世界。</p><p class="classic-meta">法文原作 · 13,357 法文词</p>
-        <span class="book-state" data-book-state="boule-de-suif">从第一页开始 →</span></a></div>
+            <div class="shelf-filters" data-shelf-enhancement hidden>
+                <div class="library-tabs" role="group" aria-label="正文语言">
+                    <button data-library-filter="all" aria-pressed="true">全部 12</button>
+                    <button data-library-filter="zh-CN" aria-pressed="false">中文 11</button>
+                    <button data-library-filter="fr" aria-pressed="false">法文原作 01</button></div>
+                <div class="filter-selects">
+                    <label><span class="sr-only">阅读时间</span><select id="readingTime">
+                        <option value="all">不限时间</option><option value="10">约10分钟以内</option>
+                        <option value="20">约20分钟以内</option><option value="long">留一段长时间</option></select></label>
+                    <label><span class="sr-only">阅读主题</span><select id="readingTheme">
+                        <option value="all">所有主题</option><option value="relationships">亲密关系</option>
+                        <option value="self">自我与孤独</option><option value="crowds">人性与社会</option>
+                        <option value="home">故乡与离别</option></select></label>
+                    <label><span class="sr-only">阅读状态</span><select id="bookStatus">
+                        <option value="all">阅读状态</option><option value="unread">尚未开始</option>
+                        <option value="reading">正在阅读</option><option value="completed">已读完</option></select></label>
+                </div>
+            </div>
+            <div class="shelf-summary" data-shelf-enhancement hidden>
+                <p id="discoveryStatus" role="status"></p>
+                <div><label><span class="sr-only">书架排序</span><select id="bookSort">
+                    <option value="default">上新在前</option><option value="short">短篇优先</option>
+                    <option value="long">长篇幅优先</option></select></label>
+                    <button id="clearDiscovery">重置筛选 ↺</button></div></div>
+            <aside class="pick-result" id="pickResult" tabindex="-1" hidden aria-label="随机选书结果">
+                <div><span class="section-label">让一个故事，来遇见你</span><h3 id="pickedBookTitle"></h3>
+                    <p id="pickedBookDescription"></p></div><a id="pickedBookLink" class="primary-action">翻开它 ↗</a>
+                <button id="dismissPick" aria-label="关闭随机选书结果">×</button></aside>
+            <div class="classic-grid"><a class="classic-card" href="library/blessing/index.html"
+    data-classic-id="blessing" data-language="zh-CN">
+    <div class="classic-cover color-mist"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">鲁迅 / 1924</p>
+        <h3>祝福</h3><span class="cover-word" aria-hidden="true">福</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">热闹的新年，有一个人被留在门外。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约23分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="blessing">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/regret-for-the-past/index.html"
+    data-classic-id="regret-for-the-past" data-language="zh-CN">
+    <div class="classic-cover color-mint"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">鲁迅 / 1925</p>
+        <h3>伤逝</h3><span class="cover-word" aria-hidden="true">逝</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">爱说出口之后，生活还需要什么。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约27分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="regret-for-the-past">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/in-the-tavern/index.html"
+    data-classic-id="in-the-tavern" data-language="zh-CN">
+    <div class="classic-cover color-navy"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">鲁迅 / 1924</p>
+        <h3>在酒楼上</h3><span class="cover-word" aria-hidden="true">酒</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">绕了一圈回来，当年的自己还在吗。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约16分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="in-the-tavern">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/spring-peach/index.html"
+    data-classic-id="spring-peach" data-language="zh-CN">
+    <div class="classic-cover color-coral"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">许地山 / 1934</p>
+        <h3>春桃</h3><span class="cover-word" aria-hidden="true">桃</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">生活由谁安排，她想自己说了算。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约29分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="spring-peach">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/sinking/index.html"
+    data-classic-id="sinking" data-language="zh-CN">
+    <div class="classic-cover color-sand"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">郁达夫 / 1921</p>
+        <h3>沉沦</h3><span class="cover-word" aria-hidden="true">沉</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">异乡的孤独，连着一个年轻人的自尊。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约48分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="sinking">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/fathers-back/index.html"
+    data-classic-id="fathers-back" data-language="zh-CN">
+    <div class="classic-cover color-lilac"><div class="cover-top"><span>SLOW PAGES</span><span class="new-book-badge">上新</span></div>
+        <p class="cover-author">朱自清 / 1925</p>
+        <h3>背影</h3><span class="cover-word" aria-hidden="true">影</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">后来才看懂，一个人慢慢爬上月台。</p>
+        <p class="classic-meta">散文 <span>·</span> 约4分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="fathers-back">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/hometown/index.html"
+    data-classic-id="hometown" data-language="zh-CN">
+    <div class="classic-cover color-mist"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">鲁迅 / 1921</p>
+        <h3>故乡</h3><span class="cover-word" aria-hidden="true">乡</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">回去以后，故乡还在吗。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约13分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="hometown">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/kong-yiji/index.html"
+    data-classic-id="kong-yiji" data-language="zh-CN">
+    <div class="classic-cover color-mint"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">鲁迅 / 1919</p>
+        <h3>孔乙己</h3><span class="cover-word" aria-hidden="true">己</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">笑声里，有谁被听见。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约7分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="kong-yiji">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/madman-diary/index.html"
+    data-classic-id="madman-diary" data-language="zh-CN">
+    <div class="classic-cover color-navy"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">鲁迅 / 1918</p>
+        <h3>狂人日记</h3><span class="cover-word" aria-hidden="true">狂</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">翻开日记，也翻开沉默。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约12分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="madman-diary">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/ah-q/index.html"
+    data-classic-id="ah-q" data-language="zh-CN">
+    <div class="classic-cover color-coral"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">鲁迅 / 1921—1922</p>
+        <h3>阿Q正传</h3><span class="cover-word" aria-hidden="true">Q</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">一个名字，一面镜子。</p>
+        <p class="classic-meta">中篇小说 <span>·</span> 约52分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="ah-q">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/medicine/index.html"
+    data-classic-id="medicine" data-language="zh-CN">
+    <div class="classic-cover color-sand"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">鲁迅 / 1919</p>
+        <h3>药</h3><span class="cover-word" aria-hidden="true">药</span>
+        <div class="cover-bottom"><span>中文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">他们各自相信着什么。</p>
+        <p class="classic-meta">短篇小说 <span>·</span> 约11分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="medicine">开始阅读 ↗</span></div></a>
+<a class="classic-card" href="library/boule-de-suif/index.html"
+    data-classic-id="boule-de-suif" data-language="fr">
+    <div class="classic-cover color-lilac"><div class="cover-top"><span>SLOW PAGES</span></div>
+        <p class="cover-author">莫泊桑 / 1880</p>
+        <h3>羊脂球</h3><span class="cover-word" aria-hidden="true">球</span>
+        <div class="cover-bottom"><span>法文全文</span><b>↗</b></div></div>
+    <div class="book-card-copy"><p class="classic-tagline">一辆马车，一个缩小的世界。</p>
+        <p class="classic-meta">法文原作 <span>·</span> 约75分钟</p>
+        <div class="card-progress" aria-hidden="true"><span data-book-progress></span></div>
+        <span class="book-state" data-book-state="boule-de-suif">开始阅读 ↗</span></div></a></div>
+            <div class="empty-shelf" id="emptyShelf" hidden><h3>这一组条件，暂时没有合适的书。</h3>
+                <p>可以换一个主题，或给阅读多留一点时间。</p><button id="emptyReset">重置所有条件 →</button></div>
+            <p class="time-note">阅读时间按中文约350汉字/分钟、法文约180词/分钟估算。随时可以停下，进度保存在当前浏览器。</p>
         </section>
-<!-- CLASSIC_SHELF_END -->
-        <section class="return-card" id="returnCard" hidden><div><span class="eyebrow">上次读到这里</span>
+        <section class="journal-shelf" id="journalShelf" aria-labelledby="journalTitle">
+            <div class="section-heading"><div><p class="section-label">READ TOGETHER / 原创共读手记</p>
+                <h2 id="journalTitle">读完以后，还有话想说。</h2></div>
+                <p>从情节回到人物，也回到自己。<br>每篇都有深度解读和可下载图文。</p></div>
+            <div class="journal-grid"><a class="journal-card" href="reading/miguel-street/index.html">
+    <div class="journal-image"><img src="reading/miguel-street/assets/street.png" loading="lazy"
+        alt="《米格尔街》文学意象插画"><span>本期</span></div>
+    <div class="journal-copy"><p>奈保尔 <span>·</span> 原创文学解读</p>
+        <h3>《米格尔街》</h3><p class="journal-summary">笑声停下来以后，才听见他们的一生。</p>
+        <b>读这篇共读 <span>↗</span></b></div></a>
+<a class="journal-card" href="reading/red-and-black/index.html">
+    <div class="journal-image"><img src="reading/red-and-black/assets/stairs.svg" loading="lazy"
+        alt="《红与黑》文学意象插画"><span>共读</span></div>
+    <div class="journal-copy"><p>司汤达 <span>·</span> 原创文学解读</p>
+        <h3>《红与黑》</h3><p class="journal-summary">他一直在向上走，却很少问自己想去哪里。</p>
+        <b>读这篇共读 <span>↗</span></b></div></a>
+<a class="journal-card" href="reading/yangzhi-qiu/index.html">
+    <div class="journal-image"><img src="reading/yangzhi-qiu/assets/carriage.png" loading="lazy"
+        alt="《羊脂球》文学意象插画"><span>共读</span></div>
+    <div class="journal-copy"><p>莫泊桑 <span>·</span> 原创文学解读</p>
+        <h3>《羊脂球》</h3><p class="journal-summary">他们需要她，却容不下她。</p>
+        <b>读这篇共读 <span>↗</span></b></div></a>
+<a class="journal-card" href="reading/kite-runner/index.html">
+    <div class="journal-image"><img src="reading/kite-runner/assets/sky.png" loading="lazy"
+        alt="《追风筝的人》文学意象插画"><span>共读</span></div>
+    <div class="journal-copy"><p>卡勒德·胡赛尼 <span>·</span> 原创文学解读</p>
+        <h3>《追风筝的人》</h3><p class="journal-summary">有些长大，是别人替我们付了账。</p>
+        <b>读这篇共读 <span>↗</span></b></div></a></div>
+        </section>
+        <section class="reading-experiences" aria-labelledby="experienceTitle">
+            <div class="experience-copy"><p class="section-label">MORE THAN A PAGE</p>
+                <h2 id="experienceTitle">一个故事，<br>可以多走近一点。</h2>
+                <p>看一幕慢慢展开的影像，或写一段只留给自己的回应。</p></div>
+            <a class="experience-card motion-entry" href="reading/yangzhi-qiu/motion/index.html">
+                <span class="experience-icon" aria-hidden="true">▶</span><small>文学影像 / 六幕动态片段</small>
+                <h3>让一个场景<br>慢下来。</h3><p>《羊脂球》 · 运镜、字幕与静音阅读</p><b>进入放映 ↗</b></a>
+            <a class="experience-card response-entry" href="reading/kite-runner/index.html#response">
+                <span class="experience-icon" aria-hidden="true">↳</span><small>私人页边 / 写下阅读的回声</small>
+                <h3>把没有说完的话，<br>留在页边。</h3><p>《追风筝的人》 · 私人回应与阅读卡</p><b>去留一段话 ↗</b></a>
+        </section>
+        <details class="original-drawer" id="originalDrawer"><summary><div><span class="section-label">还有几本原创试读</span>
+            <h2>给慢下来的片刻，留一个小书架。</h2></div><span aria-hidden="true">＋</span></summary>
+            <div class="legacy-sections">        <section class="return-card" id="returnCard" hidden><div><span class="eyebrow">上次读到这里</span>
             <h2 id="returnTitle"></h2><p id="returnDescription"></p></div>
             <button class="primary-button" id="resumeButton">接着读 ↗</button></section>
         <section id="originalBooks" class="books-section"><div class="section-heading"><div><p class="eyebrow">THE SMALL SHELF / 原创试读</p>
@@ -195,9 +283,21 @@
             <h2>读过的心动，<br>不必急着放下。</h2><button class="text-link" id="gardenButton">打开我的摘句 ↗</button></div>
             <div class="quote-paper"><span>今日摘句 · 慢页原创试读</span><blockquote id="dailyQuote"></blockquote>
                 <small id="dailySource"></small><button id="dailyRead">去读这一章 ↗</button></div></section>
+</div></details>
+        <section class="contact-panel" id="contact" aria-labelledby="contactTitle">
+            <div><p class="section-label">LET'S MAKE SOMETHING / 联系创作者</p>
+                <h2 id="contactTitle">读书之外，<br>也欢迎聊聊你的想法。</h2>
+                <p>网站由我独立制作。网站、App、小程序等开发需求，可以联系我。</p></div>
+            <div class="contact-card"><span class="contact-person">黎先生 <i>开发与合作咨询</i></span>
+                <p>微信号</p><strong>18312398810</strong>
+                <button data-copy-wechat type="button">复制微信号 <span aria-hidden="true">↗</span></button>
+                <p class="contact-status" role="status" aria-live="polite">复制后，在微信搜索添加。</p></div>
+        </section>
     </main>
-    <footer class="edition-footer"><span>慢页 / SLOW PAGES</span><p>少一点匆匆看过，多一点真正读过。</p><a href="#">回到页首 ↑</a><a data-analytics-privacy href="analytics/privacy.html">访问统计说明</a></footer>
-    <!-- 原生对话框管理阅读时的焦点与 Esc 返回，内容由安全文本节点生成。 -->
+    <footer class="site-footer"><a class="site-brand" href="#"><span>慢</span><strong>慢页</strong></a>
+        <p>把一本书，从第一页读到心里。</p><div><a href="#books">经典书架</a>
+            <a data-analytics-privacy href="analytics/privacy.html">访问统计说明</a><a href="#">回到页首 ↑</a></div></footer>
+        <!-- 原生对话框管理阅读时的焦点与 Esc 返回，内容由安全文本节点生成。 -->
     <dialog id="readerDialog" class="reader-dialog" aria-labelledby="readerBookTitle" data-theme="paper">
         <div class="reader-toolbar"><button id="closeReader" class="toolbar-button">← 返回书店</button><span class="reader-brand">慢页 <small>READING ROOM</small></span><button id="focusButton" class="toolbar-button" aria-pressed="false">专注模式</button></div>
         <div class="reader-layout"><aside class="reader-sidebar"><p class="eyebrow">YOUR QUIET CORNER</p><h2 id="readerBookTitle"></h2><p class="reader-original">慢页原创 · 短篇试读</p><nav id="chapterList" aria-label="章节目录"></nav><div class="sidebar-note">书签会留在这里。<br>慢慢读，不必赶路。</div><div class="completion-label" id="completionLabel"></div><progress id="bookProgress" value="0" max="3" aria-label="已完成章节"></progress></aside>
@@ -209,5 +309,6 @@
     </dialog>
     <dialog id="collectionDialog" class="collection-dialog" aria-labelledby="collectionTitle"><button class="close-button" id="closeCollection" aria-label="关闭摘句本">×</button><p class="eyebrow">COLLECT WORDS, NOT HURRY</p><h2 id="collectionTitle">我的摘句本</h2><p class="collection-intro">把读过的心动，折成一枚书签。</p><div id="savedList"></div><button class="primary-button" id="downloadQuotes">下载我的摘句 ↓</button><div id="exportPreview" hidden><label for="exportText">若浏览器未弹出下载，可在这里选中并复制摘句：</label><textarea id="exportText" readonly rows="7"></textarea></div></dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
 </body>
 </html>

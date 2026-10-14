@@ -1,0 +1,187 @@
+/*
+ * 慢页共用联系方式。创建者：Codex；创建日期：2026/10/14。
+ * 联系条处于正常文档流中，阅读正文时不会遮挡文字或占用浮层。
+ */
+.reading-contact-bar {
+    --contact-paper: #f5f4ed;
+    --contact-ink: #17241f;
+    --contact-muted: #617068;
+    --contact-line: #d6ded6;
+    --contact-accent: #c7f2d9;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px 32px;
+    width: min(1100px, calc(100% - 48px));
+    margin: 64px auto 32px;
+    padding: 28px 32px;
+    border: 1px solid var(--contact-line);
+    border-radius: 20px;
+    color: var(--contact-ink);
+    background: var(--contact-paper);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: left;
+}
+
+.reading-contact-bar * {
+    box-sizing: border-box;
+}
+
+.reading-contact-bar .contact-eyebrow {
+    margin: 0 0 6px;
+    color: var(--contact-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+}
+
+.reading-contact-bar .contact-heading {
+    margin: 0;
+    color: var(--contact-ink);
+    font-size: clamp(19px, 3vw, 24px);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.reading-contact-bar .contact-description {
+    margin: 8px 0 0;
+    color: var(--contact-muted);
+    font-size: 14px;
+}
+
+.reading-contact-bar .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px 14px;
+}
+
+.reading-contact-bar .contact-wechat {
+    margin: 0;
+    color: var(--contact-ink);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.reading-contact-bar .contact-copy-button {
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid var(--contact-ink);
+    border-radius: 999px;
+    color: var(--contact-ink);
+    background: var(--contact-accent);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.reading-contact-bar .contact-copy-button:hover {
+    background: #b7e6cc;
+}
+
+[data-copy-wechat]:focus-visible,
+.contact-manual-input:focus-visible {
+    outline: 3px solid #26815b;
+    outline-offset: 5px;
+}
+
+[data-copy-wechat][aria-busy="true"] {
+    opacity: 0.65;
+    cursor: progress;
+}
+
+.contact-status {
+    margin: 0;
+    color: inherit;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.reading-contact-bar .contact-status,
+.reading-contact-bar .contact-manual-copy {
+    grid-column: 1 / -1;
+}
+
+/* 空状态不占据版面；提示由真实的复制结果触发。 */
+.contact-status:empty {
+    display: none;
+}
+
+.contact-manual-copy {
+    margin-top: 10px;
+}
+
+.contact-manual-copy[hidden] {
+    display: none !important;
+}
+
+.contact-manual-label {
+    display: block;
+    margin-bottom: 6px;
+    color: inherit;
+    font-size: 13px;
+}
+
+.contact-manual-input {
+    box-sizing: border-box;
+    width: min(100%, 270px);
+    min-height: 44px;
+    padding: 9px 12px;
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    font-size: 16px;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+/* 阅读主题通过页面已有的 data-theme 切换，避免另存一份主题状态。 */
+body[data-theme="night"] .reading-contact-bar,
+body[data-theme="dark"] .reading-contact-bar {
+    --contact-paper: #252e29;
+    --contact-ink: #e8eee7;
+    --contact-muted: #b2beb4;
+    --contact-line: #47554b;
+    --contact-accent: #c7f2d9;
+}
+
+body[data-theme="night"] .reading-contact-bar .contact-copy-button,
+body[data-theme="dark"] .reading-contact-bar .contact-copy-button {
+    color: #17241f;
+    border-color: #c7f2d9;
+}
+
+/* 卡片导出和阅读专注模式应保留作品内容，不将联系条带入截图。 */
+.export-mode .reading-contact-bar,
+.reader-focused .reading-contact-bar {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .reading-contact-bar {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        width: calc(100% - 32px);
+        margin-top: 40px;
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .reading-contact-bar .contact-actions {
+        justify-content: flex-start;
+    }
+}
+
+@media print {
+    .reading-contact-bar,
+    .contact-manual-copy,
+    .contact-status {
+        display: none;
+    }
+}

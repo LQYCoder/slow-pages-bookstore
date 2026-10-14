@@ -1,0 +1,99 @@
+/* 共读手记统一新视觉；只作用于网页壳层，下载图卡与原文不改。创建者：Codex；2026/10/14。 */
+.literary-journal {
+    --paper: #f5f5ef;
+    --ink: #25352a;
+    --muted: #687264;
+    --line: #d6dfd1;
+    --accent: #398652;
+    background: var(--paper);
+    color: var(--ink);
+}
+.literary-journal .edition-header, .literary-journal .journal-header {
+    border-bottom-color: var(--line);
+}
+.literary-journal .edition-mark, .literary-journal .brand > span {
+    border-radius: 8px 2px 8px 2px;
+    background: var(--ink);
+    color: var(--paper);
+}
+.literary-journal .journal-intro h1 {
+    font-size: clamp(40px, 5.2vw, 70px);
+    letter-spacing: -1px;
+}
+.literary-journal .journal-cover {
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    transform: none;
+    box-shadow: 0 12px 28px #253f2510;
+    height: 210px;
+    width: 265px;
+}
+.literary-journal .intro-art {
+    border-radius: 18px;
+}
+.literary-journal .journal-navigation {
+    padding: 6px;
+    border: 1px solid var(--line);
+    background: #e9eedf;
+    border-radius: 13px;
+    gap: 5px;
+}
+.literary-journal .journal-navigation button {
+    border-radius: 8px;
+    padding-block: 16px;
+}
+.literary-journal .journal-navigation [aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+.literary-journal .journal-navigation button:hover {
+    background: #d8e5ce;
+    color: var(--ink);
+}
+.literary-journal .article-section > aside {
+    border-radius: 14px;
+    background: #e9eedf;
+    border: 1px solid var(--line);
+}
+.literary-journal .review-chapter h3 {
+    border-left: 3px solid #88bc8d;
+    padding-left: 15px;
+}
+.literary-journal .discussion {
+    background: #dfecd9;
+    border: 1px solid #cbdcc4;
+    border-radius: 17px;
+}
+.literary-journal .gallery img, .literary-journal .poster {
+    border-radius: 11px;
+    overflow: hidden;
+}
+.literary-journal .material-download {
+    margin-top: 25px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #e9eedf;
+}
+.literary-journal .material-download .button, .literary-journal .article-section .button {
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--paper);
+}
+.literary-journal textarea {
+    border-radius: 10px;
+    background: #fafbf5;
+    border-color: var(--line);
+}
+@media (max-width: 650px) {
+    .literary-journal .journal-cover {
+        height: 155px;
+        width: 195px;
+    }
+    .literary-journal .journal-navigation button {
+        padding: 13px 9px;
+    }
+    .literary-journal .material-download {
+        padding: 22px;
+    }
+}

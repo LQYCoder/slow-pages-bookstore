@@ -867,3 +867,572 @@
     color: var(--reader-accent);
     line-height: 1.8;
 }
+
+/*
+ * 2026/10/14 阅读室更新：现代暖纸、薄荷强调与轻量悬浮工具。
+ * 所有更新限定在全文页；首页书架及共读文章继续使用各自样式。
+ * 原文宽度与段落编号保持稳定，颜色全部由阅读主题变量提供。
+ */
+.full-reader {
+    --reader-paper: #f8f8f2;
+    --reader-ink: #202723;
+    --reader-muted: #667068;
+    --reader-line: #dfe4dc;
+    --reader-accent: #277257;
+    --reader-panel: #eef2e8;
+    --reader-highlight: #d5eddf;
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+}
+.full-reader[data-theme="sage"] {
+    --reader-paper: #edf4eb;
+    --reader-panel: #e0edde;
+    --reader-line: #c6d8c5;
+    --reader-muted: #506b55;
+    --reader-highlight: #c7e3cd;
+}
+.full-reader[data-theme="night"] {
+    --reader-paper: #171e1b;
+    --reader-ink: #e3e9e0;
+    --reader-muted: #a6b5aa;
+    --reader-line: #36433b;
+    --reader-accent: #9dd9ba;
+    --reader-panel: #25322b;
+    --reader-highlight: #334f40;
+    color-scheme: dark;
+}
+.full-reader .reading-header {
+    height: 76px;
+    gap: 22px;
+    background: color-mix(in srgb, var(--reader-paper) 92%, transparent);
+    backdrop-filter: blur(16px);
+}
+.full-reader .reader-brand {
+    font-family: "Songti SC", serif;
+    font-weight: 600;
+}
+.full-reader .reader-brand > span {
+    width: 32px;
+    height: 35px;
+    border-radius: 8px 12px 8px 8px;
+    background: var(--reader-accent);
+}
+.full-reader .back-shelf {
+    margin-left: 6px;
+    color: var(--reader-muted);
+}
+.full-reader .tool-button,
+.full-reader .reader-focus-toggle {
+    border: 1px solid var(--reader-line);
+    background: var(--reader-paper);
+    border-radius: 999px;
+    padding: 11px 16px;
+    font: 12px/1.5 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    white-space: nowrap;
+}
+.full-reader .reader-focus-toggle {
+    color: var(--reader-accent);
+    background: var(--reader-panel);
+}
+.full-reader .reader-focus-toggle[aria-pressed="true"] {
+    border-color: var(--reader-accent);
+}
+.full-reader .tool-button:hover,
+.full-reader .reader-focus-toggle:hover {
+    border-color: var(--reader-accent);
+}
+.full-reader .reader-layout {
+    grid-template-columns: 190px minmax(0, 740px);
+    gap: 62px;
+    width: min(1120px, 90%);
+    padding-bottom: 145px;
+}
+.full-reader #readingMain {
+    min-width: 0;
+}
+.full-reader .book-sidebar {
+    top: 106px;
+    margin-top: 50px;
+    padding-right: 6px;
+}
+.full-reader .book-sidebar h2 {
+    font-size: 30px;
+    line-height: 1.5;
+}
+.full-reader .chapter-toc {
+    gap: 4px;
+    margin-top: 22px;
+}
+.full-reader .chapter-toc a {
+    align-items: baseline;
+    gap: 10px;
+    padding: 11px 12px;
+    border: 0;
+    border-radius: 10px;
+}
+.full-reader .chapter-toc a:hover {
+    background: var(--reader-panel);
+}
+.full-reader .chapter-toc a[aria-current] {
+    color: var(--reader-accent);
+    background: var(--reader-highlight);
+    border-left: 0;
+    font-weight: 600;
+}
+.full-reader .book-opening {
+    position: relative;
+    margin-top: 34px;
+    padding: 30px 36px 32px;
+    background: var(--reader-panel);
+    border: 1px solid var(--reader-line);
+    border-radius: 22px;
+}
+.full-reader .book-opening > .micro-label {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    line-height: 1.7;
+}
+.full-reader .book-opening > .micro-label > span {
+    letter-spacing: .1em;
+}
+.full-reader .opening-title {
+    margin-top: 30px;
+}
+.full-reader .opening-title h1 {
+    margin-bottom: 12px;
+    font-size: clamp(42px, 4.5vw, 66px);
+    letter-spacing: .035em;
+    overflow-wrap: anywhere;
+}
+.full-reader .opening-seal {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    font-size: 26px;
+    background: var(--reader-highlight);
+    border: 0;
+    transform: none;
+}
+.full-reader .book-byline {
+    margin-bottom: 0;
+}
+.full-reader .opening-lead {
+    margin: 24px 0;
+    line-height: 1.85;
+    max-width: 560px;
+}
+.full-reader .opening-actions {
+    gap: 16px;
+}
+.full-reader .solid-link,
+.full-reader .solid-button {
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    min-height: 44px;
+    padding: 12px 22px;
+}
+.full-reader .resume-link {
+    border: 0;
+    line-height: 1.8;
+}
+.full-reader .novel-chapter {
+    padding-top: 55px;
+    scroll-margin-top: 108px;
+}
+.full-reader .novel-chapter h2 {
+    font-weight: 500;
+    margin-bottom: 34px;
+    letter-spacing: .08em;
+}
+.full-reader .novel-chapter p {
+    line-height: 2;
+    margin-bottom: 1.35em;
+    scroll-margin-top: 115px;
+}
+.full-reader .novel-chapter p:target {
+    background: var(--reader-highlight);
+    border-radius: 3px;
+}
+.full-reader .after-reading {
+    border-radius: 16px;
+    padding: 22px 26px;
+}
+.full-reader .edition-note {
+    padding-block: 22px;
+}
+.full-reader .reader-dock {
+    display: grid;
+    grid-template-columns: auto minmax(170px, 235px) auto auto;
+    gap: 24px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--reader-paper) 94%, transparent);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px #152c1d15;
+    padding: 13px 20px;
+    width: max-content;
+    max-width: calc(100% - 32px);
+}
+.reader-ready .full-reader .reader-dock.enhanced-only {
+    display: grid !important;
+}
+.full-reader .reader-dock button {
+    min-height: 40px;
+    padding: 8px;
+    border-radius: 9px;
+    justify-content: center;
+}
+.full-reader .reader-dock button:hover:not(:disabled) {
+    background: var(--reader-panel);
+}
+.full-reader .position-info {
+    min-width: 0;
+    font-size: 10px;
+}
+.full-reader .position-info progress {
+    display: none;
+}
+.reader-progress-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 3px;
+}
+.reader-current-chapter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    color: var(--reader-ink);
+}
+.reader-progress-percent {
+    color: var(--reader-accent);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+.reader-position-slider {
+    --reader-progress: 0%;
+    display: block;
+    width: 100%;
+    margin: 5px 0 0;
+    height: 14px;
+    accent-color: var(--reader-accent);
+    cursor: pointer;
+    appearance: none;
+    background: transparent;
+}
+.reader-position-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--reader-accent) var(--reader-progress),
+        var(--reader-line) var(--reader-progress));
+}
+.reader-position-slider::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--reader-accent);
+    border: 2px solid var(--reader-paper);
+}
+.reader-position-slider::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--reader-line);
+}
+.reader-position-slider::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--reader-accent);
+}
+.reader-position-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--reader-accent);
+    border: 2px solid var(--reader-paper);
+}
+.full-reader .reader-status {
+    bottom: calc(max(20px, env(safe-area-inset-bottom)) + 92px);
+    border-radius: 12px;
+}
+.full-reader .storage-notice {
+    top: 82px;
+    border-radius: 12px;
+}
+.full-reader dialog {
+    border-radius: 24px;
+    box-shadow: 0 25px 90px #101c1730;
+    padding: 32px;
+    max-height: min(780px, 85dvh);
+}
+.full-reader dialog::backdrop {
+    background: #10271c55;
+    backdrop-filter: blur(7px);
+}
+.full-reader dialog h2 {
+    line-height: 1.4;
+    margin-bottom: 24px;
+}
+.full-reader .dialog-close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    right: 12px;
+    top: 12px;
+    border-radius: 50%;
+    background: var(--reader-panel);
+    font-size: 22px !important;
+}
+.full-reader .font-setting {
+    background: var(--reader-panel);
+    padding: 16px;
+    margin: 26px 0;
+    border-radius: 12px;
+    font-size: 13px;
+}
+.full-reader .font-setting select {
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: var(--reader-paper);
+}
+.full-reader .theme-options {
+    gap: 10px;
+}
+.full-reader .theme-options button {
+    border-radius: 12px;
+    padding: 15px 10px;
+    font-size: 13px;
+}
+.full-reader .theme-options button::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin: 0 auto 9px;
+    border-radius: 50%;
+    border: 1px solid #737d7166;
+    background: #f8f8f2;
+}
+.full-reader .theme-options [data-reading-theme="sage"]::before {
+    background: #d7e9d2;
+}
+.full-reader .theme-options [data-reading-theme="night"]::before {
+    background: #26352d;
+}
+.full-reader .theme-options button[aria-pressed="true"] {
+    background: var(--reader-highlight);
+    border-color: var(--reader-accent);
+}
+.reader-focus-setting {
+    padding: 24px 0;
+    border-top: 1px solid var(--reader-line);
+    border-bottom: 1px solid var(--reader-line);
+    margin-top: 26px;
+}
+.reader-focus-setting p {
+    color: var(--reader-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+.reader-focus-setting .reader-setting-label {
+    color: var(--reader-ink);
+    font-size: 14px;
+    margin-top: 0;
+}
+.reader-focus-title {
+    display: none;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+/* 专注阅读仍保留头部设置与浮动工具，不使用自动消失的隐藏入口。 */
+.full-reader.reader-focused .book-sidebar,
+.full-reader.reader-focused .book-opening,
+.full-reader.reader-focused .after-reading,
+.full-reader.reader-focused .next-book,
+.full-reader.reader-focused .edition-note,
+.full-reader.reader-focused .reader-footer,
+.full-reader.reader-focused .reading-header .reader-brand,
+.full-reader.reader-focused .reading-header .back-shelf,
+.full-reader.reader-focused .reading-header .running-title {
+    display: none;
+}
+.full-reader.reader-focused .reader-focus-title {
+    display: block;
+    margin-right: auto;
+}
+.full-reader.reader-focused .reader-layout {
+    display: block;
+    width: min(740px, 88%);
+}
+.full-reader.reader-focused .reading-header {
+    height: 64px;
+}
+@media (max-width: 1000px) {
+    .full-reader .reader-layout {
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 42px;
+    }
+    .full-reader .reader-brand small {
+        display: none;
+    }
+}
+@media (max-width: 760px) {
+    .full-reader .reading-header {
+        height: 66px;
+        gap: 10px;
+        padding-inline: 4%;
+    }
+    .full-reader .reader-layout {
+        display: block;
+        width: min(630px, 89%);
+        padding-bottom: 165px;
+    }
+    .full-reader .reader-brand {
+        font-size: 20px;
+        gap: 7px;
+    }
+    .full-reader .reader-brand > span {
+        width: 27px;
+        height: 30px;
+        font-size: 18px;
+    }
+    .full-reader .back-shelf {
+        font-size: 10px;
+        margin-left: 0;
+        white-space: nowrap;
+    }
+    .full-reader .tool-button,
+    .full-reader .reader-focus-toggle {
+        padding: 9px 11px;
+        font-size: 11px !important;
+    }
+    .full-reader .reading-header .tool-button {
+        margin-left: auto;
+    }
+    .full-reader .book-opening {
+        padding: 22px 23px 25px;
+        margin-top: 22px;
+        border-radius: 18px;
+    }
+    .full-reader .opening-title {
+        margin-top: 24px;
+        gap: 12px;
+    }
+    .full-reader .opening-title h1 {
+        font-size: clamp(36px, 9vw, 52px);
+    }
+    .full-reader .opening-seal {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+    }
+    .full-reader .opening-lead {
+        font-size: 16px;
+        margin-block: 22px;
+    }
+    .full-reader .book-opening > .micro-label {
+        font-size: 8px;
+        letter-spacing: .7px;
+    }
+    .full-reader .novel-chapter {
+        padding-top: 40px;
+    }
+    .full-reader .novel-chapter h2 {
+        font-size: 23px;
+        margin-bottom: 30px;
+    }
+    .full-reader .novel-chapter p {
+        line-height: 1.95;
+    }
+    .full-reader .reader-dock {
+        width: min(440px, calc(100% - 24px));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3px 12px;
+        padding: 10px 17px 7px;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        border-bottom: 1px solid var(--reader-line);
+    }
+    .full-reader .position-info {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1px 12px;
+        align-items: baseline;
+    }
+    .reader-progress-meta {
+        grid-column: 1;
+        min-width: 0;
+        margin-bottom: 0;
+    }
+    .reader-position-slider {
+        grid-column: 1 / -1;
+        margin-top: 0;
+        height: 16px;
+    }
+    .full-reader .position-info #positionText {
+        font-size: 9px;
+        white-space: nowrap;
+    }
+    .full-reader .reader-dock button {
+        font-size: 11px;
+        min-height: 35px;
+    }
+    .full-reader .reader-status {
+        width: 86%;
+        bottom: calc(max(10px, env(safe-area-inset-bottom)) + 110px);
+    }
+    .full-reader dialog {
+        padding: 28px 23px;
+        width: calc(100% - 28px);
+        border-radius: 20px;
+    }
+    .full-reader.reader-focused .reader-layout {
+        width: min(630px, 89%);
+    }
+}
+@media (max-width: 380px) {
+    .full-reader .reading-header {
+        gap: 7px;
+    }
+    .full-reader .back-shelf {
+        display: none;
+    }
+    .full-reader .book-opening {
+        padding-inline: 20px;
+    }
+}
+@media print {
+    .full-reader .reading-header,
+    .full-reader .reader-dock,
+    .reader-focus-toggle {
+        display: none !important;
+    }
+    .full-reader .reader-layout {
+        display: block;
+        width: 100%;
+    }
+    .full-reader {
+        --reader-paper: #fff;
+        --reader-ink: #000;
+        color: #000;
+        background: #fff;
+    }
+    .full-reader .book-opening {
+        border-radius: 0;
+        background: #fff;
+    }
+    .full-reader .novel-chapter p {
+        color: #000;
+        font-size: 12pt;
+    }
+}

@@ -21,9 +21,23 @@
     const SHORT_READING_MINUTES = 20;
     const MAX_QUERY_LENGTH = 80;
 
+    /** 新目录提供作者、主题和时间；兼容此前六部作品的元数据结构。 */
+    function getDetails(book) {
+        if (!book || typeof book.id !== "string") {
+            return null;
+        }
+        const fallback = BOOKS[book.id];
+        const minutes = Number.isFinite(book.minutes) ? book.minutes : fallback && fallback.minutes;
+        const themes = Array.isArray(book.themes) ? book.themes : fallback && fallback.themes;
+        if (!Number.isFinite(minutes) || !Array.isArray(themes)) {
+            return null;
+        }
+        return { author: book.author || (fallback && fallback.author) || "", minutes, themes };
+    }
+
     /** 所有条件取交集；空结果是正常状态，不偷偷放宽读者的筛选条件。 */
     function matches(book, filters) {
-        const details = BOOKS[book.id];
+        const details = getDetails(book);
         if (!details) {
             return false;
         }
@@ -37,5 +51,5 @@
                 : Number.isFinite(Number(choices.time)) && details.minutes <= Number(choices.time));
         return languageMatch && themeMatch && timeMatch && searchText.includes(query.toLocaleLowerCase());
     }
-    return Object.freeze({ matches, BOOKS });
+    return Object.freeze({ matches, getDetails, BOOKS });
 });
