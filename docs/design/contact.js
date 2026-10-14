@@ -7,7 +7,7 @@
     "use strict";
 
     const CONTACT_NAME = "黎先生";
-    const WECHAT_ID = "18312398810";
+    const WECHAT_ID = "LQY18312398810";
     const COPY_BUTTON_SELECTOR = "[data-copy-wechat]";
     const CONTACT_CONTAINER_SELECTOR = "[data-contact-container], #contact, .reading-contact-bar";
     let manualFieldCount = 0;

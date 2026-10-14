@@ -878,7 +878,7 @@
 }
 .contact-card > strong {
     display: block;
-    font: 28px/1.4 Georgia, serif;
+    font: clamp(21px, 5.8vw, 28px)/1.4 Georgia, serif;
     letter-spacing: 1px;
     word-break: break-all;
 }
