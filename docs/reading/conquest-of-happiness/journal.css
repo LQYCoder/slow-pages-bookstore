@@ -1,0 +1,548 @@
+/* 本期独立采用暖色油画配色；不覆盖其它共读页面。创建者：Codex；2026/10/27。 */
+:root, body.literary-journal {
+    --paper: #fff6e8;
+    --ink: #4b3529;
+    --muted: #806b59;
+    --accent: #ad4c30;
+    --line: #e8d7bd;
+    --serif: "Songti SC", "STSong", "SimSun", serif;
+}
+* {
+    box-sizing: border-box;
+}
+[hidden] {
+    display: none !important;
+}
+html {
+    scroll-behavior: auto;
+}
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font: 15px/1.8 "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: 5px;
+}
+button, textarea {
+    font: inherit;
+}
+button {
+    cursor: pointer;
+}
+a:focus-visible, button:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 5px;
+}
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 20px;
+    z-index: 10;
+}
+.skip-link:focus {
+    top: 15px;
+}
+.journal-header, .journal-footer, main {
+    width: min(1240px, 88%);
+    margin-inline: auto;
+}
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 98px;
+    border-bottom: 1px solid var(--line);
+    gap: 20px;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font: 24px var(--serif);
+}
+.brand > span {
+    border: 1px solid var(--ink);
+    padding: 4px 6px;
+    font-size: 23px;
+}
+.brand small {
+    font: 9px sans-serif;
+    letter-spacing: 2px;
+    margin-left: 10px;
+}
+.journal-header nav {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+}
+.journal-header nav a:hover, .sub-link:hover, .review-toc a:hover {
+    color: var(--accent);
+}
+.journal-intro {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    min-height: 550px;
+    border-bottom: 1px solid var(--line);
+}
+.intro-copy {
+    padding: 50px 0 38px;
+    align-self: center;
+}
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 0;
+}
+h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+}
+h1 {
+    font-size: clamp(55px, 6.5vw, 88px);
+    letter-spacing: 5px;
+    line-height: 1.2;
+    margin: 26px 0;
+}
+.intro-title {
+    font: 29px/1.6 var(--serif);
+    margin: 0 0 22px;
+}
+.intro-title em {
+    color: var(--accent);
+    font-style: normal;
+}
+.intro-note {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+.reading-entry {
+    display: flex;
+    width: 210px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--ink);
+    padding: 12px 0;
+    margin-top: 20px;
+    font-size: 13px;
+}
+.reading-entry span {
+    color: var(--accent);
+}
+.issue-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    font-size: 10px;
+    color: var(--muted);
+}
+.intro-art {
+    margin: 30px 0;
+    position: relative;
+    height: 490px;
+    align-self: center;
+    overflow: hidden;
+    background: #f6d9ae;
+}
+.intro-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+}
+.intro-art figcaption {
+    position: absolute;
+    top: 22px;
+    left: 25px;
+    padding: 7px 12px;
+    background: #fff4dfde;
+    font: 13px/1.8 var(--serif);
+    letter-spacing: 2px;
+}
+.journal-notice {
+    margin: 23px 0;
+    font-size: 11px;
+    color: var(--muted);
+}
+.journal-navigation {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--ink);
+}
+/* 复用共读导航结构，仅为本期覆盖公共绿色底色。 */
+.literary-journal .journal-navigation {
+    background: #f5e3c9;
+}
+.literary-journal .journal-navigation button:hover {
+    background: #edc9a5;
+}
+.literary-journal .article-section > aside,
+.literary-journal .material-download {
+    background: #f7e8d0;
+}
+.literary-journal .review-chapter h3 {
+    border-left-color: #ce8155;
+}
+.literary-journal .discussion {
+    background: #f5e3cb;
+    border-color: var(--line);
+}
+.literary-journal textarea {
+    background: #fffcf5;
+}
+.journal-navigation button {
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    padding: 17px 27px;
+    font-size: 13px;
+}
+.journal-navigation span {
+    margin-left: 20px;
+    font-family: Georgia, serif;
+    opacity: .7;
+}
+.journal-navigation [aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+}
+.article-section {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 70px;
+    padding-block: 55px 75px;
+    align-items: start;
+}
+.reading-aside {
+    position: sticky;
+    top: 24px;
+    padding: 24px;
+    background: #e8e7da;
+}
+.reading-aside h2 {
+    font-size: 30px;
+    line-height: 1.5;
+    margin: 16px 0 24px;
+}
+.reading-aside > p:not(.eyebrow) {
+    font-size: 12px;
+    color: var(--muted);
+}
+.review-toc {
+    display: grid;
+    gap: 16px;
+    font-size: 11px;
+    line-height: 1.8;
+}
+.review-toc a {
+    padding-bottom: 13px;
+    border-bottom: 1px solid #d1d3c5;
+}
+.sub-link {
+    display: block;
+    margin-top: 24px;
+    font-size: 12px;
+}
+.note-text {
+    max-width: 740px;
+    min-width: 0;
+    font: 18px/2.05 var(--serif);
+}
+.note-text h2 {
+    font-size: 32px;
+    line-height: 1.65;
+    margin: 15px 0 30px;
+}
+.note-text > p, .review-chapter > p {
+    margin-block: 0 22px;
+    overflow-wrap: break-word;
+}
+.review-chapter {
+    margin-top: 48px;
+    padding-top: 8px;
+    scroll-margin-top: 25px;
+}
+.review-chapter h3 {
+    font-size: 25px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+}
+.review-chapter .chapter-question {
+    border-left: 2px solid #b77b53;
+    padding: 6px 0 6px 18px;
+    color: #59624d;
+    font-size: 16px;
+    margin-top: 28px;
+}
+.chapter-question span {
+    display: block;
+    margin-bottom: 7px;
+    font: 10px/1.8 "PingFang SC", sans-serif;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+.note-text .review-credit {
+    margin-top: 50px;
+    color: var(--muted);
+    font: 12px/2 "PingFang SC", sans-serif;
+}
+.review-credit a {
+    text-decoration: underline;
+}
+.discussion {
+    padding: 38px 45px;
+    margin-bottom: 65px;
+    background: #e2e5d7;
+}
+.discussion h2 {
+    font-size: 34px;
+    margin: 14px 0 25px;
+}
+.discussion p:not(.eyebrow) {
+    font: 16px/1.9 var(--serif);
+    max-width: 790px;
+}
+.discussion a {
+    display: inline-block;
+    border-bottom: 1px solid var(--muted);
+    font-size: 12px;
+    margin-top: 15px;
+}
+.panel-heading {
+    margin: 35px 0;
+}
+.panel-heading h2, .material-download h2 {
+    font-size: 30px;
+    margin: 12px 0;
+}
+.panel-heading p, .material-download p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 12px;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 35px 24px;
+    margin-bottom: 65px;
+}
+.gallery figure {
+    margin: 0;
+    min-width: 0;
+}
+.gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+}
+.gallery figcaption {
+    padding-top: 14px;
+    font-size: 11px;
+    line-height: 1.9;
+}
+.gallery figcaption a {
+    display: block;
+    color: var(--accent);
+    margin-top: 5px;
+}
+.material-download {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding-block: 35px;
+    border-bottom: 1px solid var(--line);
+}
+.button {
+    display: inline-block;
+    padding: 13px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    font-size: 12px;
+    white-space: nowrap;
+}
+.button:hover {
+    background: #4b5544;
+}
+.tags {
+    color: var(--accent);
+    font: 13px/2 "PingFang SC", sans-serif;
+}
+details {
+    font: 13px/2 "PingFang SC", sans-serif;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+}
+summary {
+    cursor: pointer;
+}
+textarea {
+    width: 100%;
+    min-height: 320px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: #faf6ed;
+    color: var(--ink);
+    margin-top: 15px;
+    resize: vertical;
+}
+.sources {
+    padding-block: 35px 45px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.95;
+}
+.sources h2 {
+    color: var(--ink);
+    font-size: 24px;
+}
+.sources > p, .sources ul {
+    max-width: 900px;
+}
+.sources ul {
+    padding-left: 18px;
+}
+.sources a {
+    text-decoration: underline;
+}
+.sources li p {
+    margin: 3px 0 15px;
+}
+.journal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 25px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+}
+/* 小屏先给正文宽度，再把目录折为两列；不缩小阅读字号来强塞桌面布局。 */
+@media (max-width: 1000px) {
+    .article-section {
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 35px;
+    }
+    .intro-title {
+        font-size: 24px;
+    }
+    .journal-intro {
+        min-height: 500px;
+        gap: 25px;
+    }
+}
+@media (max-width: 720px) {
+    .journal-header, .journal-footer, main {
+        width: 90%;
+    }
+    .journal-header {
+        min-height: 78px;
+    }
+    .brand small {
+        display: none;
+    }
+    .journal-header nav {
+        gap: 15px;
+        font-size: 10px;
+    }
+    .journal-intro {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .intro-copy {
+        padding: 35px 0 20px;
+    }
+    h1 {
+        font-size: 58px;
+        letter-spacing: 2px;
+        margin-block: 22px;
+    }
+    .intro-title {
+        font-size: 25px;
+    }
+    .intro-art {
+        height: 290px;
+        margin: 8px 0 25px;
+    }
+    .intro-art img {
+        object-position: center 86%;
+    }
+    .intro-art figcaption {
+        display: none;
+    }
+    .journal-notice {
+        font-size: 10px;
+    }
+    .journal-navigation button {
+        padding: 15px 14px;
+        font-size: 12px;
+        flex: 1;
+    }
+    .journal-navigation span {
+        margin-left: 8px;
+    }
+    .article-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-block: 28px 40px;
+    }
+    .reading-aside {
+        position: static;
+        padding: 22px;
+    }
+    .reading-aside h2 {
+        font-size: 25px;
+    }
+    .review-toc {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 18px;
+        font-size: 11px;
+    }
+    .note-text {
+        font-size: 18px;
+        line-height: 2;
+    }
+    .note-text h2 {
+        font-size: 29px;
+    }
+    .review-chapter h3 {
+        font-size: 24px;
+    }
+    .discussion {
+        padding: 28px;
+        margin-bottom: 40px;
+    }
+    .discussion h2, .panel-heading h2, .material-download h2 {
+        font-size: 26px;
+    }
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px 14px;
+    }
+    .material-download {
+        display: block;
+    }
+    .material-download .button {
+        margin-top: 12px;
+    }
+}
+@media (max-width: 420px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    .journal-navigation button {
+        padding-inline: 8px;
+    }
+}
